@@ -1,0 +1,84 @@
+.dashboard-order-list {
+	list-style: none;
+}
+
+.btn-high-prio { 
+  color: #ffffff; 
+  background-color: #000000; 
+  border-color: #545454; 
+} 
+ 
+.btn-high-prio:hover, 
+.btn-high-prio:focus, 
+.btn-high-prio:active, 
+.btn-high-prio.active, 
+.open .dropdown-toggle.btn-high-prio { 
+  color: #ffffff; 
+  background-color: #919191; 
+  border-color: #545454; 
+} 
+ 
+.btn-high-prio:active, 
+.btn-high-prio.active, 
+.open .dropdown-toggle.btn-high-prio { 
+  background-image: none; 
+} 
+ 
+.btn-high-prio.disabled, 
+.btn-high-prio[disabled], 
+fieldset[disabled] .btn-high-prio, 
+.btn-high-prio.disabled:hover, 
+.btn-high-prio[disabled]:hover, 
+fieldset[disabled] .btn-high-prio:hover, 
+.btn-high-prio.disabled:focus, 
+.btn-high-prio[disabled]:focus, 
+fieldset[disabled] .btn-high-prio:focus, 
+.btn-high-prio.disabled:active, 
+.btn-high-prio[disabled]:active, 
+fieldset[disabled] .btn-high-prio:active, 
+.btn-high-prio.disabled.active, 
+.btn-high-prio[disabled].active, 
+fieldset[disabled] .btn-high-prio.active { 
+  background-color: #000000; 
+  border-color: #545454; 
+} 
+ 
+.btn-high-prio .badge { 
+  color: #000000; 
+  background-color: #ffffff; 
+}
+
+.order-heading {
+	font-size: 15px;
+}
+
+.order-comment-row {
+	background:rgba(0,0,0,0.1);
+	padding: 5px;
+	margin: 5px;
+	border-radius: 5px;
+}
+
+.order-comment {
+
+}
+
+.panel-content-danger {
+	background:rgba(255,0,0,0.1);
+}
+
+.panel-content-warning {
+	background:rgba(255,255,0,0.1);
+}
+
+.panel-content-success {
+	background:rgba(0,255,0,0.1);
+}
+
+.panel-content-primary {
+	background:rgba(0,0,255,0.1);
+}
+
+.panel-content-info {
+	background:rgba(0,0,255,0.1);
+}

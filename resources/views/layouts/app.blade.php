@@ -16,6 +16,7 @@
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon"type="image/png"href="/img/punkter.png">
+    <link href="/css/style.css" rel="stylesheet" >
 
     <style>
         body {
@@ -49,7 +50,7 @@
             <div class="collapse navbar-collapse" id="spark-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="/">Hem</a></li>
+                    <li><a href="/home">Order</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
