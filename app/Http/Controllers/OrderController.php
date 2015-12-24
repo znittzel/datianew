@@ -15,30 +15,7 @@ class OrderController extends Controller
     public function show($id) {
     	$order = Order::whereOrder_id($id)->first();
 
-    	$style = ['panel' => ""];
-
-    	switch ($order->status) {
-    		case '1':
-    			$style['panel'] = "danger";
-    			break;
-    		case '2':
-    			$style['panel'] = "warning";
-    			break;
-    		case '4':
-    			$style['panel'] = "success";
-    			break;
-    		case '5':
-    			$style['panel'] = "primary";
-    			break;
-    		case '6':
-    			$style['panel'] = "info";
-    			break;
-    		default:
-    			# code...
-    			break;
-    	}
-
-    	return view('order', compact('order', 'style'));
+    	return view('order', compact('order'));
     }
 
     public function addComment(Request $request, $id) {
@@ -70,12 +47,8 @@ class OrderController extends Controller
                     $order->status == 6;
                 break;
 
-            case 'finished'
+            case 'finished':
                 $order->status = 4;
-                break;
-            
-            default:
-                # code...
                 break;
         }
 

@@ -4,12 +4,12 @@
 <div class="container spark-screen">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-{{ $style['panel'] }}">
+            <div class="panel panel-{{ $order->state() }}">
                 <div class="panel-heading">
                     <span class="text-left">Order {{ $order->order_id }}</span>
                     <span class="pull-right"><i>{{ $order->created_at }}</i></span>
                 </div>
-                <div class="panel-body panel-content-{{ $style['panel'] }}">
+                <div class="panel-body panel-content-{{ $order->state() }}">
                     <legend class="text-center">{{ $order->order_id. ' - '.$order->customer()->orderBy('created_at', 'desc')->first()->name }}</legend>
                     <p class="order-heading">{!! $order->context !!}</p>
                     <hr/>
