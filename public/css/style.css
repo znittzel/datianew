@@ -82,3 +82,9 @@ fieldset[disabled] .btn-high-prio.active {
 .panel-content-info {
 	background:rgba(0,0,255,0.1);
 }
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}

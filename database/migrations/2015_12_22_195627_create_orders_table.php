@@ -19,7 +19,9 @@ class CreateOrdersTable extends Migration
             $table->text('context');
             $table->string('type');
             $table->text('accessories')->nullable();
+            $table->string('password')->nullable();
             $table->string('status');
+            $table->tinyInt('prio');
             $table->string('sign');
             $table->timestamps();
         });

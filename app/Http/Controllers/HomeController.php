@@ -27,9 +27,9 @@ class HomeController extends Controller
      */
     public function index()
     {        
-        $business = Order::where('status', '=','5')->orWhere('status', '=', '6')->orderBy('created_at')->get();
-        $private = Order::where('status', '=','1')->orWhere('status', '=', '2')->orderBy('created_at')->get();
-        $finished = Order::whereStatus('4')->get();
+        $business = Order::where('status', '=','5')->orWhere('status', '=', '6')->orderBy('created_at', 'decs')->get();
+        $private = Order::where('status', '=','1')->orWhere('status', '=', '2')->orderBy('created_at', 'decs')->get();
+        $finished = Order::whereStatus('4')->orderBy('created_at', 'decs')->get();
 
         return view('home', compact('business','private', 'finished'));
     }

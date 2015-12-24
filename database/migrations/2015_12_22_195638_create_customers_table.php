@@ -16,6 +16,7 @@ class CreateCustomersTable extends Migration
             $table->integer('customer_id')->uniqid();
             $table->string('name');
             $table->string('telephone_number');
+            $table->tinyInteger('business');
             $table->timestamps();
         });
     }

@@ -10,7 +10,7 @@
                     <span class="pull-right"><i>{{ $order->created_at }}</i></span>
                 </div>
                 <div class="panel-body panel-content-{{ $style['panel'] }}">
-                    <legend class="text-center">{{ $order->order_id. ' - '.$order->customer()->first()->name }}</legend>
+                    <legend class="text-center">{{ $order->order_id. ' - '.$order->customer()->orderBy('created_at', 'desc')->first()->name }}</legend>
                     <p class="order-heading">{!! $order->context !!}</p>
                     <hr/>
                     @foreach($order->events as $event)
@@ -22,6 +22,22 @@
                     </div>
 
                     @endforeach
+
+                    <form method="post" action="/order/{{ $order->order_id }}">
+                        <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
+                        <div class="form-group">
+                            <label>Kommentar</label>
+                            <textarea name="comment" style="resize:vertical;" class="form-control" rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Sign</label>
+                            <input type="text" name="sign" style="width:10em;" class="form-control"/>
+                            <label>
+                              <input type="checkbox" name="finished"> Avsluta
+                            </label>
+                        </div>
+                        <input type="submit" class="btn btn-default" value="Kommentera" />
+                    </form>
                 </div>
             </div>
         </div>
