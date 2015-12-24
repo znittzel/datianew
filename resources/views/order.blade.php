@@ -10,9 +10,10 @@
                     <span class="pull-right"><i>{{ $order->created_at }}</i></span>
                 </div>
                 <div class="panel-body panel-content-{{ $order->state() }}">
-                    <legend class="text-center">{{ $order->order_id. ' - '.$order->customer()->orderBy('created_at', 'desc')->first()->name }}</legend>
+                    <legend class="text-center">{{ $order->order_id. ' - '.$order->customer()->name }}</legend>
                     <p class="order-heading">{!! $order->context !!}</p>
                     <hr/>
+
                     @foreach($order->events as $event)
 
                     <div class="row order-comment-row" style="margin:5px;">

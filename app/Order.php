@@ -22,11 +22,11 @@ class Order extends Model
     ];
 
     public function customer() {
-    	return $this->hasOne('App\Customer', 'customer_id', 'customer_id');
+    	return $this->hasOne('App\Customer', 'customer_id', 'customer_id')->first();
     }
 
     public function user() {
-    	return $this->hasOne('App\User', 'user_id', 'user_id');
+    	return $this->hasOne('App\User', 'user_id', 'user_id')->first();
     }
 
     public function events() {
@@ -34,7 +34,7 @@ class Order extends Model
     }
 
     public function state() {
-        if ($this->status !== '3' || $this->status !== '4') {
+        if (!($this->status == '3' || $this->status == '4')) {
             if (!$this->prio) {
                 if (!$this->customer()->first()->business) {
                     switch ($this->status) {
@@ -75,10 +75,10 @@ class Order extends Model
         } else {
             switch ($this->status) {
                 case '3':
-                    return "success";
+                    return "dark-success";
                     break;
                 case '4':
-                    return "light-success";
+                    return "success";
                     break;
             }
         }

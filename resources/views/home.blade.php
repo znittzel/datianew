@@ -12,7 +12,7 @@
                         <ul class="dashboard-order-list">
                             @foreach($private as $order_s)
                             <li class="dashboard-order-list-element">
-                                <a href="/order/{{  $order_s->order_id }}" class="btn btn-{{ $order_s->state() }} btn-block">{{ $order_s->customer()->first()->name  }}</a>
+                                <a href="/order/{{  $order_s->order_id }}" class="btn btn-{{ $order_s->state() }} btn-block">{{ $order_s->customer()->name }}</a>
                             </li>
                             @endforeach
                         </ul>
@@ -22,7 +22,7 @@
                         <ul class="dashboard-order-list">
                             @foreach($finished as $order_f)
                             <li class="dashboard-order-list-element">
-                                <a href="/order/{{  $order_f->order_id }}" class="btn btn-success btn-block">{{ $order_f->customer()->first()->name  }}</a>
+                                <a href="/order/{{  $order_f->order_id }}" class="btn btn-success btn-block">{{ $order_f->customer()->name }}</a>
                             </li>
                             @endforeach
                         </ul>
