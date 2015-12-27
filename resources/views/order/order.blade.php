@@ -10,8 +10,23 @@
                     <span class="pull-right"><i>{{ $order->created_at }}</i></span>
                 </div>
                 <div class="panel-body panel-content-{{ $order->state() }}">
-                    <legend class="text-center">{{ $order->order_id }} - <a href="/customer/{{ $order->customer()->id }}">{{$order->customer()->name }}</a></legend>
-                    <p class="order-heading">{!! $order->context !!}</p>
+                    <legend class="text-center"><a href="/order/{{ $order->id }}/edit">{{ $order->order_id }}</a> - <a href="/customer/{{ $order->customer()->id }}">{{$order->customer()->name }}</a></legend>
+                        
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Typ</th>
+                            <th>Tillbehör</th>
+                            <th>Lösenord</th>
+                            <th>Låda</th>
+                        </tr>
+                        <tr class="active">
+                            <td>{{ $order->type }}</td>
+                            <td>{{ $order->accessories }}</td>
+                            <td>{{ $order->password }}</td>
+                            <td>{{ $order->box }}</td>
+                        </tr>
+                    </table>
+                    <p class="order-heading">{!! nl2br(e($order->context)) !!}</p>
                     <hr/>
 
                     @foreach($order->events as $event)
@@ -23,9 +38,9 @@
                     </div>
 
                     @endforeach
-
+                    <br>
                     @if ($order->status != '3' && $order->status != '4')
-                    <form method="post" action="/order/{{ $order->id }}/edit">
+                    <form method="post" action="/order/{{ $order->id }}/comment">
                         <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
                         <div class="form-group">
                             <label>Kommentar</label>

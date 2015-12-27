@@ -11,7 +11,7 @@ use App\Customer;
 class CustomerController extends Controller
 {
 	public function home() {
-		$customers = Customer::all();
+		$customers = Customer::orderBy("name")->get();
 
 		return view('customer.customer', compact('customers'));
 	}

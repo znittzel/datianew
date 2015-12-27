@@ -20,7 +20,7 @@ class Customer extends Model
         Hämtar alla ordrar tillhörande denna kunden.
     */
     public function orders() {
-    	return $this->hasMany('App\Order');
+    	return $this->hasMany('App\Order', 'customer_id', 'customer_id');
     }
 
     /*
@@ -28,5 +28,12 @@ class Customer extends Model
     */
     public function isBusiness() {
         return ($this->business ? true : false);
+    }
+
+    /*
+        Kollar om kund existerar.
+    */
+    public static function exists($customer_id) {
+        return (Customer::whereCustomer_id($customer_id)->first() ? true : false);
     }
 }

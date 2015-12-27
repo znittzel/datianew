@@ -35,7 +35,9 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/home', 'HomeController@index');
     Route::get('/order/{id}/show', 'OrderController@show');
-    Route::post('/order/{id}/edit', 'OrderController@addComment');
+    Route::get('/order/{id}/edit', 'OrderController@edit');
+    Route::post('/order/{id}/update', 'OrderController@update');
+    Route::post('/order/{id}/comment', 'OrderController@addComment');
     Route::post('/order/{id}/archive', 'OrderController@archive');
     Route::post('/order/{id}/return_order', 'OrderController@return_order');
     Route::get('/order/create', 'OrderController@create');

@@ -54,8 +54,8 @@
                 <ul class="nav navbar-nav">
                     <li class="{{{ (Request::is('order/create') ? 'active' : '') }}}"><a href="/order/create">Skriv ny order</a></li>
                     <li><a>|</a></li>
-                    <li class="{{{ (Request::is('home') ? 'active' : Request::is('order/*') ? 'active' : '') }}}"><a href="/home">Order</a></li>
-                    <li class="{{{ (Request::is('customer/*') ? 'active' : '') }}}"><a href="/customer">Kunder</a></li>
+                    <li class="{{{ (Request::is('home') ? 'active' : Request::is('order/*/*') ? 'active' : '') }}}"><a href="/home">Order</a></li>
+                    <li class="{{{ (Request::is('customer*') ? 'active' : '') }}}"><a href="/customer">Kunder</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

@@ -19,6 +19,23 @@ class OrderController extends Controller
     	return view('order.order', compact('order'));
     }
 
+    public function edit($id) {
+        $order = Order::whereId($id)->first();
+
+        return view('order.edit_order', compact('order'));
+    }
+
+    public function update(Request $request, $id) {
+        $order = Order::whereId($id)->first();
+        
+        if (Customer::exists($request->customer_id)) {
+            $order->fill($request->all());
+            $order->save();
+        }
+
+        return redirect('/order/'.$id.'/edit');
+    }
+
     public function create() {
         $customers = Customer::orderBy('name')->get();
         return view('order.create_order', compact("customers"));
