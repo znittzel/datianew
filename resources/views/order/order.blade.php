@@ -10,7 +10,7 @@
                     <span class="pull-right"><i>{{ $order->created_at }}</i></span>
                 </div>
                 <div class="panel-body panel-content-{{ $order->state() }}">
-                    <legend class="text-center"><a href="/order/{{ $order->id }}/edit">{{ $order->order_id }}</a> - <a href="/customer/{{ $order->customer()->id }}">{{$order->customer()->name }}</a></legend>
+                    <legend class="text-center"><a href="/order/{{ $order->id }}/edit">{{ $order->order_id }}</a> - <a href="/customer/{{ $order->customer()->id }}/show">{{$order->customer()->name }}</a></legend>
                         
                     <table class="table table-striped">
                         <tr>

@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Welcome</div>
+                <div class="panel-heading">Välkommen</div>
 
                 <div class="panel-body">
-                    Your Application's Landing Page.
+                    Datias ordersystem 2.0.
                 </div>
             </div>
         </div>

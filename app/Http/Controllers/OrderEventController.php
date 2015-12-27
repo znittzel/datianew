@@ -23,7 +23,7 @@ class OrderEventController extends Controller
     public function update(Request $request, $id) {
     	$orderevent = OrderEvent::whereOrder_event_id($id)->first();
     	$orderevent->fill($request->all());
-    	$orderevent->save();
+    	$orderevent->push();
 
     	return redirect('/order/'.$orderevent->order()->id.'/edit');
     }

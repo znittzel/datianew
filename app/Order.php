@@ -110,7 +110,7 @@ class Order extends Model
                     break;
             }
 
-        $this->save();
+        $this->push();
     }
 
     /*
