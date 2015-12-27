@@ -30,4 +30,8 @@ class CustomerController extends Controller
 
     	return redirect('/customer/'. $id);
     }
+
+    public function get($id) {
+        return Customer::whereCustomer_id($id)->first();
+    }
 }

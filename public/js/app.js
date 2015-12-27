@@ -31,3 +31,18 @@ app.controller('OrderEditEventsController', function($scope, $http) {
 		});
 	}
 });
+
+app.controller('createOrderController', function($scope, $http) {
+	$scope.getCustomer = function() {
+		if ($scope.customer.id.length >= 4) {
+			$http({
+				url: '/customer/get/'+$scope.customer.id,
+				method: 'GET'
+			}).success(function(response) {
+				$("#customer_name").val(response.name); 
+			});
+		} else {
+			$("#customer_name").val("");
+		}
+	}
+});
