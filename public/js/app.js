@@ -46,3 +46,20 @@ app.controller('OrderController', function($scope, $http) {
 		}
 	}
 });
+
+app.controller("CreateCustomerController", function($scope, $http) {
+	$scope.checkCustomerId = function() {
+		if ($scope.customer.id.length >= 4) {
+			$http({
+				url: '/customer/get/'+$scope.customer.id,
+				method: 'GET'
+			}).success(function(response) {
+				if (!response) {
+					$("#div_customer_exists").hide();
+				} else {
+					$("#div_customer_exists").show();
+				}
+			});
+		}
+	}
+});

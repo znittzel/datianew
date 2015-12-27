@@ -56,10 +56,32 @@
             <div class="collapse navbar-collapse" id="spark-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li class="{{{ (Request::is('order/create') ? 'active' : '') }}}"><a href="/order/create">Skriv ny order</a></li>
-                    <li><a>|</a></li>
-                    <li class="{{{ (Request::is('home') ? 'active' : Request::is('order/*/*') ? 'active' : '') }}}"><a href="/home">Order</a></li>
-                    <li class="{{{ (Request::is('customer*') ? 'active' : '') }}}"><a href="/customer">Kunder</a></li>
+                    <!-- <li class="dropdown {{{ (Request::is('home') ? 'active' : Request::is('order/*/*') ? 'active' : '') }}}">
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/home">Order</a></li>
+                        </ul>
+                    </li> -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            Order <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/logout"><i class="fa fa-btn fa-cubes"></i>Aktiva</a></li>
+                            <li><a href="/logout"><i class="fa fa-btn fa-plus"></i>Skapa ny</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            Kund <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/customer"><i class="fa fa-btn fa-users"></i>Alla</a></li>
+                            <li><a href="/customer/create"><i class="fa fa-btn fa-plus"></i>Skapa ny</a></li>
+                        </ul>
+                    </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -77,6 +99,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="/logout"><i class="fa fa-btn fa-sign-out"></i>Logga ut</a></li>
                             </ul>
+                        </li>
                     @endif
                 </ul>
             </div>

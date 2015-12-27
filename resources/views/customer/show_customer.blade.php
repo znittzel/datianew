@@ -12,7 +12,7 @@
                     <legend class="text-center">{{ $customer->name }}</legend>
                     
                     <div class="col-md-6">
-                        <form action="/customer/{{ $customer->id }}" method="post">
+                        <form action="/customer/{{ $customer->id }}/update" method="post">
                             <input type="hidden" value="{!! csrf_token() !!}" name="_token" />
                             <div class="form-group">
                                 <label>Kundnummer</label>
@@ -38,7 +38,7 @@
                                 <label>Telefonnummer</label>
                                 <input type="text" name="telephone_number" value="{{ $customer->telephone_number }}" class="form-control" />
                             </div>
-                            <input type="submit" class="btn btn-success" value="Ändra" />
+                            <input type="submit" class="btn btn-warning" value="Ändra" />
                         </form> 
                     </div>
                     <div class="col-md-6">

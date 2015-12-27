@@ -11,7 +11,7 @@
                 <div class="panel-body panel-content-default">
                     <table class="table">
                         <tr>
-                            <th>Kund id</th>
+                            <th>Kundnummer</th>
                             <th>Namn</th>
                             <th>Typ</th>
                             <th>Telefonnummer</th>
@@ -20,7 +20,7 @@
 
                         <tr>
                             <td>{{ $customer->customer_id }}</td>
-                            <td><a href="/customer/{{ $customer->id }}">{{ $customer->name }}</a></td>
+                            <td><a href="/customer/{{ $customer->id }}/show">{{ $customer->name }}</a></td>
                             <td>
                                 @if ($customer->business) 
                                     Företag

@@ -8,7 +8,7 @@
                 <div class="panel-heading">Översikt</div>
                 <div class="panel-body">
                     <div class="col-md-6">
-                        <legend class="text-center">Privat</legend>
+                        <legend class="text-center">Pågående</legend>
                         <ul class="dashboard-order-list">
                             @foreach($onGoing as $order_on)
                             <li class="dashboard-order-list-element">
