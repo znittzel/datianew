@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class Order extends Model
 {
@@ -108,6 +109,24 @@ class Order extends Model
                     $this->status = '4';
                     break;
             }
+
+        $this->save();
+    }
+
+    /*
+        Kommenterar på order.
+    */
+    public function commentIt($comment, $sign) {
+        $this->setOrderStatus("started");
+        $this->addOrderEvent($comment, $sign);
+    }
+
+    /*
+        Avslutar order.
+    */
+    public function finishIt($comment, $sign) {
+        $this->setOrderStatus("finished");
+        $this->addOrderEvent($comment, $sign);
     }
 
     /*
@@ -115,21 +134,27 @@ class Order extends Model
     */
     public function archiveIt($sign) {
         $this->setOrderStatus('archived');
-
-        $comment = new OrderEvent();
-        $comment->comment = "Order avslutad och utlämnad";
-        $comment->sign = $sign;
-        $comment->save();
-        $this->save();
-
+        $this->addOrderEvent("<i>Order avslutad och utlämnad</i>", $sign);
     }
 
-    
     /*
-        Slår tillbaka arkiverad order till påbörjad
+        Slår tillbaka arkiverad order till påbörjad.
     */
-    public function return() {
+    public function return_order($sign) {
         $this->setOrderStatus('started');
-        $this->save();
+        $this->addOrderEvent("<i>Order återinförd i ordersystemet.</i>", $sign);
+    }
+
+    /*
+        Lägger till ett OrderEvent (kommentar).
+    */
+    public function addOrderEvent($comment, $sign) {
+        $orderEvent = new OrderEvent();
+        $orderEvent->comment = $comment;
+        $orderEvent->sign = $sign;
+        $orderEvent->user_id = Auth::user()->id;
+        $orderEvent->order_id = $this->order_id;
+        
+        $orderEvent->save();
     }
 }

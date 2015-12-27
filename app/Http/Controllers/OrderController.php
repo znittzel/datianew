@@ -37,18 +37,11 @@ class OrderController extends Controller
 
     public function addComment(Request $request, $id) {
         $order = Order::whereId($id)->first();
+        
         if ($request->finished)
-            $order->setOrderStatus("finished");
+            $order->finishIt($request->comment, $request->sign);
         else
-            $order->setOrderStatus("started");
-
-        $comment = new OrderEvent();
-        $comment->fill($request->all());
-        $comment->user_id = Auth::user()->id;
-        $comment->order_id = $order->order_id;
-
-        $comment->save();
-        $order->save();
+            $order->addOrderEvent($request->comment, $request->sign);
 
         return redirect('order/'.$id.'/show');
     }
@@ -59,9 +52,9 @@ class OrderController extends Controller
         return redirect('home');
     }
 
-    public function return(Request $request, $id) {
-        Order::whereId($id)->first()->return();
-
+    public function return_order(Request $request, $id) {
+        $order = Order::whereId($id)->first();
+        $order->return_order($request->sign);
         return redirect('/order/'.$order->id.'/show');
     }
 }

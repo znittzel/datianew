@@ -50,8 +50,12 @@
                         <input type="submit" class="btn btn-default" value="Lämna ut" />
                     </form>
                     @else
-                    <form method="post" action="/order/{{ $order->id }}/return">
+                    <form method="post" action="/order/{{ $order->id }}/return_order">
                         <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
+                        <div class="form-group">
+                            <label>Sign</label>
+                            <input type="text" name="sign" style="width:10em;" class="form-control"/>
+                        </div>
                         <input type="submit" class="btn btn-default" value="Slå tillbaka" />
                     </form>
                     @endif
