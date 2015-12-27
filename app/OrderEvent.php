@@ -3,11 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 class OrderEvent extends Model
-{
-    protected $table = "order_events";
-
+{   
     protected $fillable = [
     	'order_event_id',
     	'order_id',

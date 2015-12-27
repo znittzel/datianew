@@ -18,6 +18,8 @@
     <link rel="icon"type="image/png"href="/img/punkter.png">
     <link href="/css/style.css" rel="stylesheet" >
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
     <style>
         body {
             font-family: 'Lato';
@@ -50,7 +52,10 @@
             <div class="collapse navbar-collapse" id="spark-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="/home">Order</a></li>
+                    <li class="{{{ (Request::is('order/create') ? 'active' : '') }}}"><a href="/order/create">Skriv ny order</a></li>
+                    <li><a>|</a></li>
+                    <li class="{{{ (Request::is('home') ? 'active' : Request::is('order/*') ? 'active' : '') }}}"><a href="/home">Order</a></li>
+                    <li class="{{{ (Request::is('customer/*') ? 'active' : '') }}}"><a href="/customer">Kunder</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

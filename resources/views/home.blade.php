@@ -8,21 +8,21 @@
                 <div class="panel-heading">Översikt</div>
                 <div class="panel-body">
                     <div class="col-md-6">
-                        <h4>Privat</h4>
+                        <legend class="text-center">Privat</legend>
                         <ul class="dashboard-order-list">
-                            @foreach($private as $order_s)
+                            @foreach($onGoing as $order_on)
                             <li class="dashboard-order-list-element">
-                                <a href="/order/{{  $order_s->order_id }}" class="btn btn-{{ $order_s->state() }} btn-block">{{ $order_s->customer()->name }}</a>
+                                <a href="/order/{{  $order_on->id }}/show" class="btn btn-{{ $order_on->state() }} btn-block">{{ $order_on->customer()->name }}</a>
                             </li>
                             @endforeach
                         </ul>
                     </div>
                     <div class="col-md-6">
-                        <h4>Färdiga, ej utlämnade</h4>
+                        <legend class="text-center">Färdiga, ej utlämnade</legend>
                         <ul class="dashboard-order-list">
                             @foreach($finished as $order_f)
                             <li class="dashboard-order-list-element">
-                                <a href="/order/{{  $order_f->order_id }}" class="btn btn-success btn-block">{{ $order_f->customer()->name }}</a>
+                                <a href="/order/{{  $order_f->id }}/show" class="btn btn-success btn-block">{{ $order_f->customer()->name }}</a>
                             </li>
                             @endforeach
                         </ul>

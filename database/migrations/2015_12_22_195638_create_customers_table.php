@@ -13,6 +13,7 @@ class CreateCustomersTable extends Migration
     public function up()
     {
         Schema::create('customers', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('customer_id')->uniqid();
             $table->string('name');
             $table->string('telephone_number');

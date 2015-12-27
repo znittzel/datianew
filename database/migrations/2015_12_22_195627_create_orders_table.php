@@ -13,6 +13,7 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('order_id')->uniqid();
             $table->integer('customer_id');
             $table->integer('user_id');
@@ -20,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->string('type');
             $table->text('accessories')->nullable();
             $table->string('password')->nullable();
+            $table->integet('box')->nullable();
             $table->string('status');
             $table->tinyInt('prio');
             $table->string('sign');

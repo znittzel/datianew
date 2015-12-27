@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Customer;
 use App\Order;
 use App\OrderEvent;
 use Auth;
@@ -13,44 +14,54 @@ use Auth;
 class OrderController extends Controller
 {
     public function show($id) {
-    	$order = Order::whereOrder_id($id)->first();
+    	$order = Order::whereId($id)->first();
+        
+    	return view('order.order', compact('order'));
+    }
 
-    	return view('order', compact('order'));
+    public function create() {
+        $customers = Customer::orderBy('name')->get();
+        return view('order.create_order', compact("customers"));
+    }
+
+    public function save(Request $request) {
+        $order = new Order();
+
+        $order->fill($request->all());
+        $order->user_id = Auth::user()->id;
+        $order->status = '1';
+        $order->save();
+
+        return redirect('/order/'.$order->id.'/show');        
     }
 
     public function addComment(Request $request, $id) {
-
+        $order = Order::whereId($id)->first();
         if ($request->finished)
-            setOrderStatus($id, "finished");
+            $order->setOrderStatus("finished");
         else
-            setOrderStatus($id, "started");
+            $order->setOrderStatus("started");
 
         $comment = new OrderEvent();
         $comment->fill($request->all());
-
-        $comment->order_id = $id;
         $comment->user_id = Auth::user()->id;
+        $comment->order_id = $order->order_id;
 
         $comment->save();
+        $order->save();
 
-        return redirect('order/'.$id);
+        return redirect('order/'.$id.'/show');
     }
 
-    public function setOrderStatus($id, $state) {
-        $order = Order::whereId($id)->first();
+    public function archive(Request $request, $id) {
+        Order::whereId($id)->first()->archiveIt($request->sign);
 
-        switch ($state) {
-            case 'started':
-                if ($order->status == 1 || $order->status == 3)
-                    $order->status = 2;
-                else if ($order->status == 5 || $order->status == 7)
-                    $order->status == 6;
-                break;
+        return redirect('home');
+    }
 
-            case 'finished':
-                $order->status = 4;
-                break;
-        }
+    public function return(Request $request, $id) {
+        Order::whereId($id)->first()->return();
 
+        return redirect('/order/'.$order->id.'/show');
     }
 }
