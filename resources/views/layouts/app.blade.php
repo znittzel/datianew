@@ -67,8 +67,8 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="/logout"><i class="fa fa-btn fa-cubes"></i>Aktiva</a></li>
-                            <li><a href="/logout"><i class="fa fa-btn fa-plus"></i>Skapa ny</a></li>
+                            <li><a href="/home"><i class="fa fa-btn fa-cubes"></i>Aktiva</a></li>
+                            <li><a href="/order/create"><i class="fa fa-btn fa-plus"></i>Skapa order</a></li>
                         </ul>
                     </li>
 
@@ -79,7 +79,7 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="/customer"><i class="fa fa-btn fa-users"></i>Alla</a></li>
-                            <li><a href="/customer/create"><i class="fa fa-btn fa-plus"></i>Skapa ny</a></li>
+                            <li><a href="/customer/create"><i class="fa fa-btn fa-plus"></i>Skapa kund</a></li>
                         </ul>
                     </li>
                 </ul>

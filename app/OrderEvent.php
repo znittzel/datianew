@@ -7,6 +7,7 @@ use Auth;
 
 class OrderEvent extends Model
 {   
+    protected $primaryKey = 'order_event_id';
     protected $fillable = [
     	'order_event_id',
     	'order_id',
@@ -16,10 +17,10 @@ class OrderEvent extends Model
     ];
 
     public function order() {
-    	return $this->hasOne('App\Order', 'order_id', 'order_id');
+    	return $this->hasOne('App\Order', 'order_id', 'order_id')->first();
     }
 
     public function user() {
-    	return $this->hasOne('App\User', 'user_id', 'id');
+    	return $this->hasOne('App\User', 'user_id', 'id')->first();
     }
 }

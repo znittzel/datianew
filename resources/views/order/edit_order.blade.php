@@ -81,7 +81,7 @@
                             </tr>
                             @foreach ($order->events as $event) 
                                 <tr id="{{ $event->order_event_id }}">
-                                    <td><a href="/orderevent/{{ $order->order_event_id }}/edit">{{ $event->order_event_id }}</a></td>
+                                    <td><a href="/orderevent/{{ $event->order_event_id }}/edit">{{ $event->order_event_id }}</a></td>
                                     <td>{!! $event->comment !!}</td>
                                     <td>{{ $event->sign }}</td>
                                     <td><button ng-really-click="delete({{ $event->order_event_id }})" ng-really-message="Ta bort kommentar #{{ $event->order_event_id }}?" class="btn btn-danger btn-xs">Ta bort</button></td>
