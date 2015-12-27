@@ -32,7 +32,7 @@ app.controller('OrderEditEventsController', function($scope, $http) {
 	}
 });
 
-app.controller('createOrderController', function($scope, $http) {
+app.controller('OrderController', function($scope, $http) {
 	$scope.getCustomer = function() {
 		if ($scope.customer.id.length >= 4) {
 			$http({

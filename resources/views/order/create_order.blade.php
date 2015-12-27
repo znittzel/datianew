@@ -9,7 +9,7 @@
                     <span class="text-left">Skapa ny order</span>
                 </div>
                 <div class="panel-body panel-content-default">
-                    <form method="post" action="/order/create" id="create_order_form" ng-controller="createOrderController">
+                    <form method="post" action="/order/create" id="create_order_form" ng-controller="OrderController">
                         <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
                         <div class="form-group">
                             <label>Kundnummer</label>
