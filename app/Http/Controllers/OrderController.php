@@ -44,19 +44,21 @@ class OrderController extends Controller
     }
 
     public function create() {
-        $customers = Customer::orderBy('name')->get();
-        return view('order.create_order', compact("customers"));
+        return view('order.create_order');
     }
 
     public function save(Request $request) {
         $order = new Order();
 
-        $order->fill($request->all());
-        $order->user_id = Auth::user()->id;
-        $order->status = '1';
-        $order->save();
+        if (Customer::whereCustomer_id($request->customer_id)->first()) {
+            $order->fill($request->all());
+            $order->user_id = Auth::user()->id;
+            $order->status = '1';
+            $order->save();
 
-        return redirect('/order/'.$order->id.'/show');        
+            return redirect('/order/'.$order->id.'/show');
+        }
+        return redirect('/order/create')->with("session", Alert::get("danger", "Något gick snett.. Försök igen!"));        
     }
 
     public function addComment(Request $request, $id) {
