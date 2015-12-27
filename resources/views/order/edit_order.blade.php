@@ -29,7 +29,7 @@
                         </div>
                         <div class="form-group">
                             <label>Ärende</label>
-                            <textarea name="context" style="resize:vertical;" class="form-control" rows="5">{!! nl2br(e($order->context)) !!}</textarea>
+                            <textarea name="context" style="resize:vertical;" class="form-control" rows="5">{!! $order->context !!}</textarea>
                         </div>
                         <div class="form-group">
                             <label>Status</label>

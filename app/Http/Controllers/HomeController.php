@@ -27,8 +27,8 @@ class HomeController extends Controller
      */
     public function index()
     {        
-        $onGoing = Order::where('status', '=','1')->orWhere('status', '=', '2')->orderBy('created_at')->get();
-        $finished = Order::whereStatus('4')->orderBy('created_at', 'decs')->get();
+        $onGoing = Order::where('status', '=','1')->orWhere('status', '=', '2')->orderBy('order_id')->get();
+        $finished = Order::whereStatus('4')->orderBy('order_id')->get();
 
         return view('home', compact('onGoing', 'finished'));
     }
