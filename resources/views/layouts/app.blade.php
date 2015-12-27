@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="OrderApp">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +19,10 @@
     <link href="/css/style.css" rel="stylesheet" >
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-resource.min.js"></script>
+    <script src="/node_modules/angular-confirm-modal/angular-confirm.min.js" type="text/javascript"></script>
+    <script src="/node_modules/angular/ui-bootstrap.min.js" type="text/javascript"></script>
+    <script src="/js/app.js" type="text/javascript"></script>
 
     <style>
         body {

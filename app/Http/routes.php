@@ -46,4 +46,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/customer/{id}', 'CustomerController@show');
     Route::get('/customer', 'CustomerController@home');
     Route::post('/customer/{id}', 'CustomerController@update');
+
+    Route::post('/orderevent/delete', 'OrderEventController@delete');
 });

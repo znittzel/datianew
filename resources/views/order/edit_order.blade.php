@@ -4,12 +4,16 @@
 <div class="container spark-screen">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
+            <div class="panel panel-{{ $order->state() }}">
                 <div class="panel-heading">
-                    <span class="text-left">Editera</span>
+                    <span class="text-left">Editera order</span>
+                    <span class="pull-right"><a href="/order/{{ $order->id }}/show">Tillbaka till order {{ $order->order_id }}</a></span>
                 </div>
                 <div class="panel-body panel-content-default">
-                    <form method="post" action="/order/{{ $order->id }}/update" style="padding:15px;">
+                     @if (session("status"))
+                        {!! session("status") !!}
+                    @endif
+                    <form method="post" class="col-md-6" action="/order/{{ $order->id }}/update" style="padding:15px;">
                         <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
                         <div class="row">
                             <div class="form-group">
@@ -28,6 +32,17 @@
                             <div class="form-group">
                                 <label>Ärende</label>
                                 <textarea name="context" style="resize:vertical;" class="form-control" rows="5">{!! nl2br(e($order->context)) !!}</textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select name="status" class="form-control">
+                                    <option value="1" {{{ ($order->status == '1') ? 'selected' : '' }}}>Ej påbörjad</option>
+                                    <option value="2" {{{ ($order->status == '2') ? 'selected' : '' }}}>Påbörjad</option>
+                                    <option value="4" {{{ ($order->status == '4') ? 'selected' : '' }}}>Avslutad</option>
+                                    <option value="3" {{{ ($order->status == '3') ? 'selected' : '' }}}>Arkiverad</option>
+                                </select>
                             </div>
                         </div>
                         <div class="row">
@@ -71,6 +86,24 @@
                             </div>
                         </div>
                     </form>
+                    <div class="col-md-6" ng-controller="OrderEditEventsController">
+                        <table class="table table-striped" id="orderEvents">
+                            <tr>
+                                <th>#</th>
+                                <th>Kommentar</th>
+                                <th>Sign</th>
+                                <th></th>
+                            </tr>
+                            @foreach ($order->events as $event) 
+                                <tr id="{{ $event->order_event_id }}">
+                                    <td><a href="/orderevent/{{ $order->order_event_id }}/edit">{{ $event->order_event_id }}</a></td>
+                                    <td>{!! $event->comment !!}</td>
+                                    <td>{{ $event->sign }}</td>
+                                    <td><button ng-really-click="delete({{ $event->order_event_id }})" ng-really-message="Ta bort kommentar #{{ $event->order_event_id }}?" class="btn btn-danger btn-xs">Ta bort</button></td>
+                                </tr>       
+                            @endforeach
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

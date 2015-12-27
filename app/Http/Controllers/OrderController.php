@@ -11,6 +11,8 @@ use App\Order;
 use App\OrderEvent;
 use Auth;
 
+use App\Classes\Alert;
+
 class OrderController extends Controller
 {
     public function show($id) {
@@ -29,11 +31,16 @@ class OrderController extends Controller
         $order = Order::whereId($id)->first();
         
         if (Customer::exists($request->customer_id)) {
+            if ($request->order_id != $order->order_id && Order::whereOrder_id($request->order_id)->first())
+                return redirect('/order/'.$id.'/edit')->with("status", Alert::get("danger", "Order existerar. Välj annat ordernummer."));
+
             $order->fill($request->all());
             $order->save();
-        }
 
-        return redirect('/order/'.$id.'/edit');
+            return redirect('/order/'.$id.'/edit')->with("status", Alert::get("success", "Order är uppdaterad."));
+        } else {
+            return redirect('/order/'.$id.'/edit')->with("status", Alert::get("danger", "Kundnummer existerar inte!"));
+        }
     }
 
     public function create() {
