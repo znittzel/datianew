@@ -17,7 +17,7 @@
                         <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
                         <div class="form-group">
                             <label>Kundnummer</label>
-                            <input type="text" class="form-control" ng-model="customer.id" ng-change="getCustomer()" ng-init="customer.id='{{ $order->customer()->customer_id }}'" id="customer_id" name="customer_id" data-parsley-minlength="4" data-parsley-required data-parsley-type="number">
+                            <input type="text" class="form-control" ng-model="customer.id" ng-change="getCustomer()" ng-init="customer.id='{{ $order->customer()->customer_id }}'" name="customer_id" data-parsley-minlength="4" data-parsley-required data-parsley-type="number">
                         </div>
                         <div class="form-group">
                             <label>Kundnamn</label>
@@ -25,7 +25,7 @@
                         </div>
                         <div class="form-group">
                             <label>Ordernummer</label>
-                            <input type="text" value="{{ $order->order_id }}" name="order_id" class="form-control" data-parsley-required data-parsley-minlength="5" data-parsley-type="number">
+                            <input type="text" name="order_id" ng-model="order.id" ng-init="order.id='{{ $order->order_id }}'" ng-change="trimOrderId()" class="form-control" data-parsley-required data-parsley-minlength="5" data-parsley-type="number">
                         </div>
                         <div class="form-group">
                             <label>Ärende</label>

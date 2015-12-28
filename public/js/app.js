@@ -40,12 +40,11 @@ app.controller('OrderEditEventsController', function($scope, $http) {
 	}
 });
 
-
 /*
-	Controller i order/create_order.blade.php
-	Används till create_order_form -form
+	Controller i order/create_order.blade.php && order/edit_order.blade.php
+	Används till create_order_form -form && edit_order_form
 */
-app.controller('OrderCreateController', function($scope, $http) {
+app.controller('OrderController', function($scope, $http) {
 	/*
 		getCustomer(): hämtar kund från databasen. Trimmar customer.id innan anrop
 	*/
