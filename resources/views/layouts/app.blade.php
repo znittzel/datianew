@@ -82,6 +82,7 @@
                             <li><a href="/customer/create"><i class="fa fa-btn fa-plus"></i>Skapa kund</a></li>
                         </ul>
                     </li>
+                    <li><a href="/archive">Arkiv</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

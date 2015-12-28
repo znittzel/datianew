@@ -52,6 +52,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/orderevent/{id}/edit', 'OrderEventController@edit');
     Route::post('/orderevent/{id}/update', 'OrderEventController@update');
 
+    Route::get('/archive', 'ArchiveController@archive');
+
     //API
     Route::post('/orderevent/delete', 'OrderEventController@delete');
 
