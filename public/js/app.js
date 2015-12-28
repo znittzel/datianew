@@ -18,7 +18,15 @@ app.directive('ngReallyClick', [function() {
     }
 }]);
 
+/*
+	Controller i order/edit_order.blade.php.
+	Används till order_events_div -div
+*/
 app.controller('OrderEditEventsController', function($scope, $http) {
+
+	/*
+		Delete(id): tar bort OrderEvent från databasen med order_event_id = id och ifrån table:n vid success
+	*/
 	$scope.delete = function(id) {
 		$http({
 			url: '/orderevent/delete',
@@ -32,8 +40,18 @@ app.controller('OrderEditEventsController', function($scope, $http) {
 	}
 });
 
-app.controller('OrderController', function($scope, $http) {
+
+/*
+	Controller i order/create_order.blade.php
+	Används till create_order_form -form
+*/
+app.controller('OrderCreateController', function($scope, $http) {
+	/*
+		getCustomer(): hämtar kund från databasen. Trimmar customer.id innan anrop
+	*/
 	$scope.getCustomer = function() {
+		$scope.customer.id = $scope.customer.id.replace(/ /g, '');
+
 		if ($scope.customer.id.length >= 4) {
 			$http({
 				url: '/customer/get/'+$scope.customer.id,
@@ -45,10 +63,23 @@ app.controller('OrderController', function($scope, $http) {
 			$("#customer_name").val("");
 		}
 	}
+
+	/*
+		trimOrderId(): trimmar order.id innan skapande av ny order
+	*/
+	$scope.trimOrderId = function() {
+		$scope.order.id = $scope.order.id.replace(/ /g, '');
+	}
 });
 
-app.controller("CreateCustomerController", function($scope, $http) {
+/*
+	Controller i customer/create_customer.blade.php
+	Används till create_customer -form
+*/
+app.controller("CustomerCreateController", function($scope, $http) {
 	$scope.checkCustomerId = function() {
+		$scope.customer.id = $scope.customer.id.replace(/ /g, '');
+
 		if ($scope.customer.id.length >= 4) {
 			$http({
 				url: '/customer/get/'+$scope.customer.id,

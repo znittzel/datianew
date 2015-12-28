@@ -71,7 +71,7 @@
                             <input type="submit" class="btn btn-warning" value="Uppdatera" style="width:100%;" />
                         </div>
                     </form>
-                    <div class="col-md-6" ng-controller="OrderEditEventsController">
+                    <div class="col-md-6" ng-controller="OrderEditEventsController" id="order_events_div">
                         <table class="table table-striped" id="orderEvents">
                             <tr>
                                 <th>#</th>

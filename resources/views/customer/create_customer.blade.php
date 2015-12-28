@@ -13,11 +13,11 @@
                     @if (session("status"))
                         {!! session("status") !!}
                     @endif
-                    <form action="/customer/create" method="post" id="create_customer" ng-controller="CreateCustomerController">
+                    <form action="/customer/create" method="post" id="create_customer" ng-controller="CustomerCreateController">
                         <input type="hidden" value="{!! csrf_token() !!}" name="_token" />
                         <div class="form-group" id="customer_id">
                             <label>Kundnummer</label>
-                            <input type="text" ng-model="customer.id" ng-change="checkCustomerId()" name="customer_id" class="form-control" data-parsley-required>
+                            <input type="text" ng-model="customer.id" data-parsley-whitespace="trim" ng-change="checkCustomerId()" name="customer_id" class="form-control" data-parsley-required>
                         </div>
                         <div class="alert alert-danger" id="div_customer_exists" style="display:none;">Kund existerar!</div>
                         <div class="form-group">

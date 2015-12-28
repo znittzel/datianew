@@ -9,11 +9,11 @@
                     <span class="text-left">Skapa ny order</span>
                 </div>
                 <div class="panel-body panel-content-default">
-                    <form method="post" action="/order/create" id="create_order_form" ng-controller="OrderController">
+                    <form method="post" action="/order/create" id="create_order_form" ng-controller="OrderCreateController">
                         <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
                         <div class="form-group">
                             <label>Kundnummer</label>
-                            <input type="text" class="form-control" ng-model="customer.id" ng-change="getCustomer()" id="customer_id" name="customer_id" data-parsley-minlength="4" data-parsley-required data-parsley-type="number">
+                            <input type="text" class="form-control" data-parsley-whitespace="trim" ng-model="customer.id" ng-change="getCustomer()" id="customer_id" name="customer_id" data-parsley-minlength="4" data-parsley-required data-parsley-type="number">
                         </div>
                         <div class="form-group">
                             <label>Kundnamn</label>
@@ -22,7 +22,7 @@
                         <hr/>
                         <div class="form-group">
                             <label>Ordernummer</label>
-                            <input type="text" name="order_id" class="form-control" data-parsley-required data-parsley-type="number">
+                            <input type="text" name="order_id" ng-model="order.id" ng-change="trimOrderId()" data-parsley-whitespace="trim" class="form-control" data-parsley-required data-parsley-type="number">
                         </div>
                         <div class="form-group">
                             <label>Ärende</label>
