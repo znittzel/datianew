@@ -83,4 +83,15 @@ class OrderController extends Controller
         $order->return_order($request->sign);
         return redirect('/order/'.$order->id.'/show');
     }
+
+    //API
+    public function delete(Request $request) {
+        $order = Order::whereId($request->id)->first();
+
+        foreach ($order->events as $event) {
+            $event->delete();
+        }
+
+        return Order::whereId($request->id)->delete();
+    }
 }

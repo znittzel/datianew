@@ -41,6 +41,28 @@ app.controller('OrderEditEventsController', function($scope, $http) {
 });
 
 /*
+	Controller i customer/show_customer.blade.php.
+	Används till customerOrders -table
+*/
+app.controller('CustomerEditOrdersController', function($scope, $http) {
+
+	/*
+		Delete(id): tar bort Ordern från databasen med id = id och ifrån table:n vid success
+	*/
+	$scope.delete = function(id) {
+		$http({
+			url: '/order/delete',
+			method: 'POST',
+			data: {
+				id: id
+			}
+		}).success(function(response){
+			$('table#customerOrders tr#'+id).remove();
+		});
+	}
+});
+
+/*
 	Controller i order/create_order.blade.php && order/edit_order.blade.php
 	Används till create_order_form -form && edit_order_form
 */

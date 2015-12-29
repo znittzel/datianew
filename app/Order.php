@@ -92,6 +92,25 @@ class Order extends Model
     }
 
     /*
+        Hämtar rätt style utefter orderstatus. Används i olika views
+    */
+    public function stateName() {
+        switch ($this->status) {
+            case '1':
+                return 'Ej påbörjad';
+                break;
+            case '2':
+                return 'Påbörjad';
+            case '3':
+                return 'Arkiverad';
+                break;
+            case '4':
+                return 'Avslutad';
+                break;
+        }
+    }
+
+    /*
         Ändrar orderstatus utefter meddelande "started" (påbörjad), "archived" (arkiverad) 
         och "finished" (avslutad, ej utlämnad). 
     */

@@ -20,7 +20,7 @@ class Customer extends Model
         Hämtar alla ordrar tillhörande denna kunden.
     */
     public function orders() {
-    	return $this->hasMany('App\Order', 'customer_id', 'customer_id');
+    	return $this->hasMany('App\Order', 'customer_id', 'customer_id')->orderBy('order_id', 'desc');
     }
 
     /*
