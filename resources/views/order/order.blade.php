@@ -18,12 +18,14 @@
                             <th>Tillbehör</th>
                             <th>Lösenord</th>
                             <th>Låda</th>
+                            <th>Telefonnummer</th>
                         </tr>
                         <tr class="active">
                             <td>{{ $order->type }}</td>
                             <td>{{ $order->accessories }}</td>
                             <td>{{ $order->password }}</td>
                             <td>{{ $order->box }}</td>
+                            <td><a href="tel:{{$order->customer()->telephone_number}}">{{ $order->customer()->telephone_number }}</a></td>
                         </tr>
                     </table>
                     <p class="order-heading">{!! nl2br(e($order->context)) !!}</p>

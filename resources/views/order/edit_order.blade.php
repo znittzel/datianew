@@ -7,7 +7,7 @@
             <div class="panel panel-{{ $order->state() }}">
                 <div class="panel-heading">
                     <span class="text-left">Editera order</span>
-                    <span class="pull-right"><a href="/order/{{ $order->id }}/show">Tillbaka till order {{ $order->order_id }}</a></span>
+                    <span class="pull-right"><a style="color:white;" href="/order/{{ $order->id }}/show">Tillbaka till order {{ $order->order_id }}</a></span>
                 </div>
                 <div class="panel-body panel-content-default">
                      @if (session("status"))
