@@ -13,11 +13,8 @@ use App\Http\Input;
 class CustomerController extends Controller
 {
 	public function home(Request $request) {
-        $sortBy = 'id';
-        if ($request->input('sort') !== null)
-            $sortBy = $request->input('sort');
-
-		$customers = Customer::orderBy($sortBy)->paginate(15);
+        
+		$customers = Customer::all();
 
         return view('customer.customer', compact('customers'));
 	}
@@ -51,7 +48,7 @@ class CustomerController extends Controller
     	$customer->fill($request->all());
     	$customer->push();
 
-    	return redirect('/customer/'. $id .'/show');
+    	return redirect('/customer/'. $id .'/show')->with('status', Alert::get('success', 'Informationen är uppdaterad.'));
     }
 
     public function get($id) {

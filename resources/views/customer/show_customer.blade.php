@@ -10,7 +10,9 @@
                 </div>
                 <div class="panel-body panel-content-default">
                     <legend class="text-center">{{ $customer->name }}</legend>
-                    
+                    @if (session('status'))
+                        {!! @session('status') !!}
+                    @endif
                     <div class="col-md-6">
                         <form action="/customer/{{ $customer->id }}/update" method="post">
                             <input type="hidden" value="{!! csrf_token() !!}" name="_token" />

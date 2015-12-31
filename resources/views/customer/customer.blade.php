@@ -7,40 +7,26 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Kunder</div>
                 <div class="panel-body">
-                    <table class="table">
+                    <!-- <div class="form-group form-inline pull-right">
+                        <label>Sök:</label>
+                        <input type="text" id="searchInput" class="form-control">
+                    </div> -->
+                    <table class="table" id="CustomerTable">
                         <thead>
-                            <th><a href="?sort=id">#</a>
-                                @if (!isset($_GET['sort']) || $_GET['sort'] == 'id')
-                                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-                                @endif
+                            <th>#
                             </th>
-                            <th><a href="?sort=customer_id">Kundnr</a>
-                                @if (isset($_GET['sort']) && $_GET['sort'] == 'customer_id')
-                                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-                                @endif
+                            <th>Kundnr
                             </th>
-                            <th><a href="?sort=name">Namn</a>
-                                @if (isset($_GET['sort']) && $_GET['sort'] == 'name')
-                                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-                                @endif
+                            <th>Namn
                             </th>
-                            <th><a href="?sort=telephone_number">Telefonr</a>
-                                @if (isset($_GET['sort']) && $_GET['sort'] == 'telephone_number')
-                                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-                                @endif
+                            <th>Telefonnr
                             </th>
-                            <th><a href="?sort=business">Typ</a>
-                                @if (isset($_GET['sort']) && $_GET['sort'] == 'business')
-                                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-                                @endif
+                            <th>Typ
                             </th>
-                            <th><a href="?sort=reputation">Omdöme</a>
-                                @if (isset($_GET['sort']) && $_GET['sort'] == 'reputation')
-                                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-                                @endif
+                            <th>Omdöme
                             </th>
                         </thead>
-                        <tbody>
+                        <tbody ng-controller="CustomerSearchController" id="fbody">
                             @foreach($customers as $customer)
                             <tr>
                                 <td>{{ $customer->id }}</td>
@@ -63,16 +49,16 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="btn-toolbar text-center" role="toolbar" aria-label="...">
-                        @if (isset($_GET['sort']))
-                            {!! $customers->appends(['sort' => $_GET['sort']])->links() !!}
-                        @else
-                            {!! $customers->appends(['sort' => 'id'])->links() !!}
-                        @endif
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#CustomerTable").DataTable();
+        });
+    </script>
 @endsection

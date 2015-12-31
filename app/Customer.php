@@ -36,4 +36,15 @@ class Customer extends Model
     public static function exists($customer_id) {
         return (Customer::whereCustomer_id($customer_id)->first() ? true : false);
     }
+
+    public function getStatusByReputation() {
+        switch ($this->reputation) {
+            case 0:
+                return [
+                    'status' => 'default',
+                    'message' => 'Inget omdöme'
+                    ];
+                break;
+        }
+    }
 }

@@ -13,6 +13,7 @@
     <link href="/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet" />
     <link href="/vendor/angular-loading-bar/build/loading-bar.min.css" rel="stylesheet" />
+    <link href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" rel="stylesheet" />
     <!-- <link href="/vendor/backgrid/src/backgrid.css" rel="stylesheet" />
     <link href="/vendor/backgrid-select-all/backgrid-select-all.min.css" rel="stylesheet" />
     <link href="/vendor/backgrid-filter/backgrid-filter.min.css" rel="stylesheet" />
