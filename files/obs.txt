@@ -1,0 +1,2 @@
+kund 6494 finns ej -> tillhör order 30484
+kund 3198 finns ej -> tillhör order 31981

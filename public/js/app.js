@@ -1,4 +1,14 @@
-var app = angular.module('OrderApp', ['ui.bootstrap.modal']);
+'use strict';
+
+var app = angular.module('OrderApp', 
+	[
+	'ui.bootstrap.modal',
+	'ngResource',
+	'ngAnimate'
+	], function($interpolateProvider) {
+        $interpolateProvider.startSymbol('<%');
+        $interpolateProvider.endSymbol('%>');
+    });
 
 /**
  * A generic confirmation for risky actions.

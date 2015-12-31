@@ -176,4 +176,24 @@ class Order extends Model
         
         $orderEvent->save();
     }
+
+    /*
+        Hämtar första knytna orderevent
+    */
+    public function startedAt() {
+        if ($this->events()->count() != 0)
+            return date("Y-m-d", strtotime($this->events()->first()->created_at));
+        else
+            return '<i>Ej påbörjad</i>';
+    }
+
+    /*
+        Hämtar sista knytna orderevent
+    */
+    public function finishedAt() {
+        if ($this->events()->count() != 0)
+            return date("Y-m-d", strtotime($this->events()->orderBy('order_event_id', 'desc')->first()->created_at));
+        else 
+            return '<i>Ej avslutad</i>';
+    }
 }

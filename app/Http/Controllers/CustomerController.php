@@ -8,13 +8,18 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Customer;
 use App\Classes\Alert;
+use App\Http\Input;
 
 class CustomerController extends Controller
 {
-	public function home() {
-		$customers = Customer::orderBy("name")->get();
+	public function home(Request $request) {
+        $sortBy = 'id';
+        if ($request->input('sort') !== null)
+            $sortBy = $request->input('sort');
 
-		return view('customer.customer', compact('customers'));
+		$customers = Customer::orderBy($sortBy)->paginate(15);
+
+        return view('customer.customer', compact('customers'));
 	}
 
     public function show($id) {
@@ -44,12 +49,16 @@ class CustomerController extends Controller
     	$customer = Customer::whereId($id)->first();
 
     	$customer->fill($request->all());
-    	$customer->save();
+    	$customer->push();
 
-    	return redirect('/customer/'. $id);
+    	return redirect('/customer/'. $id .'/show');
     }
 
     public function get($id) {
         return Customer::whereCustomer_id($id)->first();
+    }
+
+    public function getAll() {
+        dd(Customer::paginate(15));
     }
 }
