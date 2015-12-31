@@ -43,6 +43,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/order/create', 'OrderController@create');
     Route::post('/order/create', 'OrderController@save');
 
+    Route::controller('customer', 'CustomerController', [
+        'anyData'  => 'customer.data',
+        'home' => 'customer',
+    ]);
+
     Route::get('/customer/{id}/show', 'CustomerController@show');
     Route::get('/customer', 'CustomerController@home');
     Route::post('/customer/{id}/update', 'CustomerController@update');
@@ -54,12 +59,18 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/archive', 'ArchiveController@archive');
 
+    Route::controller('datatables', 'DatatablesController', [
+        'anyData'  => 'datatables.data',
+        'getIndex' => 'datatables',
+    ]);
+
     //API
     Route::post('/orderevent/delete', 'OrderEventController@delete');
     Route::post('/order/delete', 'OrderController@delete');
 
     Route::get('/customer/get/{id}', 'CustomerController@get');
-    Route::get('/customer/getAll', 'CustomerController@getAll');
+    Route::get('/customer/getCustomers', 'CustomerController@getCustomers');
+    Route::get('/customer/anyData', 'CustomerController@anyData');
 
     Route::get('/archive/getArchive', 'ArchiveController@getArchive');
 });

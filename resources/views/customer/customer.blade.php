@@ -13,41 +13,12 @@
                     </div> -->
                     <table class="table" id="CustomerTable">
                         <thead>
-                            <th>#
-                            </th>
-                            <th>Kundnr
-                            </th>
-                            <th>Namn
-                            </th>
-                            <th>Telefonnr
-                            </th>
-                            <th>Typ
-                            </th>
-                            <th>Omdöme
-                            </th>
+                            <th>#</th>
+                            <th>Kundnr</th>
+                            <th>Namn</th>
+                            <th>Telefonnr</th>
+                            <th>Skapad</th>
                         </thead>
-                        <tbody ng-controller="CustomerSearchController" id="fbody">
-                            @foreach($customers as $customer)
-                            <tr>
-                                <td>{{ $customer->id }}</td>
-                                <td>{{ $customer->customer_id }}</td>
-                                <td><a href="/customer/{{ $customer->id }}/show">{{ $customer->name }}</a></td>
-                                <td>{{ $customer->telephone_number }}</td>
-                                <td>
-                                    @if ($customer->business)
-                                    <span class="label label-primary">Företag</span>
-                                    @else
-                                    <span class="label label-success">Privat</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    <span class="label label-{{ $customer->getStatusByReputation()['status'] }}">
-                                        {{ $customer->getStatusByReputation()['message'] }}
-                                    </span>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
                     </table>
                 </div>
             </div>
@@ -58,7 +29,18 @@
 @section('script')
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#CustomerTable").DataTable();
+            $('#CustomerTable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{!! route('customer.data') !!}',
+                columns: [
+                    { data: 'id', name: 'id' },
+                    { data: 'customer_id', name: 'customer_id' },
+                    { data: 'name', name: 'name' },
+                    { data: 'telephone_number', name: 'telephone_number' },
+                    { data: 'created_at', name: 'created_at' }
+                ]
+            });
         });
     </script>
 @endsection
