@@ -13,9 +13,29 @@ use Datatables;
 use Yajra\Datatables\Html\Builder;
 
 class CustomerController extends Controller
-{
-	public function home() {
-        return view('customer.customer');
+{   
+    /**
+     * Datatables Html Builder
+     * @var Builder
+     */
+    protected $htmlBuilder; 
+
+    public function __construct(Builder $htmlB) {
+        $this->htmlBuilder = $htmlB;
+    }
+
+	public function home(Request $request) {
+        if ($request->ajax()) {
+            return Datatables::of(Customer::select('*'))->make(true);
+        }
+
+        $html = $this->htmlBuilder
+                ->addColumn(['data' => 'id', 'name' => 'id', 'title' => '#'])
+                ->addColumn(['data' => 'customer_id', 'name' => 'customer_id', 'title' => 'Kundnr'])
+                ->addColumn(['data' => 'name', 'name' => 'name', 'title' => 'Namn'])
+                ->addColumn(['data' => 'telephone_number', 'name' => 'telephone_number', 'title' => 'Telefonnr']);
+
+        return view('customer.customer', compact('html'));
 	}
 
     public function show($id) {
@@ -52,9 +72,5 @@ class CustomerController extends Controller
 
     public function get($id) {
         return Customer::whereCustomer_id($id)->first();
-    }
-
-    public function anyData() {
-        return Datatables::of(Customer::select('*'))->make(true);
     }
 }
