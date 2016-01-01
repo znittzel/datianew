@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Classes\Alert;
 
 class Customer extends Model
 {
@@ -28,6 +29,23 @@ class Customer extends Model
     */
     public function isBusiness() {
         return ($this->business ? true : false);
+    }
+
+    /*
+        Ger tillbaka en html "label" beroende på $this->business.
+    */
+    public function getLabelForBusiness() {
+        if ($this->isBusiness())
+            return Alert::getLabel("primary", "Företag");
+        else
+            return Alert::getLabel("default", "Privat");
+    }
+
+    /*
+        Ger tillbaka en html "label" beroende på $this->reputation.
+    */
+    public function getLabelForReputation() {
+        return Alert::getLabel($this->getStatusByReputation()['status'], $this->getStatusByReputation()['message']);
     }
 
     /*

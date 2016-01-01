@@ -150,6 +150,7 @@
     <script src="/vendor/widgster/widgster.js"></script>
     <!-- <script data-pace-options='{ "target": ".content-wrap", "ghostTime": 1000 }' src="/vendor/pace.js/pace.min.js"></script>-->
     <script src="/vendor/jquery-touchswipe/jquery.touchSwipe.min.js"></script>
+    <script src="/vendor/bpopup/jquery.bpopup.min.js"></script>
 
     <script src="/js/parsley.min.js"></script>
     <script src="/js/parsley-sv.js"></script>

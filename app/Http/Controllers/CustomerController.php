@@ -26,14 +26,26 @@ class CustomerController extends Controller
 
 	public function home(Request $request) {
         if ($request->ajax()) {
-            return Datatables::of(Customer::select('*'))->make(true);
+            $customers = Customer::select('*');
+
+            return Datatables::of($customers)
+                        ->editColumn('name', '<a href="#customer-{{$customer_id}}" ng-click="editCustomer({{$customer_id}})">{{ $name }}</a>')
+                        ->editColumn('business', function($customer) {
+                            return $customer->getLabelForBusiness();
+                        })
+                        ->editColumn('reputation', function($customer) {
+                            return $customer->getLabelForReputation();
+                        })
+                        ->make(true);
         }
 
         $html = $this->htmlBuilder
                 ->addColumn(['data' => 'id', 'name' => 'id', 'title' => '#'])
                 ->addColumn(['data' => 'customer_id', 'name' => 'customer_id', 'title' => 'Kundnr'])
                 ->addColumn(['data' => 'name', 'name' => 'name', 'title' => 'Namn'])
-                ->addColumn(['data' => 'telephone_number', 'name' => 'telephone_number', 'title' => 'Telefonnr']);
+                ->addColumn(['data' => 'telephone_number', 'name' => 'telephone_number', 'title' => 'Telefonnr'])
+                ->addColumn(['data' => 'business', 'name' => 'business', 'title' => 'Typ'])
+                ->addColumn(['data' => 'reputation', 'name' => 'reputation', 'title' => 'Omdöme']);
 
         return view('customer.customer', compact('html'));
 	}

@@ -125,3 +125,17 @@ app.controller("CustomerCreateController", function($scope, $http) {
 		}
 	}
 });
+
+app.controller("CustomerEditController", function($scope, $http) {
+	$scope.editCustomer = function(id) {
+		$http({
+			method: 'GET',
+			url: '/customer/get/'+id
+		}).success(function(customer) {
+
+			$scope.customer = customer;
+
+			$("#modal").modal('show');
+		});
+	}
+});
