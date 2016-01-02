@@ -2,6 +2,10 @@
 
 /* FUNKTIONER */
 
+/*
+	getLabelByBusiness(business);
+	Ger tillbaka en Label om företag eller privat
+*/
 var getLabelByBusiness = function(business) {
 	if (business == "1")
 		return '<span class="label label-primary">Företag</span>';
@@ -9,6 +13,11 @@ var getLabelByBusiness = function(business) {
 		return '<span class="label label-default">Privat</span>';
 }
 
+
+/*
+	getLabelByReputation(rep);
+	Ger tillbaka en Label beroende på kunds rykte
+*/
 var getLabelByReputation = function(rep) {
 	switch (rep) {
 		case "0":
@@ -151,6 +160,11 @@ app.controller("CustomerCreateController", function($scope, $http) {
 	}
 });
 
+/*
+
+	Controller i customer/customer.blade.php
+	Används till Edit Customer Modal, #modal
+*/
 app.controller("CustomerEditController", function($scope, $http) {
 	$scope.editCustomer = function(customer_id, id) {
 		$http({

@@ -132,7 +132,7 @@
     <script src='vendor/backgrid-paginator/backgrid-paginator.js'></script>
     <script src='vendor/backgrid-select-all/backgrid-select-all.min.js'></script>
     <script src='vendor/backgrid-filter/backgrid-filter.min.js'></script>-->
-    <script src='vendor/bootstrap-select/dist/js/bootstrap-select.min.js'></script>
+    <script src='/vendor/bootstrap-select/dist/js/bootstrap-select.min.js'></script>
 
     <!-- Loading bar -->
     <script src="/vendor/angular-loading-bar/build/loading-bar.min.js"></script>
