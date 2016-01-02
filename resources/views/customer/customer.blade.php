@@ -40,6 +40,14 @@
                                             <option ng-selected="!customer.business" value="0">Privat</option>
                                         </select>
                                     </div>
+                                    <div class="form-group">
+                                        <label>Omdöme</label>
+                                        <select class="form-control" ng-model="customer.reputation">
+                                            <option ng-selected="customer.reputation == 0" value="0">Inget omdöme</option>
+                                            <option ng-selected="customer.reputation == 1" value="1">Problem med betalning</option>
+                                            <option ng-selected="customer.reputation == 2" value="2">Faktureras inte</option>
+                                        </select>
+                                    </div>
                                 </form>
                               </div>
                               <div class="modal-footer">

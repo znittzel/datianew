@@ -13,7 +13,8 @@ class Customer extends Model
     	'customer_id',
     	'name',
     	'business',
-    	'telephone_number'
+    	'telephone_number',
+        'reputation'
     ];
 
 
@@ -62,6 +63,18 @@ class Customer extends Model
                     'status' => 'default',
                     'message' => 'Inget omdöme'
                     ];
+                break;
+            case 1:
+                return [
+                    'status' => 'warning',
+                    'message' => 'Problem med betalning'
+                ];
+                break;
+            case 2:
+                return [
+                    'status' => 'danger',
+                    'message' => 'Faktureras ej'
+                ];
                 break;
         }
     }

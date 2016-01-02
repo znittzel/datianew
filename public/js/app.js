@@ -11,8 +11,14 @@ var getLabelByBusiness = function(business) {
 
 var getLabelByReputation = function(rep) {
 	switch (rep) {
-		case 1:
+		case "0":
 			return '<span class="label label-default">Inget omdöme</span>';
+			break;
+		case "1":
+			return '<span class="label label-warning">Problem med betalning</span>';
+			break;
+		case "2":
+			return '<span class="label label-danger">Faktureras ej</span>';
 			break;
 	}
 }
