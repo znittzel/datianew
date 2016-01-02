@@ -7,13 +7,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Kunder</div>
                 <div class="panel-body">
-                    <div ng-controller="CustomerEditController">
+                    <div ng-controller="CustomerEditController" id="customer_div">
                     {!! $html->table() !!}
-                    <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary btn-lg" ng-click="editCustomer(1000)">
-                          Launch demo modal
-                        </button>
-
                         <!-- Modal -->
                         <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                           <div class="modal-dialog" role="document">
@@ -24,9 +19,11 @@
                               </div>
                               <div class="modal-body">
                                 <form>
+                                    <input type="hidden" name="_token" ng-model="token" ng-init="{!! csrf_token() !!}">
+                                    <input type="hidden" name="row_id" ng-model="rowId">
                                     <div class="form-group">
                                         <label>Kundnummer</label>
-                                        <input type="text" class="form-control" ng-model="customer.customer_id">
+                                        <input type="text" disabled class="form-control" ng-model="customer.customer_id">
                                     </div>
                                     <div class="form-group">
                                         <label>Namn</label>
@@ -38,16 +35,17 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Typ</label>
-                                        <select class="form-control">
-                                            <option ng-selected="customer.business">Företag</option>
-                                            <option ng-selected="!customer.business">Privat</option>
+                                        <select class="form-control"  ng-model="customer.business">
+                                            <option ng-selected="customer.business" value="1">Företag</option>
+                                            <option ng-selected="!customer.business" value="0">Privat</option>
                                         </select>
                                     </div>
                                 </form>
                               </div>
                               <div class="modal-footer">
+                                <a href="/customer/<% customer.id %>/show" class="pull-left">Mer information</a>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
-                                <button type="button" class="btn btn-primary">Spara</button>
+                                <button type="button" class="btn btn-primary" ng-click="saveCustomer(customer, rowId)">Spara</button>
                               </div>
                             </div>
                           </div>
@@ -62,4 +60,10 @@
 @endsection
 @section('script')
     {!! $html->scripts() !!}
+
+    <script type="text/javascript">
+        var editCustomerJavascript = function(customer_id, id) {
+            angular.element($("#customer_div")).scope().editCustomer(customer_id, id);
+        }
+    </script>
 @endsection

@@ -1,5 +1,24 @@
 'use strict';
 
+/* FUNKTIONER */
+
+var getLabelByBusiness = function(business) {
+	if (business == "1")
+		return '<span class="label label-primary">Företag</span>';
+	else
+		return '<span class="label label-default">Privat</span>';
+}
+
+var getLabelByReputation = function(rep) {
+	switch (rep) {
+		case 1:
+			return '<span class="label label-default">Inget omdöme</span>';
+			break;
+	}
+}
+
+/*----END FUNKTIONER---*/
+
 var app = angular.module('OrderApp', 
 	[
 	'ui.bootstrap.modal',
@@ -127,15 +146,34 @@ app.controller("CustomerCreateController", function($scope, $http) {
 });
 
 app.controller("CustomerEditController", function($scope, $http) {
-	$scope.editCustomer = function(id) {
+	$scope.editCustomer = function(customer_id, id) {
 		$http({
 			method: 'GET',
-			url: '/customer/get/'+id
+			url: '/customer/get/'+customer_id
 		}).success(function(customer) {
-
-			$scope.customer = customer;
+			$scope.rowId = id;
+			$scope.customer = customer;	
 
 			$("#modal").modal('show');
 		});
+	}
+
+	$scope.saveCustomer = function(customer, rowId) {
+		$http({
+			url: '/customer/saveAjax',
+			method: 'POST',
+			data: customer
+		}).then(function successCallback(response) {
+		    var row = $("#"+rowId);
+
+		    $(row.children()[2]).html('<a href="#" onclick="editCustomerJavascript('+customer.customer_id+','+rowId+')">'+customer.name+'</a>');
+		    $(row.children()[3]).html(customer.telephone_number);
+		    $(row.children()[4]).html(getLabelByBusiness(customer.business));
+		    $(row.children()[5]).html(getLabelByReputation(customer.reputation));
+
+		    $("#modal").modal('hide');
+		  }, function errorCallback(response) {
+		    console.log(response);
+		  });
 	}
 });

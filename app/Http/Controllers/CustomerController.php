@@ -29,13 +29,14 @@ class CustomerController extends Controller
             $customers = Customer::select('*');
 
             return Datatables::of($customers)
-                        ->editColumn('name', '<a href="#customer-{{$customer_id}}" ng-click="editCustomer({{$customer_id}})">{{ $name }}</a>')
+                        ->editColumn('name', '<a href="#customer-{{$id}}" onclick="editCustomerJavascript({{$customer_id}},{{$id}})">{{ $name }}</a>')
                         ->editColumn('business', function($customer) {
                             return $customer->getLabelForBusiness();
                         })
                         ->editColumn('reputation', function($customer) {
                             return $customer->getLabelForReputation();
                         })
+                        ->setRowId('id')
                         ->make(true);
         }
 
@@ -84,5 +85,11 @@ class CustomerController extends Controller
 
     public function get($id) {
         return Customer::whereCustomer_id($id)->first();
+    }
+
+    public function saveAjax(Request $request) {
+            $customer = Customer::whereCustomer_id($request->customer_id)->first();
+            $customer->fill($request->all());
+            $customer->push();
     }
 }

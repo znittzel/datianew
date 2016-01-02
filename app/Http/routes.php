@@ -62,6 +62,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/customer/get', 'CustomerController@getCustomer');
     Route::get('/customer/getCustomers', 'CustomerController@getCustomers');
     Route::get('/customer/anyData', 'CustomerController@anyData');
+    Route::post('/customer/saveAjax', 'CustomerController@saveAjax');
 
     Route::get('/archive/getArchive', 'ArchiveController@getArchive');
 });
