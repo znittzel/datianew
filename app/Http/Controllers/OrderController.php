@@ -37,7 +37,7 @@ class OrderController extends Controller
             $order->fill($request->all());
             $order->push();
 
-            return redirect('/order/'.$id.'/edit')->with("status", Alert::get("success", "Order är uppdaterad."));
+            return redirect('/order/'.$id.'/show')->with("status", Alert::get("success", "Order är uppdaterad."));
         } else {
             return redirect('/order/'.$id.'/edit')->with("status", Alert::get("danger", "Kundnummer existerar inte!"));
         }

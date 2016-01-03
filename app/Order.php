@@ -153,7 +153,7 @@ class Order extends Model
     */
     public function archiveIt($sign) {
         $this->setOrderStatus('archived');
-        $this->addOrderEvent("<i>Order avslutad och utlämnad</i>", $sign);
+        $this->addOrderEvent("Order avslutad och utlämnad", $sign);
     }
 
     /*
@@ -161,7 +161,7 @@ class Order extends Model
     */
     public function return_order($sign) {
         $this->setOrderStatus('started');
-        $this->addOrderEvent("<i>Order återinförd i ordersystemet.</i>", $sign);
+        $this->addOrderEvent("Order återinförd i ordersystemet.", $sign);
     }
 
     /*

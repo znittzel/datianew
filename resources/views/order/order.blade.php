@@ -15,7 +15,9 @@
                 </div>
                 <div class="panel-body panel-content-{{ $order->state() }}">
                     <legend class="text-center"><a href="/order/{{ $order->id }}/edit">{{ $order->order_id }}</a> - <a href="/customer/{{ $order->customer()->first()->id }}/show">{{$order->customer()->first()->name }}</a></legend>
-                        
+                    @if (session('status'))
+                        {!! session('status') !!}
+                    @endif
                     <table class="table table-striped">
                         <tr>
                             <th>Typ</th>
