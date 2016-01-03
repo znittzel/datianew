@@ -27,7 +27,7 @@
                                 @if(!$p_order->customer->business)
                                 <h6>
                                   <a href="/order/{{ $p_order->id }}/show" class="list-group-item text-center">
-                                    {!! $p_order->order_id.' - <b>'.$p_order->customer->name !!}</b>
+                                    {!! $p_order->order_id.' - '.$p_order->customer->name !!}
                                     <span class="label label-{{ $p_order->state() }} pull-right ">{{$p_order->stateName()}}</span>
                                   </a>
                                 </h6>

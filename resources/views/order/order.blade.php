@@ -14,27 +14,13 @@
                     <span class="pull-right"><i>{{ $order->created_at .' - '. $order->sign }}</i></span>
                 </div>
                 <div class="panel-body panel-content-{{ $order->state() }}">
-                    <h4 class="text-center"><a href="/order/{{ $order->id }}/edit">{{ $order->order_id }}</a> - <a href="/customer/{{ $order->customer()->first()->id }}/show">{{$order->customer()->first()->name }}</a></h4>
+                    <legend class="text-center"><a href="/order/{{ $order->id }}/edit">{{ $order->order_id }}</a> - <a href="/customer/{{ $order->customer()->first()->id }}/show">{{$order->customer()->first()->name }}</a></legend>
                     @if (session('status'))
                         {!! session('status') !!}
                     @endif
-                    <table class="table">
-                        <tr>
-                            <th>Typ</th>
-                            <th>Tillbehör</th>
-                            <th>Lösenord</th>
-                            <th>Låda</th>
-                            <th>Telefonnummer</th>
-                        </tr>
-                        <tr class="active">
-                            <td>{{ $order->type }}</td>
-                            <td>{{ $order->accessories }}</td>
-                            <td>{{ $order->password }}</td>
-                            <td>{{ $order->box }}</td>
-                            <td><a href="tel:{{$order->customer()->first()->telephone_number}}">{{ $order->customer()->first()->telephone_number }}</a></td>
-                        </tr>
-                    </table>
-                    <p class="order-heading">{!! nl2br(e($order->context)) !!}</p>
+                    <div class="well">
+                        <p class="order-heading">{!! nl2br(e($order->context)) !!}</p>
+                    </div>
                     <div id="comments">
                         @foreach($order->events as $event)
 
@@ -48,7 +34,8 @@
                     </div>
                     <br>
                     <!-- Button trigger modal -->
-                    
+                </div>
+                <div class="panel-footer">
                     <div class="col-md-3 @if($order->status != 4) {{'hidden'}} @endif" id="div_deliver_order">
                         <form action="/order/{{ $order->id }}/archive" method="post" novalidate id="archive_order">
                             {!! csrf_field() !!}
@@ -70,7 +57,8 @@
                     <button type="button" id="btn_comment" class="btn btn-default btn-lg @if($order->status == 4) {{ 'hidden' }} @endif" data-toggle="modal" data-target="#modalComment">
                       Kommentera
                     </button>
-                    <!-- Modal -->
+                    <button class="btn btn-default btn-lg pull-right" data-toggle="modal" data-target="#modalInformation">Information</button>
+                    <!-- Modal Comment -->
                     <div class="modal fade" id="modalComment" tabindex="-1" role="dialog" aria-labelledby="Comment" ng-controller="CommentOrderController">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -110,6 +98,38 @@
                           <div class="modal-footer">
                             <button type="button" class="btn btn-default" ng-click="closeModal()">Stäng</button>
                             <button type="button" class="btn btn-primary" ng-click="save(comment)">Spara</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Modal Information -->
+                    <div class="modal fade" id="modalInformation" tabindex="-1" role="dialog" aria-labelledby="Information">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Information</h4>
+                          </div>
+                          <div class="modal-body row">
+                            <div class="col-md-2">
+                                <legend>Typ</legend>
+                                {{ $order->type }}
+                            </div>
+                            <div class="col-md-4">
+                                <legend>Tillbehör</legend>
+                                {{ $order->accessories }}
+                            </div>
+                            <div class="col-md-4">
+                                <legend>Telefonnr</legend>
+                                <a href="tel:{{$order->customer()->first()->telephone_number}}">{{ $order->customer()->first()->telephone_number }}</a>
+                            </div>
+                            <div class="col-md-2">
+                                <legend>Låda</legend>
+                                {{ $order->box }}
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
                           </div>
                         </div>
                       </div>
