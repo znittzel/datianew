@@ -48,7 +48,26 @@
                     </div>
                     <br>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#modalComment">
+                    
+                    <div class="col-md-3 @if($order->status != 4) {{'hidden'}} @endif" id="div_deliver_order">
+                        <form action="/order/{{ $order->id }}/archive" method="post" novalidate id="archive_order">
+                            {!! csrf_field() !!}
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Sign</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" data-parsley-required class="form-control" name="sign" >
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <button type="submit" class="btn btn-default">Lämna ut</button>
+                                  </div>
+                            </fieldset>
+                        </form>
+                    </div>
+
+                    <button type="button" id="btn_comment" class="btn btn-default btn-lg @if($order->status == 4) {{ 'hidden' }} @endif" data-toggle="modal" data-target="#modalComment">
                       Kommentera
                     </button>
                     <!-- Modal -->
@@ -63,7 +82,7 @@
                             <form class="form-horizontal" novalidate id="comment_order">
                                 {!! csrf_field() !!}
                                 <input type="hidden" ng-model="comment.order_id" ng-init="comment.order_id = {{$order->order_id}}">
-                                <input type="hidden" ng-model="comment.panel_classname" ng-init="comment.panel_classname='{{$order->state()}}'">
+                                <input type="hidden" ng-model="comment.panel_classname" ng-init="comment.panel_classname='panel-{{$order->state()}}'">
                               <fieldset>
                                 <div class="form-group">
                                   <label for="textArea" class="col-lg-2 control-label">Kommentar</label>
@@ -81,7 +100,7 @@
                                 <div class="form-group">
                                     <div class="checkbox col-lg-10 col-md-offset-2">
                                       <label>
-                                        <input type="checkbox" ng.model="comment.finished" id="finished"> Avsluta order
+                                        <input type="checkbox" ng-model="comment.finished" id="finished"> Avsluta order
                                       </label>
                                     </div>
                                 </div>
@@ -90,12 +109,11 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-default" ng-click="closeModal()">Stäng</button>
-                            <button type="button" class="btn btn-primary" ng-click="validate(comment)">Spara</button>
+                            <button type="button" class="btn btn-primary" ng-click="save(comment)">Spara</button>
                           </div>
                         </div>
                       </div>
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -115,5 +133,17 @@
         errorsWrapper: '<div class="invalid-message"></div>',
         errorTemplate: '<span></span>',
     });
+
+    $("#archive_order").parsley({
+        trigger:      'change',
+        successClass: "has-success",
+        errorClass: "has-error",
+        classHandler: function (el) {
+            return el.$element.closest('.form-group');
+        },
+        errorsWrapper: '<div class="invalid-message"></div>',
+        errorTemplate: '<span></span>',
+    });
+
 </script>
 @endsection

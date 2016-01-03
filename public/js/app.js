@@ -88,12 +88,16 @@ var getLabelByReputation = function(rep) {
 	getPanelClassByState(state, business);
 	Ger tillbaka en class beroende på state, företag (business) och vilken sort (class)
 */
-var getClassByState = function(state, business, prio,classname) {
+var getClassByState = function(state, business, prio, classname) {
 	if (state == '3' || state == '4') {
-		if (state == '3')
-			return classname+'-default';
-		else if (state == '4')
-			return classname+'-success';
+		switch (state) {
+			case '3':
+				return classname+'-default';
+				break;
+			case '4':
+				return classname+'-success';
+				break;
+		}
 	} else {
 		if (prio) {
 			switch (state) {
@@ -102,6 +106,7 @@ var getClassByState = function(state, business, prio,classname) {
 					break;
 				case '2':
 					return classname+'-default';
+					break;
 			}
 		} else {
 			if (business) {
@@ -111,6 +116,7 @@ var getClassByState = function(state, business, prio,classname) {
 						break;
 					case '2':
 						return classname+'-info';
+						break;
 				}
 			} else {
 				switch (state) {
@@ -119,6 +125,7 @@ var getClassByState = function(state, business, prio,classname) {
 						break;
 					case '2':
 						return classname+'-warning';
+						break;
 				}
 			}
 		}
@@ -285,20 +292,28 @@ app.controller("CustomerEditController", function($scope, $http) {
 	}
 });
 
-app.controller('CommentOrderController', function($scope, $http) {
-	$scope.validate = function(comment) {
+app.controller('CommentOrderController', ['$scope', '$http', function($scope, $http) {
+	$scope.save = function(comment) {
 		if ($("#comment_order").parsley().isValid()) {
-			var timestamp = 
 			$http({
 				url: '/order/comment',
 				method: 'POST',
 				data: comment
 			}).success(function(res) {
 				$("#comments").append('<div class="row order-comment-row"><div class="col-md-7 order-comment">'+res.event.comment+'</div><div class="col-md-4 order-comment">'+res.event.created_at+'</div><div class="col-md-1 order-comment">'+res.event.sign+'</div></div>');
+				var classname = getClassByState(res.status, res.business, res.prio,'panel');
 
-				$("#panel_order").removeClass($("#panel_order").removeClass("panel-"+comment.panel_classname));
-				$("#panel_order").addClass(getClassByState(res.status, res.business, 'panel'));
+				$("#panel_order").removeClass($("#panel_order").removeClass(comment.panel_classname));
+				$("#panel_order").addClass(classname);
 
+				if (res.status == '4') {
+					$("#div_deliver_order").removeClass("hidden");
+					$("#btn_comment").addClass("hidden");
+				}
+
+				$scope.comment = {};
+				$scope.comment.panel_classname = classname;
+				$scope.comment.order_id = res.event.order_id;
 				$scope.closeModal();
 			}).error(function(response){
 				console.log(response);
@@ -307,8 +322,7 @@ app.controller('CommentOrderController', function($scope, $http) {
 	}
 
 	$scope.closeModal = function() {
-		$scope.comment = {};
 		$("#modalComment").modal('hide');
 		$('#comment_order').parsley().reset();
 	}
-});
+}]);
