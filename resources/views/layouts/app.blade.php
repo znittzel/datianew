@@ -12,8 +12,7 @@
     <!-- Styles -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/theme.min.css">
     <link href="/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet" />
     <link href="/vendor/angular-loading-bar/build/loading-bar.min.css" rel="stylesheet" />
     <link href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" rel="stylesheet" />
@@ -55,33 +54,28 @@
                 <!-- Left Side Of Navbar -->
                 @if (!Auth::guest())
                 <ul class="nav navbar-nav">
-                    <!-- <li class="dropdown {{{ (Request::is('home') ? 'active' : Request::is('order/*/*') ? 'active' : '') }}}">
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="/home">Order</a></li>
-                        </ul>
-                    </li> -->
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            Order <span class="caret"></span>
+                            <i class="fa fa-btn fa-file-text"></i> Order <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="/home"><i class="fa fa-btn fa-cubes"></i>Aktiva</a></li>
-                            <li><a href="/order/create"><i class="fa fa-btn fa-plus"></i>Skapa order</a></li>
+                            <li><a href="/home">Aktiva</a></li>
+                            <li><a href="/order/create"><i class="fa fa-btn fa-plus"></i> Skapa order</a></li>
                         </ul>
                     </li>
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            Kund <span class="caret"></span>
+                           <i class="fa fa-btn fa-user"></i> Kund <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="/customer"><i class="fa fa-btn fa-users"></i>Alla</a></li>
-                            <li><a href="/customer/create"><i class="fa fa-btn fa-plus"></i>Skapa kund</a></li>
+                            <li><a href="/customer">Lista</a></li>
+                            <li><a href="/customer/create"><i class="fa fa-btn fa-plus"></i> Skapa kund</a></li>
                         </ul>
                     </li>
-                    <li><a href="/archive">Arkiv</a></li>
+                    <li><a href="/archive"><i class="fa fa-btn fa-archive"></i> Arkiv</a></li>
                 </ul>
                 @endif
 

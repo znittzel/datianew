@@ -49,7 +49,7 @@
                             </tr>
 
                             @foreach ($customer->orders as $order)
-                                <tr class="{{ $order->state() }}" id="{{ $order->id }}">
+                                <tr id="{{ $order->id }}">
                                     <td><a href="/order/{{ $order->id }}/show">{{ $order->order_id }}</a></td>
                                     <td>{{ $order->type }}</td>
                                     <td><span class="label label-{{$order->state()}}">{{ $order->stateName() }}</span></td>

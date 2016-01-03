@@ -4,7 +4,10 @@
 
 class Alert {
 	public static function get($state, $message) {
-		return '<div class="alert alert-'.$state.'"> '.$message.' </div>'; 
+		return '<div class="alert alert-dismissible alert-'.$state.'">
+				  <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+				  '.$message.'
+				</div>'; 
 	}
 
 	public static function getLabel($state, $message) {

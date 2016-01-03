@@ -14,11 +14,11 @@
                     <span class="pull-right"><i>{{ $order->created_at .' - '. $order->sign }}</i></span>
                 </div>
                 <div class="panel-body panel-content-{{ $order->state() }}">
-                    <legend class="text-center"><a href="/order/{{ $order->id }}/edit">{{ $order->order_id }}</a> - <a href="/customer/{{ $order->customer()->first()->id }}/show">{{$order->customer()->first()->name }}</a></legend>
+                    <h4 class="text-center"><a href="/order/{{ $order->id }}/edit">{{ $order->order_id }}</a> - <a href="/customer/{{ $order->customer()->first()->id }}/show">{{$order->customer()->first()->name }}</a></h4>
                     @if (session('status'))
                         {!! session('status') !!}
                     @endif
-                    <table class="table table-striped">
+                    <table class="table">
                         <tr>
                             <th>Typ</th>
                             <th>Tillbehör</th>
@@ -35,7 +35,6 @@
                         </tr>
                     </table>
                     <p class="order-heading">{!! nl2br(e($order->context)) !!}</p>
-                    <hr/>
 
                     @foreach($order->events as $event)
 
@@ -46,6 +45,7 @@
                     </div>
 
                     @endforeach
+                    <hr/>
                     <br>
                     @if ($order->status != '3' && $order->status != '4')
                     <form method="post" action="/order/{{ $order->id }}/comment" id="comment_order">

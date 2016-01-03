@@ -59,28 +59,17 @@ fieldset[disabled] .btn-high-prio.active {
 	border-radius: 5px;
 }
 
-.order-comment {
-
+.panel-content-high-prio table {
+  color:black;
 }
 
-.panel-content-danger {
-	background:rgba(255,0,0,0.1);
+.panel-high-prio .panel-heading {
+  background: black;
+  color:white;
 }
 
-.panel-content-warning {
-	background:rgba(255,255,0,0.1);
-}
-
-.panel-content-success {
-	background:rgba(0,255,0,0.1);
-}
-
-.panel-content-primary {
-	background:rgba(0,0,255,0.1);
-}
-
-.panel-content-info {
-	background:rgba(0,0,255,0.1);
+.panel-high-prio .panel-heading a {
+  color:orange;
 }
 
 .vcenter {
