@@ -20,6 +20,7 @@ class ArchiveController extends Controller
 
     public function __construct(Builder $builder) {
         $this->htmlBuilder = $builder;
+        $this->middleware('auth');
     }
 
     public function archive(Request $request) {

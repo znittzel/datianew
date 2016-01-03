@@ -10,6 +10,16 @@ use App\OrderEvent;
 
 class OrderEventController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function delete(Request $request) {
         return OrderEvent::whereOrder_event_id($request->order_event_id)->delete();
     }

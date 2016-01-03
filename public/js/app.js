@@ -84,6 +84,48 @@ var getLabelByReputation = function(rep) {
 	}
 }
 
+/*
+	getPanelClassByState(state, business);
+	Ger tillbaka en class beroende på state, företag (business) och vilken sort (class)
+*/
+var getClassByState = function(state, business, prio,classname) {
+	if (state == '3' || state == '4') {
+		if (state == '3')
+			return classname+'-default';
+		else if (state == '4')
+			return classname+'-success';
+	} else {
+		if (prio) {
+			switch (state) {
+				case '1':
+					return classname+'-high-prio';
+					break;
+				case '2':
+					return classname+'-default';
+			}
+		} else {
+			if (business) {
+				switch (state) {
+					case '1':
+						return classname+'-primary';
+						break;
+					case '2':
+						return classname+'-info';
+				}
+			} else {
+				switch (state) {
+					case '1':
+						return classname+'-danger';
+						break;
+					case '2':
+						return classname+'-warning';
+				}
+			}
+		}
+	}
+	
+}
+
 /*----END FUNKTIONER---*/
 
 var app = angular.module('OrderApp', 
@@ -240,5 +282,33 @@ app.controller("CustomerEditController", function($scope, $http) {
 	$scope.close = function() {
 		$('#edit_customer').parsley().reset();
 		$("#modal").modal('hide');
+	}
+});
+
+app.controller('CommentOrderController', function($scope, $http) {
+	$scope.validate = function(comment) {
+		if ($("#comment_order").parsley().isValid()) {
+			var timestamp = 
+			$http({
+				url: '/order/comment',
+				method: 'POST',
+				data: comment
+			}).success(function(res) {
+				$("#comments").append('<div class="row order-comment-row"><div class="col-md-7 order-comment">'+res.event.comment+'</div><div class="col-md-4 order-comment">'+res.event.created_at+'</div><div class="col-md-1 order-comment">'+res.event.sign+'</div></div>');
+
+				$("#panel_order").removeClass($("#panel_order").removeClass("panel-"+comment.panel_classname));
+				$("#panel_order").addClass(getClassByState(res.status, res.business, 'panel'));
+
+				$scope.closeModal();
+			}).error(function(response){
+				console.log(response);
+			});
+		}
+	}
+
+	$scope.closeModal = function() {
+		$scope.comment = {};
+		$("#modalComment").modal('hide');
+		$('#comment_order').parsley().reset();
 	}
 });

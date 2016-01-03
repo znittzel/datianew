@@ -77,6 +77,9 @@ class Order extends Model
                     case '1':
                         return "high-prio";
                         break;
+                    case '2':
+                        return "default";
+                        break;
                 }
             }
         } else {

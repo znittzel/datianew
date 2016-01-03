@@ -10,11 +10,6 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -27,7 +22,9 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    Route::get('/', function () {
+        return view('welcome');
+    });
 });
 
 Route::group(['middleware' => 'web'], function () {
@@ -37,7 +34,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/order/{id}/show', 'OrderController@show');
     Route::get('/order/{id}/edit', 'OrderController@edit');
     Route::post('/order/{id}/update', 'OrderController@update');
-    Route::post('/order/{id}/comment', 'OrderController@addComment');
+    // Route::post('/order/{id}/comment', 'OrderController@addComment');
     Route::post('/order/{id}/archive', 'OrderController@archive');
     Route::post('/order/{id}/return_order', 'OrderController@return_order');
     Route::get('/order/create', 'OrderController@create');
@@ -58,6 +55,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/orderevent/delete', 'OrderEventController@delete');
     Route::post('/order/delete', 'OrderController@delete');
     Route::get('/order/exists/{id}', 'OrderController@exists');
+    Route::post('/order/comment', 'OrderController@comment');
 
     Route::get('/customer/get/{id}', 'CustomerController@get');
     Route::post('/customer/get', 'CustomerController@getCustomer');

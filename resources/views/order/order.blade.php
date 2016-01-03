@@ -4,7 +4,7 @@
 <div class="container spark-screen">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-{{ $order->state() }}">
+            <div class="panel panel-{{ $order->state() }}" id="panel_order">
                 <div class="panel-heading">
                     @if ($order->status == 3)
                         <span class="text-left">Order {{ $order->order_id }} <span class="label label-default">Arkiverad</span></span>
@@ -35,53 +35,67 @@
                         </tr>
                     </table>
                     <p class="order-heading">{!! nl2br(e($order->context)) !!}</p>
+                    <div id="comments">
+                        @foreach($order->events as $event)
 
-                    @foreach($order->events as $event)
+                        <div class="row order-comment-row">
+                            <div class="col-md-7 order-comment">{!! $event->comment !!}</div>
+                            <div class="col-md-4 order-comment">{{ $event->created_at }}</div>
+                            <div class="col-md-1 order-comment">{{ $event->sign }}</div>
+                        </div>
 
-                    <div class="row order-comment-row" style="margin:5px;">
-                        <div class="col-md-7 order-comment">{!! $event->comment !!}</div>
-                        <div class="col-md-4 order-comment">{{ $event->created_at }}</div>
-                        <div class="col-md-1 order-comment">{{ $event->sign }}</div>
+                        @endforeach
                     </div>
-
-                    @endforeach
-                    <hr/>
                     <br>
-                    @if ($order->status != '3' && $order->status != '4')
-                    <form method="post" action="/order/{{ $order->id }}/comment" id="comment_order">
-                        <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
-                        <div class="form-group">
-                            <label>Kommentar</label>
-                            <textarea name="comment" data-parsley-required style="resize:vertical;" class="form-control" rows="5"></textarea>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#modalComment">
+                      Kommentera
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="modalComment" tabindex="-1" role="dialog" aria-labelledby="Comment" ng-controller="CommentOrderController">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" ng-click="closeModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Kommentera</h4>
+                          </div>
+                          <div class="modal-body">
+                            <form class="form-horizontal" novalidate id="comment_order">
+                                {!! csrf_field() !!}
+                                <input type="hidden" ng-model="comment.order_id" ng-init="comment.order_id = {{$order->order_id}}">
+                                <input type="hidden" ng-model="comment.panel_classname" ng-init="comment.panel_classname='{{$order->state()}}'">
+                              <fieldset>
+                                <div class="form-group">
+                                  <label for="textArea" class="col-lg-2 control-label">Kommentar</label>
+                                  <div class="col-lg-10">
+                                    <textarea class="form-control" ng-model="comment.comment" data-parsley-maxlength="1000" data-parsley-required rows="3" id="textArea"></textarea>
+                                    <span class="help-block">Skriv din kommentar ovan. Max 1000 tecken.</span>
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="inputSign" class="col-lg-2 control-label">Sign</label>
+                                  <div class="col-lg-10">
+                                    <input type="text" ng-model="comment.sign" data-parsley-required class="form-control" id="sign">
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="checkbox col-lg-10 col-md-offset-2">
+                                      <label>
+                                        <input type="checkbox" ng.model="comment.finished" id="finished"> Avsluta order
+                                      </label>
+                                    </div>
+                                </div>
+                              </fieldset>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" ng-click="closeModal()">Stäng</button>
+                            <button type="button" class="btn btn-primary" ng-click="validate(comment)">Spara</button>
+                          </div>
                         </div>
-                        <div class="form-group">
-                            <label>Sign</label>
-                            <input type="text" data-parsley-required name="sign" style="width:10em;" class="form-control"/>
-                            <label>
-                              <input type="checkbox" name="finished"> Avsluta
-                            </label>
-                        </div>
-                        <input type="submit" class="btn btn-default" value="Kommentera" />
-                    </form>
-                    @elseif ($order->status == '4')
-                    <form method="post" action="/order/{{ $order->id }}/archive">
-                        <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
-                        <div class="form-group">
-                            <label>Sign</label>
-                            <input type="text" name="sign" style="width:10em;" class="form-control"/>
-                        </div>
-                        <input type="submit" class="btn btn-default" value="Lämna ut" />
-                    </form>
-                    @else
-                    <form method="post" action="/order/{{ $order->id }}/return_order">
-                        <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
-                        <div class="form-group">
-                            <label>Sign</label>
-                            <input type="text" name="sign" style="width:10em;" class="form-control"/>
-                        </div>
-                        <input type="submit" class="btn btn-default" value="Slå tillbaka" />
-                    </form>
-                    @endif
+                      </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>

@@ -27,9 +27,25 @@ class HomeController extends Controller
      */
     public function index()
     {        
-        $onGoing = Order::where('status', '=','1')->orWhere('status', '=', '2')->orderBy('order_id')->get();
-        $finished = Order::whereStatus('4')->orderBy('order_id')->get();
+        $private = Order::where('status', '=','1')
+                    ->orWhere('status', '=', '2')
+                    ->orderBy('order_id', 'desc')
+                    ->with("customer")
+                    ->get();
+        $company = Order::where('status', '=','1')
+                    ->orWhere('status', '=', '2')
+                    ->orderBy('order_id', 'desc')
+                    ->with("customer")
+                    ->get();
+        $prio = Order::where('prio', '=', '1')
+                ->whereRaw('(status = 1 OR status = 2)')
+                ->orderBy('order_id')
+                ->with("customer")
+                ->get();
+        $finished = Order::whereStatus('4')
+                ->with("customer")
+                ->get();
 
-        return view('home', compact('onGoing', 'finished'));
+        return view('home', compact('private', 'company', 'prio', 'finished'));
     }
 }

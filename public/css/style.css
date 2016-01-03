@@ -1,7 +1,3 @@
-.dashboard-order-list {
-	list-style: none;
-}
-
 .btn-high-prio { 
   color: #ffffff; 
   background-color: #000000; 
@@ -53,10 +49,10 @@ fieldset[disabled] .btn-high-prio.active {
 }
 
 .order-comment-row {
-	background:rgba(0,0,0,0.1);
+  color:black;
 	padding: 5px;
 	margin: 5px;
-	border-radius: 5px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
 .panel-content-high-prio table {
@@ -81,4 +77,20 @@ fieldset[disabled] .btn-high-prio.active {
 .table-responsive
 {
     overflow-x: auto;
+}
+
+.nav-tabs.centered > li, .nav-pills.centered > li {
+    float:none;
+    display:inline-block;
+    *display:inline; /* ie7 fix */
+     zoom:1; /* hasLayout ie7 trigger */
+}
+
+.nav-tabs.centered, .nav-pills.centered {
+    text-align:center;
+}
+
+.label-high-prio {
+  color:white;
+  background-color:black;
 }

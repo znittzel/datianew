@@ -15,6 +15,16 @@ use App\Classes\Alert;
 
 class OrderController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function show($id) {
     	$order = Order::whereId($id)->first();
         
@@ -61,17 +71,6 @@ class OrderController extends Controller
         return redirect('/order/create')->with("session", Alert::get("danger", "Något gick snett.. Försök igen!"));        
     }
 
-    public function addComment(Request $request, $id) {
-        $order = Order::whereId($id)->first();
-        
-        if ($request->finished)
-            $order->finishIt($request->comment, $request->sign);
-        else
-            $order->commentIt($request->comment, $request->sign);
-
-        return redirect('order/'.$id.'/show');
-    }
-
     public function archive(Request $request, $id) {
         Order::whereId($id)->first()->archiveIt($request->sign);
 
@@ -85,6 +84,21 @@ class OrderController extends Controller
     }
 
     //API
+    public function comment(Request $request) {
+        $order = Order::whereOrder_id($request->order_id)->first();
+        
+        if ($request->finished)
+            $order->finishIt($request->comment, $request->sign);
+        else
+            $order->commentIt($request->comment, $request->sign);
+
+        $event = $order->events()->orderBy('order_event_id', 'desc')->first();
+        return ["event" => $event, 
+                "business" => $order->customer()->first()->business,
+                "status" => $order->status,
+                "prio" => $order->prio];
+    }
+
     public function delete(Request $request) {
         $order = Order::whereId($request->id)->first();
 
