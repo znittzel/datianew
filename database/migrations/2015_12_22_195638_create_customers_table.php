@@ -18,6 +18,7 @@ class CreateCustomersTable extends Migration
             $table->string('name');
             $table->string('telephone_number');
             $table->tinyInteger('business');
+            $table->tinyInteger('reputation');
             $table->timestamps();
         });
     }

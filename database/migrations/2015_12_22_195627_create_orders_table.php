@@ -18,10 +18,10 @@ class CreateOrdersTable extends Migration
             $table->integer('customer_id');
             $table->integer('user_id');
             $table->text('context');
-            $table->string('type');
+            $table->string('type')->nullable();
             $table->text('accessories')->nullable();
             $table->string('password')->nullable();
-            $table->integet('box')->nullable();
+            $table->string('box')->nullable();
             $table->string('status');
             $table->tinyInt('prio');
             $table->string('sign');
