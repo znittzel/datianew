@@ -35,7 +35,7 @@ class OrderController extends Controller
                 return redirect('/order/'.$id.'/edit')->with("status", Alert::get("danger", "Order existerar. Välj annat ordernummer."));
 
             $order->fill($request->all());
-            $order->save();
+            $order->push();
 
             return redirect('/order/'.$id.'/edit')->with("status", Alert::get("success", "Order är uppdaterad."));
         } else {
@@ -67,7 +67,7 @@ class OrderController extends Controller
         if ($request->finished)
             $order->finishIt($request->comment, $request->sign);
         else
-            $order->addOrderEvent($request->comment, $request->sign);
+            $order->commentIt($request->comment, $request->sign);
 
         return redirect('order/'.$id.'/show');
     }

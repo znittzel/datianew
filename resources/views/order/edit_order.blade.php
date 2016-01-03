@@ -26,7 +26,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Ordernummer</label>
-                                <input type="text" name="order_id" ng-model="order.id" ng-init="order.id='{{ $order->order_id }}'" ng-change="trimOrderId()" class="form-control" data-parsley-required data-parsley-minlength="5" data-parsley-type="number">
+                                <input type="text" name="order_id" ng-model="order.id" ng-init="order.id='{{ $order->order_id }}'" ng-change="trimOrderId()" class="form-control" data-parsley-required data-parsley-type="number">
                             </div>
                             <div class="form-group">
                                 <label>Ärende</label>

@@ -46,15 +46,15 @@
                     @endforeach
                     <br>
                     @if ($order->status != '3' && $order->status != '4')
-                    <form method="post" action="/order/{{ $order->id }}/comment">
+                    <form method="post" action="/order/{{ $order->id }}/comment" id="comment_order">
                         <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
                         <div class="form-group">
                             <label>Kommentar</label>
-                            <textarea name="comment" style="resize:vertical;" class="form-control" rows="5"></textarea>
+                            <textarea name="comment" data-parsley-required style="resize:vertical;" class="form-control" rows="5"></textarea>
                         </div>
                         <div class="form-group">
                             <label>Sign</label>
-                            <input type="text" name="sign" style="width:10em;" class="form-control"/>
+                            <input type="text" data-parsley-required name="sign" style="width:10em;" class="form-control"/>
                             <label>
                               <input type="checkbox" name="finished"> Avsluta
                             </label>
@@ -85,4 +85,19 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script type="text/javascript">
+    $("#comment_order").parsley({
+        trigger:      'change',
+        successClass: "has-success",
+        errorClass: "has-error",
+        classHandler: function (el) {
+            return el.$element.closest('.form-group');
+        },
+        errorsWrapper: '<div class="invalid-message"></div>',
+        errorTemplate: '<span></span>',
+    });
+</script>
 @endsection

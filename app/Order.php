@@ -169,7 +169,7 @@ class Order extends Model
     */
     public function addOrderEvent($comment, $sign) {
         $orderEvent = new OrderEvent();
-        $orderEvent->comment = $comment;
+        $orderEvent->comment = htmlentities($comment);
         $orderEvent->sign = $sign;
         $orderEvent->user_id = Auth::user()->id;
         $orderEvent->order_id = $this->order_id;
