@@ -20,8 +20,8 @@ class CustomerController extends Controller
      */
     protected $htmlBuilder; 
 
-    public function __construct(Builder $htmlB) {
-        $this->htmlBuilder = $htmlB;
+    public function __construct(Builder $builder) {
+        $this->htmlBuilder = $builder;
     }
 
 	public function home(Request $request) {
@@ -91,5 +91,9 @@ class CustomerController extends Controller
             $customer = Customer::whereCustomer_id($request->customer_id)->first();
             $customer->fill($request->all());
             $customer->push();
+    }
+
+    public function exists($customer_id) {
+        return ["exists" => Customer::exists($customer_id)];
     }
 }

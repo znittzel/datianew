@@ -6,11 +6,15 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-{{ $order->state() }}">
                 <div class="panel-heading">
-                    <span class="text-left">Order {{ $order->order_id }}</span>
-                    <span class="pull-right"><i>{{ $order->created_at }}</i></span>
+                    @if ($order->status == 3)
+                        <span class="text-left">Order {{ $order->order_id }} <span class="label label-default">Arkiverad</span></span>
+                    @else
+                        <span class="text-left">Order {{ $order->order_id }}</span>
+                    @endif
+                    <span class="pull-right"><i>{{ $order->created_at .' - '. $order->sign }}</i></span>
                 </div>
                 <div class="panel-body panel-content-{{ $order->state() }}">
-                    <legend class="text-center"><a href="/order/{{ $order->id }}/edit">{{ $order->order_id }}</a> - <a href="/customer/{{ $order->customer()->id }}/show">{{$order->customer()->name }}</a></legend>
+                    <legend class="text-center"><a href="/order/{{ $order->id }}/edit">{{ $order->order_id }}</a> - <a href="/customer/{{ $order->customer()->first()->id }}/show">{{$order->customer()->first()->name }}</a></legend>
                         
                     <table class="table table-striped">
                         <tr>
@@ -25,7 +29,7 @@
                             <td>{{ $order->accessories }}</td>
                             <td>{{ $order->password }}</td>
                             <td>{{ $order->box }}</td>
-                            <td><a href="tel:{{$order->customer()->telephone_number}}">{{ $order->customer()->telephone_number }}</a></td>
+                            <td><a href="tel:{{$order->customer()->first()->telephone_number}}">{{ $order->customer()->first()->telephone_number }}</a></td>
                         </tr>
                     </table>
                     <p class="order-heading">{!! nl2br(e($order->context)) !!}</p>

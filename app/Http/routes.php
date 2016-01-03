@@ -57,9 +57,11 @@ Route::group(['middleware' => 'web'], function () {
     //API
     Route::post('/orderevent/delete', 'OrderEventController@delete');
     Route::post('/order/delete', 'OrderController@delete');
+    Route::get('/order/exists/{id}', 'OrderController@exists');
 
     Route::get('/customer/get/{id}', 'CustomerController@get');
     Route::post('/customer/get', 'CustomerController@getCustomer');
+    Route::get('/customer/exists/{id}', 'CustomerController@exists');
     Route::get('/customer/getCustomers', 'CustomerController@getCustomers');
     Route::get('/customer/anyData', 'CustomerController@anyData');
     Route::post('/customer/saveAjax', 'CustomerController@saveAjax');

@@ -18,16 +18,16 @@
                                 <h4 class="modal-title" id="myModalLabel"><% customer.name %></h4>
                               </div>
                               <div class="modal-body">
-                                <form>
+                                <form id="edit_customer" novalidate="novalidate">
                                     <input type="hidden" name="_token" ng-model="token" ng-init="{!! csrf_token() !!}">
                                     <input type="hidden" name="row_id" ng-model="rowId">
                                     <div class="form-group">
                                         <label>Kundnummer</label>
-                                        <input type="text" disabled class="form-control" ng-model="customer.customer_id">
+                                        <input type="text" disabled class="form-control" data-parsley-required ng-model="customer.customer_id">
                                     </div>
                                     <div class="form-group">
                                         <label>Namn</label>
-                                        <input type="text" class="form-control" ng-model="customer.name">
+                                        <input type="text" class="form-control" data-parsley-required ng-model="customer.name">
                                     </div>
                                     <div class="form-group">
                                         <label>Telefonnummer</label>
@@ -52,7 +52,7 @@
                               </div>
                               <div class="modal-footer">
                                 <a href="/customer/<% customer.id %>/show" class="pull-left">Mer information</a>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
+                                <button type="button" class="btn btn-default" ng-click="close()">Stäng</button>
                                 <button type="button" class="btn btn-primary" ng-click="saveCustomer(customer, rowId)">Spara</button>
                               </div>
                             </div>
@@ -73,5 +73,16 @@
         var editCustomerJavascript = function(customer_id, id) {
             angular.element($("#customer_div")).scope().editCustomer(customer_id, id);
         }
+
+        $("#edit_customer").parsley({
+            trigger:      'change',
+            successClass: "has-success",
+            errorClass: "has-error",
+            classHandler: function (el) {
+                return el.$element.closest('.form-group');
+            },
+            errorsWrapper: '<div class="invalid-message"></div>',
+            errorTemplate: '<span></span>',
+        });
     </script>
 @endsection

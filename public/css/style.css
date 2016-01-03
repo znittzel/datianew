@@ -88,3 +88,8 @@ fieldset[disabled] .btn-high-prio.active {
     vertical-align: middle;
     float: none;
 }
+
+.table-responsive
+{
+    overflow-x: auto;
+}

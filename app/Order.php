@@ -29,7 +29,7 @@ class Order extends Model
         Hämtar kunden tillhörande denna ordern.
     */
     public function customer() {
-    	return $this->hasOne('App\Customer', 'customer_id', 'customer_id')->first();
+    	return $this->hasOne('App\Customer', 'customer_id', 'customer_id');
     }
 
 
@@ -37,7 +37,7 @@ class Order extends Model
         Hämtar användaren tillhörande denna ordern.
     */
     public function user() {
-    	return $this->hasOne('App\User', 'user_id', 'user_id')->first();
+    	return $this->hasOne('App\User', 'user_id', 'user_id');
     }
 
     /*
@@ -53,7 +53,7 @@ class Order extends Model
     public function state() {
         if (!($this->status == '3' || $this->status == '4')) {
             if (!$this->prio) {
-                if (!$this->customer()->business) {
+                if (!$this->customer()->first()->business) {
                     switch ($this->status) {
                         case '1':
                             return "danger";
@@ -195,5 +195,9 @@ class Order extends Model
             return date("Y-m-d", strtotime($this->events()->orderBy('order_event_id', 'desc')->first()->created_at));
         else 
             return '<i>Ej avslutad</i>';
+    }
+
+    public static function exists($id) {
+        return (Order::whereOrder_id($id)->first() ? true : false);
     }
 }

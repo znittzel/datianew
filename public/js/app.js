@@ -1,5 +1,57 @@
 'use strict';
 
+/* GLOBALA INSTÄLLNINGAR */
+	 window.Parsley
+      .addValidator('orderexists', {
+        requirementType: 'boolean',
+        validateNumber: function(value, requirement) {
+            if (requirement) {
+                var ok = false;
+              $.ajax({
+                url: '/order/exists/'+value,
+                async: false,
+                success: function(order) {
+                    if (!order.exists) 
+                        ok = true;
+                    else
+                        ok = false;
+                }
+              });
+
+              return ok;
+            }
+        },
+        messages: {
+          sv: 'Order existerar.'
+        }
+      });
+
+      window.Parsley
+      .addValidator('customerexists', {
+        requirementType: 'boolean',
+        validateNumber: function(value, requirement) {
+            if (requirement) {
+                var ok = false;
+              $.ajax({
+                url: '/customer/exists/'+value,
+                async: false,
+                success: function(customer) {
+                    if (!customer.exists) 
+                        ok = true;
+                    else
+                        ok = false;
+                }
+              });
+
+              return ok;
+            }
+        },
+        messages: {
+          sv: 'Kund existerar.'
+        }
+      });
+/*---END GLOBALA INSTÄLLNINGAR---*/
+
 /* FUNKTIONER */
 
 /*
@@ -144,19 +196,6 @@ app.controller('OrderController', function($scope, $http) {
 app.controller("CustomerCreateController", function($scope, $http) {
 	$scope.checkCustomerId = function() {
 		$scope.customer.id = $scope.customer.id.replace(/ /g, '');
-
-		if ($scope.customer.id.length >= 4) {
-			$http({
-				url: '/customer/get/'+$scope.customer.id,
-				method: 'GET'
-			}).success(function(response) {
-				if (!response) {
-					$("#div_customer_exists").hide();
-				} else {
-					$("#div_customer_exists").show();
-				}
-			});
-		}
 	}
 });
 
@@ -192,8 +231,14 @@ app.controller("CustomerEditController", function($scope, $http) {
 		    $(row.children()[5]).html(getLabelByReputation(customer.reputation));
 
 		    $("#modal").modal('hide');
+		    $('#edit_customer').parsley().reset();
 		  }, function errorCallback(response) {
 		    console.log(response);
 		  });
+	}
+
+	$scope.close = function() {
+		$('#edit_customer').parsley().reset();
+		$("#modal").modal('hide');
 	}
 });

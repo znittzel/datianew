@@ -94,4 +94,8 @@ class OrderController extends Controller
 
         return Order::whereId($request->id)->delete();
     }
+
+    public function exists($id) {
+        return ['exists' => Order::exists($id)];
+    }
 }

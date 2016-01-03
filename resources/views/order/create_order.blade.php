@@ -22,7 +22,7 @@
                         <hr/>
                         <div class="form-group">
                             <label>Ordernummer</label>
-                            <input type="text" name="order_id" ng-model="order.id" ng-change="trimOrderId()" data-parsley-whitespace="trim" class="form-control" data-parsley-required data-parsley-type="number">
+                            <input type="text" name="order_id" ng-model="order.id" ng-change="trimOrderId()" data-parsley-whitespace="trim" class="form-control" data-parsley-required data-parsley-type="number" data-parsley-orderexists="true">
                         </div>
                         <div class="form-group">
                             <label>Ärende</label>
