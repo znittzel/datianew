@@ -31,7 +31,7 @@ class ArchiveController extends Controller
                     ->editColumn('order_id', function($order) {
                         return '<a href="/order/'.$order->id.'/show">'.$order->order_id.'</a>';
                     })
-    				->editColumn('customer_name', function($order) {
+    				->editColumn('name', function($order) {
     					return '<a href="/customer/'.$order->customer->id.'/show">'.$order->customer->name.'</a>';
     				})
                     ->editColumn('started_at', function($order) {
@@ -45,7 +45,7 @@ class ArchiveController extends Controller
 
     	$html = $this->htmlBuilder
     				->addColumn(['data' => 'order_id', 'name' => 'order_id', 'title' => 'Ordernr'])
-                    ->addColumn(['data' => 'customer_name', 'name' => 'customer_name', 'title' => 'Kund'])
+                    ->addColumn(['data' => 'name', 'name' => 'name', 'title' => 'Kund'])
                     ->addColumn(['data' => 'started_at', 'name' => 'started_at', 'title' => 'Påbörjad'])
     				->addColumn(['data' => 'finished_at', 'name' => 'finished_at', 'title' => 'Avslutad']);
 

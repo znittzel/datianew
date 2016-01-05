@@ -19,6 +19,9 @@ class CreateOrderEventsTable extends Migration
             $table->text('comment');
             $table->string('sign');
             $table->timestamps();
+
+            $table->foreign('order_id')->references('order_id')->on('orders')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->integer('order_id')->uniqid();
             $table->integer('customer_id');
-            $table->integer('user_id');
+            $table->integer('user_id');;
             $table->text('context');
             $table->string('type')->nullable();
             $table->text('accessories')->nullable();
@@ -26,6 +26,9 @@ class CreateOrdersTable extends Migration
             $table->tinyInt('prio');
             $table->string('sign');
             $table->timestamps();
+
+            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

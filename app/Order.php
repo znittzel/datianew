@@ -29,7 +29,7 @@ class Order extends Model
         Hämtar kunden tillhörande denna ordern.
     */
     public function customer() {
-    	return $this->hasOne('App\Customer', 'customer_id', 'customer_id');
+    	return $this->belongsTo('App\Customer', 'customer_id', 'customer_id');
     }
 
 
@@ -37,7 +37,7 @@ class Order extends Model
         Hämtar användaren tillhörande denna ordern.
     */
     public function user() {
-    	return $this->hasOne('App\User', 'user_id', 'user_id');
+    	return $this->belongsTo('App\User', 'user_id', 'user_id');
     }
 
     /*
@@ -200,6 +200,11 @@ class Order extends Model
             return '<i>Ej avslutad</i>';
     }
 
+    /**
+     * Returnerar true eller false beroende på om order existerar 
+     * @param  $order_id
+     * @return boolean
+     */
     public static function exists($id) {
         return (Order::whereOrder_id($id)->first() ? true : false);
     }

@@ -13,8 +13,6 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/theme.min.css">
-    <link href="/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet" />
-    <link href="/vendor/angular-loading-bar/build/loading-bar.min.css" rel="stylesheet" />
     <link href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" rel="stylesheet" />
     <!-- <link href="/vendor/backgrid/src/backgrid.css" rel="stylesheet" />
     <link href="/vendor/backgrid-select-all/backgrid-select-all.min.css" rel="stylesheet" />
@@ -147,7 +145,6 @@
     <script src="/vendor/widgster/widgster.js"></script>
     <!-- <script data-pace-options='{ "target": ".content-wrap", "ghostTime": 1000 }' src="/vendor/pace.js/pace.min.js"></script>-->
     <script src="/vendor/jquery-touchswipe/jquery.touchSwipe.min.js"></script>
-    <script src="/vendor/bpopup/jquery.bpopup.min.js"></script>
 
     <script src="/js/parsley.min.js"></script>
     <script src="/js/parsley-sv.js"></script>
