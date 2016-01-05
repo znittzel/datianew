@@ -58,9 +58,8 @@ class OrderController extends Controller
     }
 
     public function save(Request $request) {
-        $order = new Order();
-
         if (Customer::whereCustomer_id($request->customer_id)->first()) {
+            $order = new Order();
             $order->fill($request->all());
             $order->user_id = Auth::user()->id;
             $order->status = '1';

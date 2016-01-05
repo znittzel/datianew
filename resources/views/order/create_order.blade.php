@@ -41,8 +41,8 @@
                             <input type="text" name="password" class="form-control" data-parsley-maxlength="255">
                         </div>
                         <div class="form-group col-sm-4">
-                            <label>Låda</label>
-                            <input type="text" name="box" class="form-control" data-parsley-maxlength="255"/>
+                            <label>Plats</label>
+                            <input type="text" name="plats" class="form-control" data-parsley-maxlength="255"/>
                         </div>
                         <div class="form-group col-sm-4">
                             <label>Prioritering</label>

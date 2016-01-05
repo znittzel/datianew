@@ -14,13 +14,15 @@ class CreateOrderEventsTable extends Migration
     {
         Schema::create('order_events', function (Blueprint $table) {
             $table->increments('order_event_id');
-            $table->integer('order_id')->unsigned;
-            $table->integer('user_id')->unsigned;
+            $table->integer('order_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->text('comment');
             $table->string('sign');
             $table->timestamps();
+        });
 
-            $table->foreign('order_id')->references('order_id')->on('orders')->onDelete('cascade');
+        Schema::table('order_events', function(Blueprint $table) {
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

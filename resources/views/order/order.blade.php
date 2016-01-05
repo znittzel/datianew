@@ -36,28 +36,25 @@
                     <!-- Button trigger modal -->
                 </div>
                 <div class="panel-footer">
-                    <div class="col-md-3 @if($order->status != 4) {{'hidden'}} @endif" id="div_deliver_order">
-                        <form action="/order/{{ $order->id }}/archive" method="post" novalidate id="archive_order">
+                    <div class="@if($order->status != 4) {{'hidden'}} @endif" id="div_deliver_order">
+                        <form action="/order/{{ $order->id }}/archive" class="form-inline" method="post" novalidate id="archive_order">
                             {!! csrf_field() !!}
-                            <fieldset>
-                                <div class="form-group">
-                                    <label class="col-lg-2 control-label">Sign</label>
-                                    <div class="col-lg-10">
-                                        <input type="text" data-parsley-required class="form-control" name="sign" >
-                                    </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Sign</label>
+                                <div class="col-lg-10">
+                                    <input type="text" data-parsley-required class="form-control" name="sign" >
                                 </div>
-                                <br>
-                                <div class="col-lg-10 col-lg-offset-2">
-                                    <button type="submit" class="btn btn-default">Lämna ut</button>
-                                  </div>
-                            </fieldset>
+                            </div>
+                            <button type="submit" class="btn btn-default btn-lg">Lämna ut</button>
+                            <button class="btn btn-default btn-lg pull-right" data-toggle="modal" data-target="#modalInformation">
+                                Information
+                            </button>
                         </form>
                     </div>
 
                     <button type="button" id="btn_comment" class="btn btn-default btn-lg @if($order->status == 4) {{ 'hidden' }} @endif" data-toggle="modal" data-target="#modalComment">
                       Kommentera
                     </button>
-                    <button class="btn btn-default btn-lg pull-right" data-toggle="modal" data-target="#modalInformation">Information</button>
                     <!-- Modal Comment -->
                     <div class="modal fade" id="modalComment" tabindex="-1" role="dialog" aria-labelledby="Comment" ng-controller="CommentOrderController">
                       <div class="modal-dialog" role="document">
@@ -124,8 +121,8 @@
                                 <a href="tel:{{$order->customer()->first()->telephone_number}}">{{ $order->customer()->first()->telephone_number }}</a>
                             </div>
                             <div class="col-md-2">
-                                <legend>Låda</legend>
-                                {{ $order->box }}
+                                <legend>Plats</legend>
+                                {{ $order->place }}
                             </div>
                           </div>
                           <div class="modal-footer">

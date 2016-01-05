@@ -54,8 +54,8 @@
                                 <input type="text" name="password" value="{{ $order->password }}" class="form-control">
                             </div>
                             <div class="form-group col-sm-4">
-                                <label>Låda</label>
-                                <input type="text" name="box" class="form-control" value="{{ $order->box }}" />
+                                <label>Plats</label>
+                                <input type="text" name="place" class="form-control" value="{{ $order->place }}" />
                             </div>
                             <div class="form-group col-sm-4">
                                 <label>Prioritering</label>

@@ -43,12 +43,8 @@ class HomeController extends Controller
                 ->with("customer")
                 ->get();
         $finished = Order::whereStatus('4')
-                ->with(['customer' => function($query) {
-                    $query->where('business', '=', '1');
-                }])
+                ->with('customer')
                 ->get();
-
-        dd($finished);
 
         return view('home', compact('private', 'company', 'prio', 'finished'));
     }

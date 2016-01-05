@@ -14,19 +14,21 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('order_id')->uniqid();
-            $table->integer('customer_id')->unsigned;
-            $table->integer('user_id')->unsigned;
+            $table->integer('order_id')->unsigned();
+            $table->integer('customer_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->text('context');
             $table->string('type')->nullable();
             $table->text('accessories')->nullable();
             $table->string('password')->nullable();
-            $table->string('box')->nullable();
+            $table->string('place')->nullable();
             $table->string('status');
-            $table->tinyInt('prio');
+            $table->tinyInteger('prio');
             $table->string('sign');
             $table->timestamps();
+        });
 
+        Schema::table('orders', function (Blueprint $table) {
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->foreign('user_id')->references('id')->on('users');
         });
