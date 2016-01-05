@@ -14,8 +14,8 @@ class CreateOrderEventsTable extends Migration
     {
         Schema::create('order_events', function (Blueprint $table) {
             $table->increments('order_event_id');
-            $table->integer('order_id');
-            $table->integer('user_id');
+            $table->integer('order_id')->unsigned;
+            $table->integer('user_id')->unsigned;
             $table->text('comment');
             $table->string('sign');
             $table->timestamps();
