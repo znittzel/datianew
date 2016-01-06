@@ -17,19 +17,6 @@ class CreateArticlesTable extends Migration
             $table->integer('articles_list_id')->unsigned();
             $table->integer('order_id')->unsigned();
             $table->timestamps();
-
-        });
-
-        Schema::table('articles', function (Blueprint $table) {
-            $table->foreign('articles_list_id')
-                ->references('id')
-                ->on('articles_list')
-                ->onDelete('cascade');
-
-            $table->foreign('order_id')
-                ->references('id')
-                ->on('orders')
-                ->onDelete('cascade');
         });
     }
 

@@ -20,11 +20,6 @@ class CreateOrderEventsTable extends Migration
             $table->string('sign');
             $table->timestamps();
         });
-
-        Schema::table('order_events', function(Blueprint $table) {
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users');
-        });
     }
 
     /**

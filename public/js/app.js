@@ -50,6 +50,36 @@
           sv: 'Kund existerar.'
         }
       });
+
+      window.Parsley
+      .addValidator('articleexists', {
+        requirementType: 'string',
+        validateString: function(value, requirement) {
+          var ok = false;
+          $.ajax({
+            url: '/article/exists/'+value,
+            async: false,
+            success: function(article) {
+	            if (requirement) {
+	                if (!article.exists) 
+	                    ok = true;
+	                else
+	                    ok = false;
+	            } else {
+	            	if (article.exists) 
+	                    ok = true;
+	                else
+	                    ok = false;
+	            }
+            }
+          });
+
+          return ok;
+        },
+        messages: {
+          sv: 'Fel med artikel.'
+        }
+      });
 /*---END GLOBALA INSTÄLLNINGAR---*/
 
 /* FUNKTIONER */
@@ -314,15 +344,40 @@ app.controller('CommentOrderController', ['$scope', '$http', function($scope, $h
 				$scope.comment = {};
 				$scope.comment.panel_classname = classname;
 				$scope.comment.order_id = res.event.order_id;
-				$scope.closeModal();
 			}).error(function(response){
 				console.log(response);
 			});
 		}
+
+		$scope.closeModal();
 	}
 
 	$scope.closeModal = function() {
 		$("#modalComment").modal('hide');
 		$('#comment_order').parsley().reset();
+	}
+}]);
+
+app.controller('AddArticleOrderController', ['$scope', '$http', function($scope, $http) {
+	$scope.save = function(article) {
+		if ($("#article_order").parsley().isValid()) {
+			$http({
+				url: '/article/order/add',
+				method: 'POST',
+				data: article
+			}).success(function(res) {
+				$("#articles").append('<li class="list-group-item"> <span class="badge">1 st</span>'+article.article_id+' - '+article.sign+' </li>'); 
+				$scope.article = {};
+				$scope.order_id = article.order_id;
+			}).error(function(res) {
+				console.log(res);
+			});
+			$scope.closeModal();
+		}
+	}
+
+	$scope.closeModal = function() {
+		$("#modalArticle").modal('hide');
+		$('#article_order').parsley().reset();
 	}
 }]);

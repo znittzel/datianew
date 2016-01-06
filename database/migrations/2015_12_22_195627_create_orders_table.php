@@ -27,11 +27,6 @@ class CreateOrdersTable extends Migration
             $table->string('sign');
             $table->timestamps();
         });
-
-        Schema::table('orders', function (Blueprint $table) {
-            $table->foreign('customer_id')->references('id')->on('customers');
-            $table->foreign('user_id')->references('id')->on('users');
-        });
     }
 
     /**

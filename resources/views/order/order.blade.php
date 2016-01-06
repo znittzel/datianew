@@ -21,7 +21,7 @@
                     <div class="well">
                         <p class="order-heading">{!! nl2br(e($order->context)) !!}</p>
                     </div>
-                    <div id="comments">
+                    <div id="comments" class="col-md-8">
                         @foreach($order->events as $event)
 
                         <div class="row order-comment-row">
@@ -31,6 +31,14 @@
                         </div>
 
                         @endforeach
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="list-group" id="articles">
+                          <li class="list-group-item">
+                            <span class="badge">1 st</span>
+                            T10 - RO
+                          </li>
+                        </ul>
                     </div>
                     <br>
                     <!-- Button trigger modal -->
@@ -52,16 +60,24 @@
                         </form>
                     </div>
 
-                    <button type="button" id="btn_comment" class="btn btn-default btn-lg @if($order->status == 4) {{ 'hidden' }} @endif" data-toggle="modal" data-target="#modalComment">
-                      Kommentera
-                    </button>
+                    <div class="@if($order->status == 4) {{ 'hidden' }} @endif">
+                        <button type="button" id="btn_comment" class="btn btn-default btn-lg" data-toggle="modal" data-target="#modalComment">
+                          <i class="fa fa-comment"></i> Kommentera
+                        </button>
+                        <button type="button" id="btn_comment" class="btn btn-default btn-lg @if($order->status == 4) {{ 'hidden' }} @endif" data-toggle="modal" data-target="#modalArticle">
+                          <i class="fa fa-plus"></i> Lägg till artikel
+                        </button>
+                        <button class="btn btn-default btn-lg pull-right" data-toggle="modal" data-target="#modalInformation">
+                            <i class="fa fa-info"></i> Information
+                        </button>
+                    </div>
                     <!-- Modal Comment -->
                     <div class="modal fade" id="modalComment" tabindex="-1" role="dialog" aria-labelledby="Comment" ng-controller="CommentOrderController">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
                             <button type="button" class="close" ng-click="closeModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Kommentera</h4>
+                            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-btn fa-comment"></i> Kommentera</h4>
                           </div>
                           <div class="modal-body">
                             <form class="form-horizontal" novalidate id="comment_order">
@@ -99,13 +115,54 @@
                         </div>
                       </div>
                     </div>
+                    <!-- Modal Add Article -->
+                    <div class="modal fade" id="modalArticle" tabindex="-1" role="dialog" aria-labelledby="Article" ng-controller="AddArticleOrderController">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" ng-click="closeModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-btn fa-tag"></i> Lägg till artikel</h4>
+                          </div>
+                          <div class="modal-body">
+                            <form class="form-horizontal" novalidate id="article_order">
+                                {!! csrf_field() !!}
+                                <input type="hidden" ng-model="article.order_id" ng-init="article.order_id='{{ $order->order_id }}'">
+                              <fieldset>
+                                <div class="form-group">
+                                  <div class="col-lg-10">
+                                    <input class="form-control" data-parsley-articleexists="false" type="text" name="article_id" ng-model="article.article_id" placeholder="Artikelnummer"></input>
+                                    <span class="help-block">Skriv artikelnummret för att hämta artikeln.</span>
+                                  </div>
+                                </div>
+                                <div class="form-group col-lg-10">
+                                    <div class="input-group">
+                                        <input class="form-control" data-parsley-type="number" type="number" name="quantity" placeholder="Antal" ng-model="article.quantity" data-parsley-type="number"></input>
+                                        <span class="help-block">Ange antal att addera.</span>
+                                        <div class="input-group-addon">st</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                  <div class="col-lg-3">
+                                    <input type="text" ng-model="article.sign" placeholder="Sign" data-parsley-required class="form-control" id="sign">
+                                  </div>
+                                </div>
+                              </fieldset>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" ng-click="closeModal()">Stäng</button>
+                            <button type="button" class="btn btn-primary" ng-click="save(article)">Spara</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <!-- Modal Information -->
                     <div class="modal fade" id="modalInformation" tabindex="-1" role="dialog" aria-labelledby="Information">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal"aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Information</h4>
+                            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-btn fa-info"></i> Information</h4>
                           </div>
                           <div class="modal-body row">
                             <div class="col-md-2">
@@ -152,6 +209,17 @@
     });
 
     $("#archive_order").parsley({
+        trigger:      'change',
+        successClass: "has-success",
+        errorClass: "has-error",
+        classHandler: function (el) {
+            return el.$element.closest('.form-group');
+        },
+        errorsWrapper: '<div class="invalid-message"></div>',
+        errorTemplate: '<span></span>',
+    });
+
+    $("#article_order").parsley({
         trigger:      'change',
         successClass: "has-success",
         errorClass: "has-error",

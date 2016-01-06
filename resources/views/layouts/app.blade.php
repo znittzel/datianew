@@ -54,6 +54,17 @@
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                           <i class="fa fa-btn fa-tag"></i> Artikel <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/article">Lista</a></li>
+                            <li><a href="/article/create"><i class="fa fa-btn fa-plus"></i> Skapa artikel</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             <i class="fa fa-btn fa-file-text"></i> Order <span class="caret"></span>
                         </a>
 

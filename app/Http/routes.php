@@ -30,6 +30,12 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
+    Route::get('/article', 'ArticlesListController@index');
+    Route::get('/article/create', 'ArticlesListController@create');
+    Route::post('/article/create', 'ArticlesListController@save');
+
+    Route::get('/archive', 'ArchiveController@archive');
+
     Route::get('/home', 'HomeController@index');
     Route::get('/order/{id}/show', 'OrderController@show');
     Route::get('/order/{id}/edit', 'OrderController@edit');
@@ -49,8 +55,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/orderevent/{id}/edit', 'OrderEventController@edit');
     Route::post('/orderevent/{id}/update', 'OrderEventController@update');
 
-    Route::get('/archive', 'ArchiveController@archive');
-
     //API
     Route::post('/orderevent/delete', 'OrderEventController@delete');
     Route::post('/order/delete', 'OrderController@delete');
@@ -65,4 +69,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/customer/saveAjax', 'CustomerController@saveAjax');
 
     Route::get('/archive/getArchive', 'ArchiveController@getArchive');
+
+    Route::get('/article/exists/{id}', 'ArticlesListController@exists');
+    Route::post('/article/order/add', 'ArticleController@add');
 });
