@@ -52,16 +52,6 @@
                 <!-- Left Side Of Navbar -->
                 @if (!Auth::guest())
                 <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                           <i class="fa fa-btn fa-tag"></i> Artikel <span class="caret"></span>
-                        </a>
-
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="/article">Lista</a></li>
-                            <li><a href="/article/create"><i class="fa fa-btn fa-plus"></i> Skapa artikel</a></li>
-                        </ul>
-                    </li>
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -71,6 +61,17 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="/home">Aktiva</a></li>
                             <li><a href="/order/create"><i class="fa fa-btn fa-plus"></i> Skapa order</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                           <i class="fa fa-btn fa-tag"></i> Artikel <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/article">Lista</a></li>
+                            <li><a href="/article/create"><i class="fa fa-btn fa-plus"></i> Skapa artikel</a></li>
                         </ul>
                     </li>
 

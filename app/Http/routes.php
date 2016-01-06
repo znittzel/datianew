@@ -72,4 +72,5 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/article/exists/{id}', 'ArticlesListController@exists');
     Route::post('/article/order/add', 'ArticleController@add');
+    Route::post('/article/order/delete/', 'ArticleController@delete');
 });

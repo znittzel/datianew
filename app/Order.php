@@ -47,6 +47,10 @@ class Order extends Model
     	return $this->hasMany('App\OrderEvent', 'order_id', 'order_id');
     }
 
+    public function articles() {
+        return $this->hasMany('App\Article', 'order_id', 'order_id');
+    }
+
     /*
         Hämtar rätt style utefter orderstatus. Används i olika views
     */

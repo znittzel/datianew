@@ -93,6 +93,29 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            <hr/>
+                            <table class="table table-striped" id="articles" ng-controller="ArticlesEditController">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Artikel</th>
+                                        <th>Antal</th>
+                                        <th>Sign</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($order->articles as $article)
+                                    <tr id="article_{{ $article->id }}">
+                                        <td><a href="/article/order/{{ $article->id }}/edit">{{ $article->id }}</a></td>
+                                        <td>{{ $article->article_list()->first()->article_id }}</td>
+                                        <td>{{ $article->quantity }}</td>
+                                        <td>{{ $article->sign }}</td>
+                                        <td><button ng-really-click="delete({{$article->id}})" ng-really-message="Ta bort artikel #{{$article->id}}?" class="btn btn-danger btn-xs">Ta bort</button></td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

@@ -34,37 +34,32 @@
                     </div>
                     <div class="col-md-4">
                         <ul class="list-group" id="articles">
+                          @foreach($order->articles as $article)
                           <li class="list-group-item">
-                            <span class="badge">1 st</span>
-                            T10 - RO
+                            {{ $article->article_list()->first()->article_id }} - {{$article->sign}}
+                            <span class="badge">{{$article->quantity}} st</span>
                           </li>
+                          @endforeach
                         </ul>
                     </div>
                     <br>
                     <!-- Button trigger modal -->
                 </div>
                 <div class="panel-footer">
-                    <div class="@if($order->status != 4) {{'hidden'}} @endif" id="div_deliver_order">
-                        <form action="/order/{{ $order->id }}/archive" class="form-inline" method="post" novalidate id="archive_order">
-                            {!! csrf_field() !!}
-                            <div class="form-group">
-                                <label class="col-lg-2 control-label">Sign</label>
-                                <div class="col-lg-10">
-                                    <input type="text" data-parsley-required class="form-control" name="sign" >
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-default btn-lg">Lämna ut</button>
-                            <button class="btn btn-default btn-lg pull-right" data-toggle="modal" data-target="#modalInformation">
-                                Information
-                            </button>
-                        </form>
+                    <div class="@if($order->status != 4 && $order->status != 3) {{'hidden'}} @endif" id="div_deliver_order">
+                        <button type="submit" class="btn btn-default btn-lg @if($order->status == 3) {{'hidden'}} @endif" data-toggle="modal" data-target="#modalDeliver">
+                          <i class="fa fa-mail-forward"></i> Lämna ut
+                        </button>
+                        <button class="btn btn-default btn-lg @if($order->status != 3) {{'pull-right'}} @endif" data-toggle="modal" data-target="#modalInformation">
+                            <i class="fa fa-info"></i> Information
+                        </button>
                     </div>
 
-                    <div class="@if($order->status == 4) {{ 'hidden' }} @endif">
-                        <button type="button" id="btn_comment" class="btn btn-default btn-lg" data-toggle="modal" data-target="#modalComment">
+                    <div class="@if($order->status == 4 || $order->status == 3) {{ 'hidden' }} @endif" id="div_ongoing_order">
+                        <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#modalComment">
                           <i class="fa fa-comment"></i> Kommentera
                         </button>
-                        <button type="button" id="btn_comment" class="btn btn-default btn-lg @if($order->status == 4) {{ 'hidden' }} @endif" data-toggle="modal" data-target="#modalArticle">
+                        <button type="button" class="btn btn-default btn-lg @if($order->status == 4) {{ 'hidden' }} @endif" data-toggle="modal" data-target="#modalArticle">
                           <i class="fa fa-plus"></i> Lägg till artikel
                         </button>
                         <button class="btn btn-default btn-lg pull-right" data-toggle="modal" data-target="#modalInformation">
@@ -182,6 +177,31 @@
                                 {{ $order->place }}
                             </div>
                           </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Modal Deliver -->
+                    <div class="modal fade" id="modalDeliver" tabindex="-1" role="dialog" aria-labelledby="Lämna ut">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-btn fa-mail-forward"></i> Lämna ut</h4>
+                          </div>
+                          <div class="modal-body row">
+                            <form action="/order/{{ $order->id }}/archive" class="form-inline" method="post" novalidate id="archive_order">
+                              {!! csrf_field() !!}
+                              <div class="form-group">
+                                  <label class="col-lg-2 control-label">Sign</label>
+                                  <div class="col-lg-10">
+                                      <input type="text" data-parsley-required class="form-control" name="sign" >
+                                  </div>
+                              </div>
+                              <button type="submit" class="btn btn-default btn-lg">Lämna ut</button>
+                          </form>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Stäng</button>
                           </div>

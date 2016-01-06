@@ -9,16 +9,32 @@
                 <div class="panel-body">
                     <div class="col-sm-12">
                         <ul class="nav nav-tabs centered">
-                          <li class=""><a href="#private" data-toggle="tab" aria-expanded="true">Privat</a></li>
-                          <li class="active"><a href="#company" data-toggle="tab" aria-expanded="false">Företag</a></li>
+                          <li class=""><a href="#private" data-toggle="tab" aria-expanded="true">Privat 
+                              @if ($private->count() != 0)
+                                <span class="badge">{{$private->count()}}</span>
+                              @endif
+                            </a>
+                          </li>
+                          <li class="active"><a href="#company" data-toggle="tab" aria-expanded="false">Företag 
+                              @if ($company->count() != 0)
+                                <span class="badge">{{$company->count()}}</span>
+                              @endif
+                            </a>
+                          </li>
                           <li class="">
                             <a href="#priority" data-toggle="tab" aria-expanded="false">Prioriterade
                                 @if ($prio->count() != 0)
+                                    <span class="badge">{{$prio->count()}}</span>
                                     <i class="fa fa-exclamation" style="color:red;"></i>
                                 @endif 
                             </a>
                           </li>
-                          <li class=""><a href="#finished" data-toggle="tab" aria-expanded="false">Avslutade</a></li>
+                          <li class=""><a href="#finished" data-toggle="tab" aria-expanded="false">Avslutade 
+                              @if ($finished->count() != 0)
+                                  <span class="badge">{{$finished->count()}}</span>
+                              @endif 
+                            </a>
+                          </li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
                           <div class="tab-pane fade" id="private">

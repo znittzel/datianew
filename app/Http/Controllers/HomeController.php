@@ -27,15 +27,17 @@ class HomeController extends Controller
      */
     public function index()
     {        
-        $private = Order::where('status', '=','1')
-                    ->orWhere('status', '=', '2')
+        $private = Order::whereRaw('(status = 1 OR status = 2) AND prio = 0')
                     ->orderBy('order_id', 'desc')
-                    ->with("customer")
+                    ->whereHas("customer", function($query) {
+                        $query->where("business", "=", '0');
+                    })
                     ->get();
-        $company = Order::where('status', '=','1')
-                    ->orWhere('status', '=', '2')
+        $company = Order::whereRaw('(status = 1 OR status = 2) AND prio = 0')
                     ->orderBy('order_id', 'desc')
-                    ->with("customer")
+                    ->whereHas("customer", function($query) {
+                        $query->where("business", "=", '1');
+                    })
                     ->get();
         $prio = Order::where('prio', '=', '1')
                 ->whereRaw('(status = 1 OR status = 2)')

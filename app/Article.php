@@ -19,6 +19,7 @@ class Article extends Model
     protected $fillable = [
     	"order_id",
     	"articles_list_id",
+        "quantity",
         "sign"
     ];
 

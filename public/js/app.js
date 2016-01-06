@@ -77,7 +77,7 @@
           return ok;
         },
         messages: {
-          sv: 'Fel med artikel.'
+          sv: 'Fel med artikelnummer.'
         }
       });
 /*---END GLOBALA INSTÄLLNINGAR---*/
@@ -338,7 +338,7 @@ app.controller('CommentOrderController', ['$scope', '$http', function($scope, $h
 
 				if (res.status == '4') {
 					$("#div_deliver_order").removeClass("hidden");
-					$("#btn_comment").addClass("hidden");
+					$("#div_ongoing_order").addClass("hidden");
 				}
 
 				$scope.comment = {};
@@ -366,7 +366,7 @@ app.controller('AddArticleOrderController', ['$scope', '$http', function($scope,
 				method: 'POST',
 				data: article
 			}).success(function(res) {
-				$("#articles").append('<li class="list-group-item"> <span class="badge">1 st</span>'+article.article_id+' - '+article.sign+' </li>'); 
+				$("#articles").append('<li class="list-group-item"> <span class="badge">'+article.quantity+' st</span>'+article.article_id+' - '+article.sign+' </li>'); 
 				$scope.article = {};
 				$scope.order_id = article.order_id;
 			}).error(function(res) {
@@ -379,5 +379,19 @@ app.controller('AddArticleOrderController', ['$scope', '$http', function($scope,
 	$scope.closeModal = function() {
 		$("#modalArticle").modal('hide');
 		$('#article_order').parsley().reset();
+	}
+}]);
+
+app.controller('ArticlesEditController', ['$scope', '$http', function($scope, $http) {
+	$scope.delete = function(id) {
+		$http({
+			url: '/article/order/delete',
+			method: 'POST',
+			data: {id: id}
+		}).success(function(res) {
+			$('table#articles tr#'+'article_'+id).remove();
+		}).error(function(res) {
+			console.log(res);
+		});
 	}
 }]);
