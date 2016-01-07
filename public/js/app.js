@@ -395,3 +395,22 @@ app.controller('ArticlesEditController', ['$scope', '$http', function($scope, $h
 		});
 	}
 }]);
+
+app.controller('CalendarController', ['$scope', '$http', function($scope, $http) {
+
+
+	$('#calendar').fullCalendar({
+		events: '/calendar/events',
+		firstDay: 1,
+	  	monthNames: ["Januari","Februari","Mars","April","May","Juni","Juli", "Agusti", "September", "Oktober", "Novemver", "December" ], 
+	   	monthNamesShort: ['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Agu','Sep','Okt','Nov','Dec'],
+	   	dayNames: [ 'Söndag', 'Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag'],
+	   	dayNamesShort: ['Sön','Mån','Tis','Ons','Tors','Fre','Lör'],
+	   	buttonText: {
+	    today: 'Idag',
+	    month: 'Månad',
+	    week: 'Vecka',
+	    day: 'Dag'
+	   }
+    })
+}]);

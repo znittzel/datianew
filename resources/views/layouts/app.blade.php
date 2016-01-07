@@ -18,6 +18,7 @@
     <link href="/vendor/backgrid-select-all/backgrid-select-all.min.css" rel="stylesheet" />
     <link href="/vendor/backgrid-filter/backgrid-filter.min.css" rel="stylesheet" />
     <link href="/vendor/backgrid-paginator/backgrid-paginator.min.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
     <link href="/css/style.css" rel="stylesheet" />
 
 
@@ -59,7 +60,8 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="/home">Aktiva</a></li>
+                            <li><a href="/home">Kö</a></li>
+                            <li><a href="/order/calendar">Kalender</a></li>
                             <li><a href="/order/create"><i class="fa fa-btn fa-plus"></i> Skapa order</a></li>
                         </ul>
                     </li>
@@ -122,22 +124,6 @@
     <script src="/vendor/angular-ui-utils/event.min.js"></script>
     <script src="/vendor/angular-animate/angular-animate.min.js"></script>
     <script src="/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <!--
-    <script src="/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-    <script src="/vendor/angular-bootstrap-select/build/angular-bootstrap-select.min.js"></script>
-    <script src="/vendor/angular-confirm-modal/angular-confirm.min.js"></script>
-    <script src="/vendor/angular-master/src/js/core.js"></script>
-    <script src="/vendor/angular-master/scalyr.js"></script>
-    <script src="/vendor/angular-master/src/js/directives/slyEvaluate.js"></script>
-    <script src="/vendor/angular-master/src/js/directives/slyRepeat.js"></script>
-
-    <script src='vendor/underscore/underscore-min.js'></script>
-    <script src='vendor/backbone/backbone.js'></script>
-    <script src='vendor/backbone.paginator/lib/backbone.paginator.min.js'></script>
-    <script src='vendor/backgrid/lib/backgrid.js'></script>
-    <script src='vendor/backgrid-paginator/backgrid-paginator.js'></script>
-    <script src='vendor/backgrid-select-all/backgrid-select-all.min.js'></script>
-    <script src='vendor/backgrid-filter/backgrid-filter.min.js'></script>-->
     <script src='/vendor/bootstrap-select/dist/js/bootstrap-select.min.js'></script>
 
     <!-- Loading bar -->
@@ -157,6 +143,8 @@
     <script src="/vendor/widgster/widgster.js"></script>
     <!-- <script data-pace-options='{ "target": ".content-wrap", "ghostTime": 1000 }' src="/vendor/pace.js/pace.min.js"></script>-->
     <script src="/vendor/jquery-touchswipe/jquery.touchSwipe.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
 
     <script src="/js/parsley.min.js"></script>
     <script src="/js/parsley-sv.js"></script>

@@ -20,11 +20,14 @@ class CreateOrdersTable extends Migration
             $table->text('context');
             $table->string('type')->nullable();
             $table->text('accessories')->nullable();
-            $table->string('password')->nullable();
             $table->string('place')->nullable();
             $table->string('status');
             $table->tinyInteger('prio');
             $table->string('sign');
+            $table->boolean('event');
+            $table->float('estimated_time');
+            $table->timestamp('booked_at');
+            $table->timestamp('finished_at');
             $table->timestamps();
         });
     }

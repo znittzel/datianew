@@ -10,7 +10,6 @@ use App\Customer;
 use App\Order;
 use App\OrderEvent;
 use Auth;
-
 use App\Classes\Alert;
 
 class OrderController extends Controller

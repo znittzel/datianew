@@ -46,6 +46,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/order/create', 'OrderController@create');
     Route::post('/order/create', 'OrderController@save');
 
+    Route::get('/calendar/', 'CalendarController@index');
+    Route::get('/calendar/events', 'CalendarController@events');
+
     Route::get('/customer/{id}/show', 'CustomerController@show');
     Route::get('/customer', 'CustomerController@home');
     Route::post('/customer/{id}/update', 'CustomerController@update');
