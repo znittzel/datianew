@@ -21,7 +21,7 @@ class Order extends Model
     	'status',
         'prio',
     	'sign',
-        'event',
+        'event_id',
         'estimated_time',
         'booked_at',
         'pickup_at',

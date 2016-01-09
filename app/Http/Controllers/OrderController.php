@@ -84,7 +84,7 @@ class OrderController extends Controller
             $order->save();
             $event->save();
 
-            $order->event = $event->id;
+            $order->event_id = $event->id;
             $order->push();
 
             return redirect('/order/'.$order->id.'/show');
