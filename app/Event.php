@@ -11,12 +11,11 @@ class Event extends Model
     protected $fillable = [
     	'title',
     	'order_id',
-    	'estimated_time',
     	'start',
     	'end'
     ];
 
     public function order() {
-    	return $this->hasOne('App\Order', 'order_id', 'id');
+    	return $this->hasOne('App\Order', 'order_id', 'order_id');
     }
 }

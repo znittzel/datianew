@@ -58,6 +58,7 @@
                             @endforeach
 
                         </table>
+                        <a class="btn btn-default btn-lg" href="/order/create?customer_id={{ $customer->customer_id }}&customer_name={{ $customer->name }}">Skapa order</a>
                     </div>
                 </div>
             </div>

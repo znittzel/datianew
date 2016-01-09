@@ -11,7 +11,7 @@
                     @else
                         <span class="text-left">Order {{ $order->order_id }}</span>
                     @endif
-                    <span class="pull-right"><i>{{ $order->created_at .' - '. $order->sign }}</i></span>
+                    <span class="pull-right"><i>{{ $order->booked_at .' - '. $order->sign }}</i></span>
                 </div>
                 <div class="panel-body panel-content-{{ $order->state() }}">
                     <legend class="text-center"><a href="/order/{{ $order->id }}/edit">{{ $order->order_id }}</a> - <a href="/customer/{{ $order->customer()->first()->id }}/show">{{$order->customer()->first()->name }}</a></legend>
@@ -157,24 +157,39 @@
                         <div class="modal-content">
                           <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal"aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-btn fa-info"></i> Information</h4>
+                            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-btn fa-info"></i> Information <span class="label label-{{ $order->state() }}">{{ $order->stateName() }}</span></h4>
                           </div>
-                          <div class="modal-body row">
-                            <div class="col-md-2">
-                                <legend>Typ</legend>
-                                {{ $order->type }}
+                          <div class="modal-body">
+                            <div class="row">
+                              <div class="col-md-2">
+                                <p><i class="fa fa-automobile"></i> Regnr</p>
+                                <h5>{{ $order->reg_number }}</h5>
+                              </div>
+                              <div class="col-md-4">
+                                  <p>Tillbehör</p>
+                                  <h5>{{ $order->accessories }}</h5>
+                              </div>
+                              <div class="col-md-4">
+                                  <p><i class="fa fa-mobile"></i> Telefonnr</p>
+                                  <h5>
+                                    <a href="tel:{{$order->customer()->first()->telephone_number}}">{{ $order->customer()->first()->telephone_number }}</a>
+                                  </h5>
+                              </div>
+                              <div class="col-md-2">
+                                  <p>Plats</p>
+                                  <h5>{{ $order->place }}</h5>
+                              </div>
                             </div>
-                            <div class="col-md-4">
-                                <legend>Tillbehör</legend>
-                                {{ $order->accessories }}
-                            </div>
-                            <div class="col-md-4">
-                                <legend>Telefonnr</legend>
-                                <a href="tel:{{$order->customer()->first()->telephone_number}}">{{ $order->customer()->first()->telephone_number }}</a>
-                            </div>
-                            <div class="col-md-2">
-                                <legend>Plats</legend>
-                                {{ $order->place }}
+                            <hr/>
+                            <div class="row">
+                              <div class="col-md-3">
+                                <p><i class="fa fa-calendar-o"></i> Datum</p>
+                                <h5>@if ($order->booked_at) {{ date('Y-m-d',strtotime($order->booked_at)) }} @endif</h5>
+                              </div>
+                              <div class="col-md-3">
+                                <p><i class="fa fa-clock-o"></i> Tid</p>
+                                <h5>@if ($order->booked_at) {{ date('H:i',strtotime($order->booked_at)) }} @endif</h5>
+                              </div>
                             </div>
                           </div>
                           <div class="modal-footer">

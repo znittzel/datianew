@@ -14,13 +14,18 @@ class Order extends Model
     	'customer_id',
     	'user_id',
     	'context',
-    	'type',
+    	'reg_number',
     	'accessories',
         'password',
-        'box',
+        'place',
     	'status',
         'prio',
     	'sign',
+        'event',
+        'estimated_time',
+        'booked_at',
+        'pickup_at',
+        'finished_at',
     	'created_at',
     	'updated_at'
     ];
@@ -49,6 +54,14 @@ class Order extends Model
 
     public function articles() {
         return $this->hasMany('App\Article', 'order_id', 'order_id');
+    }
+
+    /**
+     * Hämtar kalender-eventet
+     * @return Event::class 
+     */
+    public function event() {
+        return $this->hasOne('App\Event', 'order_id', 'order_id');
     }
 
     /*

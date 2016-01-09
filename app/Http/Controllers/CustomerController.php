@@ -88,6 +88,10 @@ class CustomerController extends Controller
         return Customer::whereCustomer_id($id)->first();
     }
 
+    public function getCustomers() {
+        return Customer::all();
+    }
+
     public function saveAjax(Request $request) {
             $customer = Customer::whereCustomer_id($request->customer_id)->first();
             $customer->fill($request->all());

@@ -84,6 +84,28 @@
 
 /* FUNKTIONER */
 
+var getColorCodeByState = function(state, prio) {
+	if (prio && (state == '1'))
+	{
+		return 'black';
+	} else {
+		switch (state) {
+			case '1':
+				return '#a50000';
+				break;
+			case '2':
+				return '#a5a300';
+				break;
+			case '3':
+				return '#828282';
+				break;
+			case '4':
+				return '#0ca500';
+				break;
+		}
+	}
+}
+
 /*
 	getLabelByBusiness(business);
 	Ger tillbaka en Label om företag eller privat
@@ -161,6 +183,23 @@ var getClassByState = function(state, business, prio, classname) {
 		}
 	}
 	
+}
+
+var getStateName = function(status) {
+	switch (status) {
+		case '1':
+			return 'Ej påbörjad';
+			break;
+		case '2':
+			return 'Påbörjad';
+			break;
+		case '3':
+			return 'Arkiverad';
+			break;
+		case '4':
+			return 'Avslutad';
+			break;
+	}
 }
 
 /*----END FUNKTIONER---*/
@@ -242,22 +281,36 @@ app.controller('CustomerEditOrdersController', function($scope, $http) {
 	Används till create_order_form -form && edit_order_form
 */
 app.controller('OrderController', function($scope, $http) {
-	/*
-		getCustomer(): hämtar kund från databasen. Trimmar customer.id innan anrop
-	*/
-	$scope.getCustomer = function() {
-		$scope.customer.id = $scope.customer.id.replace(/ /g, '');
+	$scope.modalGetCustomer = function() {
+		$http({
+			url: '/customer/getCustomers',
+			method: 'GET'
+		}).success(function(customers) {
+			$scope.customers = customers;
+			$("#customerModal").modal('show');
+		});
+	}
 
-		if ($scope.customer.id.length >= 4) {
+	$scope.chooseCustomer = function(customer_id) {
+		if (customer_id) {
 			$http({
-				url: '/customer/get/'+$scope.customer.id,
-				method: 'GET'
-			}).success(function(response) {
-				$("#customer_name").val(response.name); 
+				url: '/customer/get/'+customer_id
+			}).success(function(customer) {
+				$("#customer_id").val(customer.customer_id);
+				$("#customer_name").val(customer.name);
 			});
-		} else {
-			$("#customer_name").val("");
+
+			$("#customerModal").modal('hide');
 		}
+	} 
+
+	$scope.getNextOrderId = function() {
+		$http({
+			url: '/order/getNextOrderId',
+			method: 'GET'
+		}).success(function(nextId) {
+			$("#order_id").val(nextId);
+		});
 	}
 
 	/*
@@ -396,21 +449,46 @@ app.controller('ArticlesEditController', ['$scope', '$http', function($scope, $h
 	}
 }]);
 
-app.controller('CalendarController', ['$scope', '$http', function($scope, $http) {
-
-
+app.controller('CalendarController', ['$scope', '$http', '$resource', function($scope, $http, $resource) {
 	$('#calendar').fullCalendar({
-		events: '/calendar/events',
+		events: {
+			url: '/calendar/events',
+			success: function(events) {
+				$.each(events, function(index, event) {
+					event.title = event.title + ' ' + event.order.reg_number;
+				});
+			}
+		},
+		eventRender: function(event, element) {
+			element.css('background-color', getColorCodeByState(event.order.status, event.order.prio));
+			element.css('border-color', '#6a6a6a');
+		},
+		eventClick: function(calEvent, jsEvent, view) {
+			$http({
+				url: '/calendar/getEvent/'+calEvent.order_id,
+				method: 'GET'
+			}).success(function(response) {
+				$scope.data = response;
+
+				$scope.view = {
+					stateLabel: getClassByState($scope.data.order.status, $scope.data.customer.business, $scope.data.order.prio, 'label'),
+					stateLabelName: getStateName($scope.data.order.status)
+				}
+
+				$("#orderModal").modal('show');
+			});
+		},
 		firstDay: 1,
 	  	monthNames: ["Januari","Februari","Mars","April","May","Juni","Juli", "Agusti", "September", "Oktober", "Novemver", "December" ], 
 	   	monthNamesShort: ['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Agu','Sep','Okt','Nov','Dec'],
 	   	dayNames: [ 'Söndag', 'Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag'],
 	   	dayNamesShort: ['Sön','Mån','Tis','Ons','Tors','Fre','Lör'],
 	   	buttonText: {
-	    today: 'Idag',
-	    month: 'Månad',
-	    week: 'Vecka',
-	    day: 'Dag'
-	   }
+		    today: 'Idag',
+		    month: 'Månad',
+		    week: 'Vecka',
+		    day: 'Dag'
+		},
+	    timeFormat: 'H:mm' // uppercase H for 24-hour clock
     })
 }]);

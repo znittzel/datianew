@@ -19,6 +19,7 @@
     <link href="/vendor/backgrid-filter/backgrid-filter.min.css" rel="stylesheet" />
     <link href="/vendor/backgrid-paginator/backgrid-paginator.min.css" rel="stylesheet" /> -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
+    <link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
     <link href="/css/style.css" rel="stylesheet" />
 
 
@@ -61,7 +62,7 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="/home">Kö</a></li>
-                            <li><a href="/order/calendar">Kalender</a></li>
+                            <li><a href="/calendar">Kalender</a></li>
                             <li><a href="/order/create"><i class="fa fa-btn fa-plus"></i> Skapa order</a></li>
                         </ul>
                     </li>
@@ -145,6 +146,7 @@
     <script src="/vendor/jquery-touchswipe/jquery.touchSwipe.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
     <script src="/js/parsley.min.js"></script>
     <script src="/js/parsley-sv.js"></script>

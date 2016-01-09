@@ -63,6 +63,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/order/delete', 'OrderController@delete');
     Route::get('/order/exists/{id}', 'OrderController@exists');
     Route::post('/order/comment', 'OrderController@comment');
+    Route::get('/order/getNextOrderId', 'OrderController@getNextOrderId');
 
     Route::get('/customer/get/{id}', 'CustomerController@get');
     Route::post('/customer/get', 'CustomerController@getCustomer');
@@ -76,4 +77,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/article/exists/{id}', 'ArticlesListController@exists');
     Route::post('/article/order/add', 'ArticleController@add');
     Route::post('/article/order/delete/', 'ArticleController@delete');
+
+    Route::get('/calendar/getEvent/{id}', 'CalendarController@getEvent');
 });
