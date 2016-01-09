@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use DB;
 
 class User extends Authenticatable
 {
@@ -12,7 +13,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'group'
     ];
 
     /**
@@ -30,5 +31,27 @@ class User extends Authenticatable
 
     public function order_events() {
         return $this->hasMany('App\OrderEvent');
+    }
+
+    /** 
+     * Om administratör
+     * @return boolean 
+     */
+    public function isAdmin() {
+        $permissions = json_decode(DB::table('groups')->whereId($this->group_id)->first()->permissions);
+
+        if ($permissions->administrator)
+            return true;
+        
+        return false;
+    }
+
+    /**
+     * Om email existerar
+     * @param  string $email 
+     * @return boolean
+     */
+    public static function exists($email) {
+        return (User::whereEmail($email)->first() ? true : false);
     }
 }

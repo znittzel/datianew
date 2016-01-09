@@ -23,7 +23,51 @@
                             </h4>
                           </div>
                           <div class="modal-body">
-
+                            <div class="row">
+                              <div class="col-md-2">
+                                <p><i class="fa fa-automobile"></i> Regnr</p>
+                                <h5><% data.order.reg_number %></h5>
+                              </div>
+                              <div class="col-md-4">
+                                  <p>Tillbehör</p>
+                                  <h5><% data.order.accessories %></h5>
+                              </div>
+                              <div class="col-md-4">
+                                  <p><i class="fa fa-mobile"></i> Telefonnr</p>
+                                  <h5>
+                                    <a href="tel:<% data.customer.telephone_number %>"><% data.customer.telephone_number %></a>
+                                  </h5>
+                              </div>
+                              <div class="col-md-2">
+                                  <p>Plats</p>
+                                  <h5><% data.order.place %></h5>
+                              </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <legend>Bokad</legend>
+                                <div class="col-md-6">
+                                  <p><i class="fa fa-calendar-o"></i> Datum</p>
+                                  <h5 ng-if="data.order.booked_at"><% data.order.booked_at | date:'yyyy-MM-dd' %></h5>
+                                </div>
+                                <div class="col-md-6">
+                                  <p><i class="fa fa-clock-o"></i> Tid</p>
+                                  <h5 ng-if="data.order.booked_at"><% data.order.booked_at | date:'HH:mm' %></h5>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <legend>Hämtas</legend>
+                                <div class="col-md-6">
+                                  <p><i class="fa fa-calendar-o"></i> Datum</p>
+                                  <h5 ng-if="data.order.booked_at"><% data.order.pickup_at | date:'yyyy-MM-dd' %></h5>
+                                </div>
+                                <div class="col-md-6">
+                                  <p><i class="fa fa-clock-o"></i> Tid</p>
+                                  <h5 ng-if="data.order.booked_at"><% data.order.pickup_at | date:'HH:mm' %></h5>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                           <div class="modal-footer">
                             <a href="/order/<% data.order.id %>/show" class="pull-left">Gå till order</a>

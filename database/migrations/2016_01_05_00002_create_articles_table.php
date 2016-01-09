@@ -16,6 +16,8 @@ class CreateArticlesTable extends Migration
             $table->increments('id');
             $table->integer('articles_list_id')->unsigned();
             $table->integer('order_id')->unsigned();
+            $table->integer('quantity');
+            $table->string('sign');
             $table->timestamps();
         });
     }

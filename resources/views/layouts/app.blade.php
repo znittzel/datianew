@@ -104,7 +104,10 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="/logout"><i class="fa fa-btn fa-sign-out"></i>Logga ut</a></li>
+                                @if ( Auth::user()->isAdmin())
+                                <li><a href="/admin/create_user"><i class="fa fa-btn fa-user-plus"></i> Skapa användare</a></li>
+                                @endif
+                                <li><a href="/logout"><i class="fa fa-btn fa-sign-out"></i> Logga ut</a></li>
                             </ul>
                         </li>
                     @endif

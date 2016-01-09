@@ -18,16 +18,17 @@ class CreateOrdersTable extends Migration
             $table->integer('customer_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->text('context');
-            $table->string('type')->nullable();
+            $table->string('reg_number')->nullable();
             $table->text('accessories')->nullable();
             $table->string('place')->nullable();
             $table->string('status');
             $table->tinyInteger('prio');
             $table->string('sign');
-            $table->boolean('event');
-            $table->float('estimated_time');
-            $table->timestamp('booked_at');
-            $table->timestamp('finished_at');
+            $table->integer('event_id');
+            $table->string('estimated_time');
+            $table->dateTime('booked_at');
+            $table->dateTime('pickup_at');
+            $table->dateTime('finished_at');
             $table->timestamps();
         });
     }

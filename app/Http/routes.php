@@ -58,6 +58,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/orderevent/{id}/edit', 'OrderEventController@edit');
     Route::post('/orderevent/{id}/update', 'OrderEventController@update');
 
+    Route::get('/admin/create_user', 'UserController@create');
+    Route::post('/admin/user/create', 'UserController@save');
+
     //API
     Route::post('/orderevent/delete', 'OrderEventController@delete');
     Route::post('/order/delete', 'OrderController@delete');
@@ -79,4 +82,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/article/order/delete/', 'ArticleController@delete');
 
     Route::get('/calendar/getEvent/{id}', 'CalendarController@getEvent');
+
+    Route::get('/admin/user/exists/{email}', 'UserController@exists');
 });

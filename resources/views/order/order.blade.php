@@ -180,15 +180,29 @@
                                   <h5>{{ $order->place }}</h5>
                               </div>
                             </div>
-                            <hr/>
+                            <br/>
                             <div class="row">
-                              <div class="col-md-3">
-                                <p><i class="fa fa-calendar-o"></i> Datum</p>
-                                <h5>@if ($order->booked_at) {{ date('Y-m-d',strtotime($order->booked_at)) }} @endif</h5>
+                              <div class="col-md-6">
+                                <legend>Bokad</legend>
+                                <div class="col-md-6">
+                                  <p><i class="fa fa-calendar-o"></i> Datum</p>
+                                  <h5>@if ($order->booked_at) {{ date('Y-m-d',strtotime($order->booked_at)) }} @endif</h5>
+                                </div>
+                                <div class="col-md-6">
+                                  <p><i class="fa fa-clock-o"></i> Tid</p>
+                                  <h5>@if ($order->booked_at) {{ date('H:i',strtotime($order->booked_at)) }} @endif</h5>
+                                </div>
                               </div>
-                              <div class="col-md-3">
-                                <p><i class="fa fa-clock-o"></i> Tid</p>
-                                <h5>@if ($order->booked_at) {{ date('H:i',strtotime($order->booked_at)) }} @endif</h5>
+                              <div class="col-md-6">
+                                <legend>Hämtas</legend>
+                                <div class="col-md-6">
+                                  <p><i class="fa fa-calendar-o"></i> Datum</p>
+                                  <h5>@if ($order->pickup_at) {{ date('Y-m-d',strtotime($order->pickup_at)) }} @endif</h5>
+                                </div>
+                                <div class="col-md-6">
+                                  <p><i class="fa fa-clock-o"></i> Tid</p>
+                                  <h5>@if ($order->pickup_at) {{ date('H:i',strtotime($order->pickup_at)) }} @endif</h5>
+                                </div>
                               </div>
                             </div>
                           </div>

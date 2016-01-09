@@ -14,10 +14,9 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('order_id')->nullable();
-            $table->float('estimated_time')->nullable();
-            $table->timestamp('start');
-            $table->timestamp('end');
+            $table->integer('order_id');
+            $table->dateTime('start');
+            $table->dateTime('end');
             $table->string('title');
 
             $table->timestamps();

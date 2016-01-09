@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use App\Group;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,10 +14,19 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::create([
-        		"name" => "Rikard Olsson",
-        		"email" => "rikard@datia.nu",
-        		"password" => Hash::make("4Punkter"),
-        		"group_id" => "{administrator: 1}"
+        		"name" => "administrator",
+        		"email" => "rune@hemma.ws",
+        		"password" => Hash::make("Krongatan4"),
+        		"group_id" => "1"
         	]);
+
+        Group::create([
+                "name" => "Administrators",
+                "permissions" => '{"administrator":true}'
+            ]);
+        Group::create([
+                "name" => "Users",
+                "permissions" => '{"administrator":false}'
+            ]);
     }
 }

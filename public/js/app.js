@@ -80,6 +80,31 @@
           sv: 'Fel med artikelnummer.'
         }
       });
+
+      window.Parsley
+      .addValidator('emailexists', {
+        requirementType: 'string',
+        validateString: function(value, requirement) {
+            if (requirement) {
+                var ok = false;
+              $.ajax({
+                url: '/admin/user/exists/'+value,
+                async: false,
+                success: function(user) {
+                    if (!user.exists) 
+                        ok = true;
+                    else
+                        ok = false;
+                }
+              });
+
+              return ok;
+            }
+        },
+        messages: {
+          sv: 'Användare existerar.'
+        }
+      });
 /*---END GLOBALA INSTÄLLNINGAR---*/
 
 /* FUNKTIONER */
@@ -469,6 +494,9 @@ app.controller('CalendarController', ['$scope', '$http', '$resource', function($
 				method: 'GET'
 			}).success(function(response) {
 				$scope.data = response;
+				$scope.data.order.booked_at = Date.parse(response.order.booked_at);
+				$scope.data.order.pickup_at = Date.parse(response.order.pickup_at);
+				$scope.data.order.finished_at = Date.parse(response.order.finished_at);
 
 				$scope.view = {
 					stateLabel: getClassByState($scope.data.order.status, $scope.data.customer.business, $scope.data.order.prio, 'label'),

@@ -8,6 +8,9 @@
                 <div class="panel-heading">Välkommen</div>
 
                 <div class="panel-body">
+                    @if(session("status"))
+                        {!! session("status") !!}
+                    @endif
                     Datias ordersystem 2.0.
                 </div>
             </div>
