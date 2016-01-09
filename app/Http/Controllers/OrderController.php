@@ -135,6 +135,11 @@ class OrderController extends Controller
     }
 
     public function getNextOrderId() {
-        return Order::orderBy('order_id', 'desc')->first()->order_id + 1;
+        $id = Order::select("order_id")->orderBy('order_id', 'desc')->first()->order_id + 1;
+
+        if ($id)
+            return $id;
+        else
+            return 1;
     }
 }

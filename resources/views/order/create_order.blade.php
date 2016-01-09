@@ -12,7 +12,33 @@
                     <form method="post" action="/order/create" id="create_order_form" ng-controller="OrderController">
                         <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
                         <input type="hidden" name="status" value="1" />
-                        <fieldset class="col-md-6">
+                            <legend><i class="fa fa-calendar"></i> Datum & tid</legend>
+                            <div class="form-group">
+                                <label> Bokad den...</label>
+                                <div class='input-group date' id='datetimepicker-book'>
+                                    <input type='text' class="form-control" name="booked_at" data-parsley-required/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="exampleInputAmount">Arbetstid (i timmar)</label>
+                                <div class="input-group">
+                                  <div class="input-group-addon">Beräknad arbetstid</div>
+                                  <input type="text" class="form-control" name="estimated_time" data-parsley-required placeholder="timmar">
+                                  <div class="input-group-addon">h</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Hämtas av kund den...</label>
+                                <div class='input-group date' id='datetimepicker-pickup'>
+                                    <input type='text' class="form-control" name="pickup_at"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
                             <legend>Orderinformation</legend>
                             <div class="form-group form-inline">
                                 <div class="input-group">
@@ -27,7 +53,6 @@
                                 <label><i class="fa fa-user"></i> Kundnamn</label>
                                 <input type="text" disabled class="form-control" id="customer_name" value="@if(isset($_GET['customer_name'])) {{ $_GET['customer_name'] }} @endif" data-parsley-required />
                             </div>
-                            <hr/>
                             <div class="form-group form-inline">
                                 <div class="input-group">
                                     <label><i class="fa fa-file-o"></i> Ordernummer</label>
@@ -43,11 +68,11 @@
                             </div>
                             <div class="form-group">
                                 <label><i class="fa fa-align-left"></i> Beskrivning</label>
-                                <textarea name="context" style="resize:vertical;" class="form-control" rows="5" data-parsley-required data-parsley-maxlength="1000"></textarea>
+                                <textarea name="context" style="resize:vertical;" class="form-control" rows="5" data-parsley-maxlength="1000"></textarea>
                             </div>
                             <div class="form-group">
                                 <label><i class="fa fa-automobile"></i> Regnr</label>
-                                <input type="text" name="reg_number" class="form-control" placeholder="ABC123" data-parsley-maxlength="255">
+                                <input type="text" name="reg_number" class="form-control" placeholder="ABC123" data-parsley-required data-parsley-maxlength="255">
                             </div>
                             <div class="form-group">
                                 <label>Tillbehör</label>
@@ -68,36 +93,7 @@
                                 <label><i class="fa fa-check-square-o"></i> Sign</label>
                                 <input type="text" name="sign" class="form-control" data-parsley-required data-parsley-maxlength="2" />
                             </div>
-                        </fieldset>
-                        <fieldset class="col-md-6">
-                            <legend><i class="fa fa-calendar"></i> Datum & tid</legend>
-                            <div class="form-group">
-                                <label> Bokad</label>
-                                <div class='input-group date' id='datetimepicker-book'>
-                                    <input type='text' class="form-control" name="booked_at" data-parsley-required/>
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="exampleInputAmount">Arbetstid (i timmar)</label>
-                                <div class="input-group">
-                                  <div class="input-group-addon"> Arbetstid</div>
-                                  <input type="text" class="form-control" name="estimated_time" data-parsley-required placeholder="timmar">
-                                  <div class="input-group-addon">h</div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Hämtas av kund</label>
-                                <div class='input-group date' id='datetimepicker-pickup'>
-                                    <input type='text' class="form-control" name="pickup_at"/>
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
-                            </div>
-                        </fieldset>
+
                         <input type="submit" class="btn btn-success" value="Skapa" style="width:100%;" />
 
                         <!--GET CUSTOMER MODAL -->
@@ -144,10 +140,14 @@
     });
 
     $('#datetimepicker-book').datetimepicker({
-        format: 'YYYY-MM-DD HH:mm'
+        format: 'YYYY-MM-DD HH:mm',
+        sideBySide: true,
+        calendarWeeks: true
     });
     $('#datetimepicker-pickup').datetimepicker({
-        format: 'YYYY-MM-DD HH:mm'
+        format: 'YYYY-MM-DD HH:mm',
+        sideBySide: true,
+        calendarWeeks: true
     });
 </script>
 @endsection

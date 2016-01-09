@@ -36,7 +36,9 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/archive', 'ArchiveController@archive');
 
-    Route::get('/home', 'HomeController@index');
+    //Route::get('/home', 'HomeController@index');
+    Route::get('/home', 'CalendarController@index');
+    
     Route::get('/order/{id}/show', 'OrderController@show');
     Route::get('/order/{id}/edit', 'OrderController@edit');
     Route::post('/order/{id}/update', 'OrderController@update');

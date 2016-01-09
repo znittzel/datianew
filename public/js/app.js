@@ -480,7 +480,8 @@ app.controller('CalendarController', ['$scope', '$http', '$resource', function($
 			url: '/calendar/events',
 			success: function(events) {
 				$.each(events, function(index, event) {
-					event.title = event.title + ' ' + event.order.reg_number;
+					event.title = event.order.reg_number;
+					event.url = "/order/"+event.order.id+"/show";
 				});
 			}
 		},
@@ -488,24 +489,24 @@ app.controller('CalendarController', ['$scope', '$http', '$resource', function($
 			element.css('background-color', getColorCodeByState(event.order.status, event.order.prio));
 			element.css('border-color', '#6a6a6a');
 		},
-		eventClick: function(calEvent, jsEvent, view) {
-			$http({
-				url: '/calendar/getEvent/'+calEvent.order_id,
-				method: 'GET'
-			}).success(function(response) {
-				$scope.data = response;
-				$scope.data.order.booked_at = Date.parse(response.order.booked_at);
-				$scope.data.order.pickup_at = Date.parse(response.order.pickup_at);
-				$scope.data.order.finished_at = Date.parse(response.order.finished_at);
+		// eventClick: function(calEvent, jsEvent, view) {
+		// 	$http({
+		// 		url: '/calendar/getEvent/'+calEvent.order_id,
+		// 		method: 'GET'
+		// 	}).success(function(response) {
+		// 		$scope.data = response;
+		// 		$scope.data.order.booked_at = Date.parse(response.order.booked_at);
+		// 		$scope.data.order.pickup_at = Date.parse(response.order.pickup_at);
+		// 		$scope.data.order.finished_at = Date.parse(response.order.finished_at);
 
-				$scope.view = {
-					stateLabel: getClassByState($scope.data.order.status, $scope.data.customer.business, $scope.data.order.prio, 'label'),
-					stateLabelName: getStateName($scope.data.order.status)
-				}
+		// 		$scope.view = {
+		// 			stateLabel: getClassByState($scope.data.order.status, $scope.data.customer.business, $scope.data.order.prio, 'label'),
+		// 			stateLabelName: getStateName($scope.data.order.status)
+		// 		}
 
-				$("#orderModal").modal('show');
-			});
-		},
+		// 		$("#orderModal").modal('show');
+		// 	});
+		// },
 		firstDay: 1,
 	  	monthNames: ["Januari","Februari","Mars","April","May","Juni","Juli", "Agusti", "September", "Oktober", "Novemver", "December" ], 
 	   	monthNamesShort: ['Jan','Feb','Mar','Apr','Maj','Jun','Jul','Agu','Sep','Okt','Nov','Dec'],
@@ -517,6 +518,13 @@ app.controller('CalendarController', ['$scope', '$http', '$resource', function($
 		    week: 'Vecka',
 		    day: 'Dag'
 		},
-	    timeFormat: 'H:mm' // uppercase H for 24-hour clock
+		header: {
+			left: 'prev,next today',
+			center: 'title',
+			right: 'month,agendaWeek,agendaDay'
+		},
+	    timeFormat: 'H:mm',
+	    weekNumbers: true
+
     })
 }]);

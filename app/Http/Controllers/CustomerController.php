@@ -30,7 +30,8 @@ class CustomerController extends Controller
             $customers = Customer::select('*');
 
             return Datatables::of($customers)
-                        ->editColumn('name', '<a href="#customer-{{$id}}" onclick="editCustomerJavascript({{$customer_id}},{{$id}})">{{ $name }}</a>')
+                        //->editColumn('name', '<a href="#customer-{{$id}}" onclick="editCustomerJavascript({{$customer_id}},{{$id}})">{{ $name }}</a>')
+                        ->editColumn('name', '<a href="/customer/{{$id}}/show">{{ $name }}</a>')
                         ->editColumn('business', function($customer) {
                             return $customer->getLabelForBusiness();
                         })

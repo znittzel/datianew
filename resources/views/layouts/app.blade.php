@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Datia - Ordersystem</title>
+    <title>Autoexperten - Ordersystem</title>
 
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/theme.min.css">
     <link href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
+    <link rel="stylesheet" href="/vendor/fullcalendar/fullcalendar.css"/>
     <link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
     <link href="/css/style.css" rel="stylesheet" />
 
@@ -50,7 +50,13 @@
                 @if (!Auth::guest())
                 <ul class="nav navbar-nav">
 
-                    <li class="dropdown">
+                    <li class="{{ Request::is('calendar*') ? 'active' : '' }}">
+                        <a href="/calendar"><i class="fa fa-btn fa-calendar"></i> Kalender</a>
+                    </li>
+                    <li class="{{ Request::is('order/create') ? 'active' : '' }}">
+                        <a href="/order/create"><i class="fa fa-btn fa-file-text"></i> Skapa order</a>
+                    </li>
+                    <!-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             <i class="fa fa-btn fa-file-text"></i> Order <span class="caret"></span>
                         </a>
@@ -60,9 +66,9 @@
                             <li><a href="/calendar">Kalender</a></li>
                             <li><a href="/order/create"><i class="fa fa-btn fa-plus"></i> Skapa order</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                     
-                    <li class="dropdown">
+                    <!-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                            <i class="fa fa-btn fa-tag"></i> Artikel <span class="caret"></span>
                         </a>
@@ -71,9 +77,9 @@
                             <li><a href="/article">Lista</a></li>
                             <li><a href="/article/create"><i class="fa fa-btn fa-plus"></i> Skapa artikel</a></li>
                         </ul>
-                    </li>
+                    </li> -->
 
-                    <li class="dropdown">
+                    <li class="dropdown {{ Request::is('customer*') ? 'active' : '' }}">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                            <i class="fa fa-btn fa-user"></i> Kund <span class="caret"></span>
                         </a>
@@ -83,7 +89,9 @@
                             <li><a href="/customer/create"><i class="fa fa-btn fa-plus"></i> Skapa kund</a></li>
                         </ul>
                     </li>
-                    <li><a href="/archive"><i class="fa fa-btn fa-archive"></i> Arkiv</a></li>
+                    <li class="{{ Request::is('archive') ? 'active' : '' }}">
+                        <a href="/archive"><i class="fa fa-btn fa-archive"></i> Arkiv</a>
+                    </li>
                 </ul>
                 @endif
 

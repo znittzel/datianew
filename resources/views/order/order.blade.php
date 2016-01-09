@@ -19,6 +19,7 @@
                         {!! session('status') !!}
                     @endif
                     <div class="well">
+                        <h4>{{ $order->event()->first()->title }}</h4>
                         <p class="order-heading">{!! nl2br(e($order->context)) !!}</p>
                     </div>
                     <div id="comments" class="col-md-8">
@@ -58,10 +59,10 @@
                     <div class="@if($order->status == 4 || $order->status == 3) {{ 'hidden' }} @endif" id="div_ongoing_order">
                         <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#modalComment">
                           <i class="fa fa-comment"></i> Kommentera
-                        </button>
+                        </button><!-- 
                         <button type="button" class="btn btn-default btn-lg @if($order->status == 4) {{ 'hidden' }} @endif" data-toggle="modal" data-target="#modalArticle">
                           <i class="fa fa-plus"></i> Lägg till artikel
-                        </button>
+                        </button> -->
                         <button class="btn btn-default btn-lg pull-right" data-toggle="modal" data-target="#modalInformation">
                             <i class="fa fa-info"></i> Information
                         </button>
