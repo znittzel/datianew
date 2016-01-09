@@ -43,7 +43,7 @@
                             <div class="form-group form-inline">
                                 <div class="input-group">
                                     <label><i class="fa fa-user"></i> Kundnummer</label>
-                                    <input type="text" class="form-control" data-parsley-whitespace="trim" value="@if(isset($_GET['customer_id'])) {{ $_GET['customer_id'] }} @endif" id="customer_id" name="customer_id" data-parsley-minlength="4" data-parsley-required data-parsley-type="number">
+                                    <input type="text" class="form-control" data-parsley-whitespace="trim" value="@if(isset($_GET['customer_id'])) {{ $_GET['customer_id'] }} @endif" id="customer_id" name="customer_id" data-parsley-required data-parsley-type="number">
                                 </div>
                                 <button type="button" class="btn btn-default btn-sm" ng-click="modalGetCustomer()">
                                   Kundlista
@@ -72,7 +72,7 @@
                             </div>
                             <div class="form-group">
                                 <label><i class="fa fa-automobile"></i> Regnr</label>
-                                <input type="text" name="reg_number" class="form-control" placeholder="ABC123" data-parsley-required data-parsley-maxlength="255">
+                                <input type="text" name="reg_number" class="form-control" placeholder="ABC123" data-parsley-required data-parsley-maxlength="6" data-parsley-minlength="6">
                             </div>
                             <div class="form-group">
                                 <label>Tillbehör</label>
