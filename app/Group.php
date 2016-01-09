@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
-    $table = "groups";
+    protected $table = "groups";
 
-    $fillabel = [
+    protected $fillabel = [
     	'name',
     	'permissions'
     ];
