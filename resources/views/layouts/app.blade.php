@@ -14,16 +14,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/theme.min.css">
     <link href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <!-- <link href="/vendor/backgrid/src/backgrid.css" rel="stylesheet" />
-    <link href="/vendor/backgrid-select-all/backgrid-select-all.min.css" rel="stylesheet" />
-    <link href="/vendor/backgrid-filter/backgrid-filter.min.css" rel="stylesheet" />
-    <link href="/vendor/backgrid-paginator/backgrid-paginator.min.css" rel="stylesheet" /> -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
     <link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
     <link href="/css/style.css" rel="stylesheet" />
 
-
-    <link rel="icon"type="image/png"href="/img/punkter.png" />
+    <link rel="icon"type="image/png"href="/img/favicon.png" />
     <script>
         /* yeah we need this empty stylesheet here. It's cool chrome & chromium fix
          chrome fix https://code.google.com/p/chromium/issues/detail?id=167083
@@ -46,7 +41,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="/">
-                    <img src="/img/datia.png" style="max-width:100px"/>
+                    <img src="/img/logo.png" style="max-width:100px"/>
                 </a>
             </div>
 
