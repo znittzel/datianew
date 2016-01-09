@@ -15,10 +15,13 @@
                     @endif
                     <form action="/customer/create" method="post" id="create_customer" ng-controller="CustomerCreateController">
                         <input type="hidden" value="{!! csrf_token() !!}" name="_token" />
-                        <div class="form-group" id="customer_id">
+                        <div class="form-group">
                             <label>Kundnummer</label>
-                            <input type="text" ng-model="customer.id" data-parsley-whitespace="trim" ng-change="checkCustomerId()" 
+                            <div class="form-inline">
+                                <input type="text" data-parsley-whitespace="trim" id="customer_id" 
                                 name="customer_id" class="form-control" data-parsley-required data-parsley-customerexists="true">
+                            </div>
+                            <span class="help-block">Förvalt är nästa kundnummer i ordning. Vänligen ändra om annat.</span>
                         </div>
                         <div class="form-group">
                             <label>Namn</label>

@@ -90,7 +90,7 @@ class CustomerController extends Controller
     }
 
     public function getCustomers() {
-        return Customer::all();
+        return Customer::select(['customer_id', 'name'])->orderBy('name')->get();
     }
 
     public function saveAjax(Request $request) {
@@ -101,5 +101,9 @@ class CustomerController extends Controller
 
     public function exists($customer_id) {
         return ["exists" => Customer::exists($customer_id)];
+    }
+
+    public function getNextId() {
+        return Customer::getNextId();
     }
 }

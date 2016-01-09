@@ -127,6 +127,8 @@ class OrderController extends Controller
             $event->delete();
         }
 
+        $order->event()->delete();
+
         return Order::whereId($request->id)->delete();
     }
 

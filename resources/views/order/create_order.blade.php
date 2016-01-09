@@ -13,16 +13,16 @@
                         <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
                         <input type="hidden" name="status" value="1" />
                             <legend><i class="fa fa-calendar"></i> Datum & tid</legend>
-                            <div class="form-group">
-                                <label> Bokad den...</label>
-                                <div class='input-group date' id='datetimepicker-book'>
-                                    <input type='text' class="form-control" name="booked_at" data-parsley-required/>
-                                    <span class="input-group-addon">
+                            <div class="form-group form-inline">
+                                <div class="input-group" id='datetimepicker-book'>
+                                  <div class="input-group-addon">Bokad</div>
+                                  <input type="text" class="form-control" name="booked_at" data-parsley-required placeholder="datum & tid">
+                                  <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group form-inline">
                                 <label class="sr-only" for="exampleInputAmount">Arbetstid (i timmar)</label>
                                 <div class="input-group">
                                   <div class="input-group-addon">Beräknad arbetstid</div>
@@ -30,24 +30,26 @@
                                   <div class="input-group-addon">h</div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label>Hämtas av kund den...</label>
-                                <div class='input-group date' id='datetimepicker-pickup'>
-                                    <input type='text' class="form-control" name="pickup_at"/>
-                                    <span class="input-group-addon">
+                            <div class="form-group form-inline">
+                                <div class="input-group" id='datetimepicker-pickup'>
+                                  <div class="input-group-addon">Hämtas av kund</div>
+                                  <input type="text" class="form-control" name="pickup_at" data-parsley-required placeholder="datum & tid">
+                                  <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
                             </div>
+                            <br>
+                            <br>
                             <legend>Orderinformation</legend>
-                            <div class="form-group form-inline">
-                                <div class="input-group">
-                                    <label><i class="fa fa-user"></i> Kundnummer</label>
-                                    <input type="text" class="form-control" data-parsley-whitespace="trim" value="@if(isset($_GET['customer_id'])) {{ $_GET['customer_id'] }} @endif" id="customer_id" name="customer_id" data-parsley-required data-parsley-type="number">
+                            <div class="form-group">
+                                <label><i class="fa fa-user"></i> Kundnummer</label>
+                                <div class="form-inline">
+                                    <input type="text" class="form-control" data-parsley-whitespace="trim" value="{{ (isset($_GET['customer_id']) ? $_GET['customer_id'] : '') }}" id="customer_id" name="customer_id" data-parsley-required data-parsley-type="number">
+                                    <button type="button" class="btn btn-default" ng-click="modalGetCustomer()">
+                                      Kundlista
+                                    </button>
                                 </div>
-                                <button type="button" class="btn btn-default btn-sm" ng-click="modalGetCustomer()">
-                                  Kundlista
-                                </button>
                             </div>
                             <div class="form-group">
                                 <label><i class="fa fa-user"></i> Kundnamn</label>
@@ -58,9 +60,6 @@
                                     <label><i class="fa fa-file-o"></i> Ordernummer</label>
                                     <input type="text" id="order_id" name="order_id" ng-model="order.id" ng-change="trimOrderId()" data-parsley-whitespace="trim" class="form-control" data-parsley-required data-parsley-type="number" data-parsley-orderexists="true">
                                 </div>
-                                <button type="button" class="btn btn-default btn-sm" ng-click="getNextOrderId()">
-                                  Hämta nästa
-                                </button>
                             </div>
                             <div class="form-group">
                                 <label><i class="fa fa-header"></i> Titel</label>

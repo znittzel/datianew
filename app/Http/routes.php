@@ -63,7 +63,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/admin/create_user', 'UserController@create');
     Route::post('/admin/user/create', 'UserController@save');
 
-    //API
+    //---------------------------------API----------------------------------------------------------------------
     Route::post('/orderevent/delete', 'OrderEventController@delete');
     Route::post('/order/delete', 'OrderController@delete');
     Route::get('/order/exists/{id}', 'OrderController@exists');
@@ -76,6 +76,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/customer/getCustomers', 'CustomerController@getCustomers');
     Route::get('/customer/anyData', 'CustomerController@anyData');
     Route::post('/customer/saveAjax', 'CustomerController@saveAjax');
+    Route::get('/customer/getNextId', 'CustomerController@getNextId');
 
     Route::get('/archive/getArchive', 'ArchiveController@getArchive');
 

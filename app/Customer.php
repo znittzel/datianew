@@ -78,4 +78,13 @@ class Customer extends Model
                 break;
         }
     }
+
+    public static function getNextId() {
+        $id = Customer::select("customer_id")->orderBy("customer_id", 'decs')->first()->customer_id + 1;
+
+        if ($id)
+            return $id;
+
+        return 1;
+    }
 }

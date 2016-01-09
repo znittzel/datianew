@@ -329,14 +329,12 @@ app.controller('OrderController', function($scope, $http) {
 		}
 	} 
 
-	$scope.getNextOrderId = function() {
-		$http({
-			url: '/order/getNextOrderId',
-			method: 'GET'
-		}).success(function(nextId) {
-			$("#order_id").val(nextId);
-		});
-	}
+	$http({
+		url: '/order/getNextOrderId',
+		method: 'GET'
+	}).success(function(nextId) {
+		$("#order_id").val(nextId);
+	});
 
 	/*
 		trimOrderId(): trimmar order.id innan skapande av ny order
@@ -351,9 +349,12 @@ app.controller('OrderController', function($scope, $http) {
 	Används till create_customer -form
 */
 app.controller("CustomerCreateController", function($scope, $http) {
-	$scope.checkCustomerId = function() {
-		$scope.customer.id = $scope.customer.id.replace(/ /g, '');
-	}
+	$http({
+		url: '/customer/getNextId',
+		method: 'GET'
+	}).success(function(id) {
+		$("#customer_id").val(id);
+	});
 });
 
 /*

@@ -53,7 +53,7 @@
                                     <td><a href="/order/{{ $order->id }}/show">{{ $order->order_id }}</a></td>
                                     <td>{{ $order->type }}</td>
                                     <td><span class="label label-{{$order->state()}}">{{ $order->stateName() }}</span></td>
-                                    <td><button class="btn btn-danger btn-xs" ng-really-click="delete({{ $order->id }})" ng-really-message="Ta bort kommentar #{{ $order->order_id }}?">Ta bort</button</td>
+                                    <td><button class="btn btn-danger btn-xs" ng-really-click="delete({{ $order->id }})" ng-really-message="Ta bort order #{{ $order->order_id }}?">Ta bort</button</td>
                                 </tr>
                             @endforeach
 
