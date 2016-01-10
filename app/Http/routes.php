@@ -63,6 +63,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/admin/create_user', 'UserController@create');
     Route::post('/admin/user/create', 'UserController@save');
 
+    Route::get('/tire', 'TireController@tires');
+
     //---------------------------------API----------------------------------------------------------------------
     Route::post('/orderevent/delete', 'OrderEventController@delete');
     Route::post('/order/delete', 'OrderController@delete');
