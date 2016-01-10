@@ -26,18 +26,19 @@
                                         {!! csrf_field() !!}
                                         <div class="input-group">
                                             <label>Inlämningsdatum & tid</label>
-                                            <div class='input-group date' id='datetimepicker-file'>
-                                                <input type='text' class="form-control" name="filed_at" value="{!! date('Y-m-d H:i') !!}"/>
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
+                                            <div class='input-group date'>
+                                                <input type='text' class="form-control" id="datetimepicker-file" name="filed_at" value="{!! date('Y-m-d H:i') !!}"/>
                                             </div>
                                         </div>
                                         <hr/>
                                         <div class="input-group">
-                                            <label><i class="fa fa-user"></i> Kund <button class="btn btn-default btn-sm">Hämta</button></label>
-                                            <input type="number" class="form-control" id="customer_id" data-parsley-customerexists="false" placeholder="Kundnummer" name="customer_id" data-parsley-required>
-                                            <input type="text" class="form-control" id="customer_name" placeholder="Namn" name="customer_name" disabled data-parsley-required>
+                                            <label><i class="fa fa-user"></i> Kund </label>
+                                            <br/>
+                                            <select class="form-control" id="selectCustomer" name="customer_id">
+                                                @foreach ($customers as $customer)
+                                                <option value="{{$customer->customer_id}}">{{$customer->name}}</option>   
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <hr/>
                                         <div class="input-group">
@@ -89,23 +90,4 @@
 @endsection
 
 @section("script")
-<script type="text/javascript">
-    $("#file_tire").parsley({
-        trigger:      'change',
-        successClass: "has-success",
-        errorClass: "has-error",
-        classHandler: function (el) {
-            return el.$element.closest('.form-group');
-        },
-        errorsWrapper: '<div class="invalid-message"></div>',
-        errorTemplate: '<span></span>',
-    });
-
-    $('#datetimepicker-file').datetimepicker({
-        format: 'YYYY-MM-DD HH:mm',
-        sideBySide: true,
-        calendarWeeks: true,
-        useCurrent: true
-    });
-</script>
 @endsection

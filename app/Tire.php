@@ -24,6 +24,6 @@ class Tire extends Model
      * @return Customer::class
      */
     public function customer() {
-    	$this->belongsTo('App\Customer', 'customer_id', 'customer_id');
+    	return $this->belongsTo('App\Customer', 'customer_id', 'customer_id');
     }
 }

@@ -231,7 +231,6 @@ var getStateName = function(status) {
 
 var app = angular.module('OrderApp', 
 	[
-	'ui.bootstrap.modal',
 	'ngResource',
 	'ngAnimate'
 	], function($interpolateProvider) {
@@ -306,28 +305,29 @@ app.controller('CustomerEditOrdersController', function($scope, $http) {
 	Används till create_order_form -form && edit_order_form
 */
 app.controller('OrderController', function($scope, $http) {
-	$scope.modalGetCustomer = function() {
-		$http({
-			url: '/customer/getCustomers',
-			method: 'GET'
-		}).success(function(customers) {
-			$scope.customers = customers;
-			$("#customerModal").modal('show');
-		});
-	}
+	$("#selectCustomer").select2();
 
-	$scope.chooseCustomer = function(customer_id) {
-		if (customer_id) {
-			$http({
-				url: '/customer/get/'+customer_id
-			}).success(function(customer) {
-				$("#customer_id").val(customer.customer_id);
-				$("#customer_name").val(customer.name);
-			});
+    $("#create_order_form").parsley({
+        trigger:      'change',
+        successClass: "has-success",
+        errorClass: "has-error",
+        classHandler: function (el) {
+            return el.$element.closest('.form-group');
+        },
+        errorsWrapper: '<div class="invalid-message"></div>',
+        errorTemplate: '<span></span>',
+    });
 
-			$("#customerModal").modal('hide');
-		}
-	} 
+    $('#datetimepicker-book').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
+        sideBySide: true,
+        calendarWeeks: true
+    });
+    $('#datetimepicker-pickup').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
+        sideBySide: true,
+        calendarWeeks: true
+    });
 
 	$http({
 		url: '/order/getNextOrderId',
@@ -531,14 +531,23 @@ app.controller('CalendarController', ['$scope', '$http', '$resource', function($
 }]);
 
 app.controller('FileTiresController', ['$scope', '$http', function($scope, $http) {
-	$("#customer_id").focusout(function() {
-		if ($("#customer_id").val() != "") {
-			$http({
-				url: '/customer/get/'+$("#customer_id").val(),
-				method: 'GET'
-			}).success(function(customer) {
-				$("#customer_name").val(customer.name);
-			});
-		}
-	});
+	$("#selectCustomer").select2();
+
+    $('#datetimepicker-file').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
+        sideBySide: true,
+        calendarWeeks: true,
+        useCurrent: true
+    });
+
+    $("#file_tire").parsley({
+        trigger:      'change',
+        successClass: "has-success",
+        errorClass: "has-error",
+        classHandler: function (el) {
+            return el.$element.closest('.form-group');
+        },
+        errorsWrapper: '<div class="invalid-message"></div>',
+        errorTemplate: '<span></span>',
+    });
 }]);

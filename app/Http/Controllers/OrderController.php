@@ -40,31 +40,25 @@ class OrderController extends Controller
     public function update(Request $request, $id) {
         $order = Order::whereId($id)->first();
         $event = $order->event()->first();
-        
-        if (Customer::exists($request->customer_id)) {
-            if ($request->order_id != $order->order_id && Order::whereOrder_id($request->order_id)->first())
-                return redirect('/order/'.$id.'/edit')->with("status", Alert::get("danger", "Order existerar. Välj annat ordernummer."));
 
-            $order->fill($request->all());
-            $order->push();
+        $order->fill($request->all());
+        $order->push();
 
-            $event->title = $request->title;
-            $event->start = $request->booked_at;
+        $event->title = $request->title;
+        $event->start = $request->booked_at;
 
-            $end = date_create($request->booked_at);
-            date_add($end, date_interval_create_from_date_string($request->estimated_time.' hours'));
-            $event->end = date_format($end, 'Y-m-d H:i');
+        $end = date_create($request->booked_at);
+        date_add($end, date_interval_create_from_date_string($request->estimated_time.' hours'));
+        $event->end = date_format($end, 'Y-m-d H:i');
 
-            $event->push();
+        $event->push();
 
-            return redirect('/order/'.$id.'/show')->with("status", Alert::get("success", "Order är uppdaterad."));
-        } else {
-            return redirect('/order/'.$id.'/edit')->with("status", Alert::get("danger", "Kundnummer existerar inte!"));
-        }
+        return redirect('/order/'.$id.'/show')->with("status", Alert::get("success", "Order är uppdaterad."));
     }
 
     public function create() {
-        return view('order.create_order');
+        $customers = Customer::select(["customer_id", "name"])->orderBy('name')->get();
+        return view('order.create_order', compact("customers"));
     }
 
     public function save(Request $request) {
