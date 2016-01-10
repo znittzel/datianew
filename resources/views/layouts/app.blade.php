@@ -11,14 +11,16 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
     <!-- Styles -->
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+   
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/theme-two.min.css">
-    <link href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="/vendor/fullcalendar/fullcalendar.css"/>
-    <link rel="stylesheet" href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
-    <link href="/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/select2.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" href="/css/style.css"  />
 
-    <link rel="icon"type="image/png"href="/img/favicon.png" />
+    <link rel="icon"type="image/png" href="/images/favicon.png" />
     <script>
         /* yeah we need this empty stylesheet here. It's cool chrome & chromium fix
          chrome fix https://code.google.com/p/chromium/issues/detail?id=167083
@@ -41,7 +43,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="/">
-                    <img src="/img/logo.png" style="max-width:100px"/>
+                    <img src="/images/logo.png" style="max-width:100px"/>
                 </a>
             </div>
 
@@ -121,44 +123,32 @@
 
     @yield('content')
 
-    <!-- JavaScripts -->
-    <script src="/vendor/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap & jQuery -->
+    <script src="/js/jquery-2.1.4.min.js"></script>
+    <script src="/js/jquery-migrate-1.2.1.min.js"></script>
+
+    <script type="text/javascript" src="/vendor/moment/min/moment.min.js"></script>
+    <script type="text/javascript" src="/vendor/moment/locale/sv.js"></script>
+    <script type="text/javascript" src="/vendor/bootstrap/js/transition.js"></script>
+    <script type="text/javascript" src="/vendor/bootstrap/js/collapse.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script src="/js/select2.min.js"></script>
 
     <script src="/vendor/angular/angular.min.js"></script>
-    <script src="/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script src="/vendor/ngstorage/ngStorage.min.js"></script>
     <script src="/vendor/angular-resource/angular-resource.min.js"></script>
-    <script src="/vendor/angular-ui-utils/event.min.js"></script>
     <script src="/vendor/angular-animate/angular-animate.min.js"></script>
-    <script src="/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script src='/vendor/bootstrap-select/dist/js/bootstrap-select.min.js'></script>
 
-    <!-- Loading bar -->
-    <script src="/vendor/angular-loading-bar/build/loading-bar.min.js"></script>
-
-    <!-- page specific angular libs. may be removed -->
-    <script src="/vendor/datatables/media/js/jquery.dataTables.js"></script>
-    <script src="/vendor/angular-datatables/dist/angular-datatables.min.js"></script>
-    <script src="/vendor/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.min.js"></script>
-
-    <!-- <script src="vendor/angular-ui-calendar/src/calendar.js"></script> -->
-
-    <!-- common libs. previous bootstrap-sass version was used, but due to a need to have single compiled file using bootstrap's version -->
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="/vendor/slimScroll/jquery.slimscroll.min.js"></script>
-    <script src="/vendor/widgster/widgster.js"></script>
-    <!-- <script data-pace-options='{ "target": ".content-wrap", "ghostTime": 1000 }' src="/vendor/pace.js/pace.min.js"></script>-->
-    <script src="/vendor/jquery-touchswipe/jquery.touchSwipe.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
-    <script type="text/javascript" src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="/js/jquery.dataTables.js"></script>
+    <script src="/js/angular-datatables.min.js"></script>
+    <script src="/js/angular-datatables.bootstrap.min.js"></script>
+    <script src="/vendor/fullcalendar/fullcalendar.min.js"></script>
 
     <script src="/js/parsley.min.js"></script>
     <script src="/js/parsley-sv.js"></script>
-    <!--  -->
-    <script src="/js/app.js" type="text/javascript"></script>
 
+    <script src="/js/app.js" type="text/javascript"></script>
     @yield('script')
 </body>
 </html>

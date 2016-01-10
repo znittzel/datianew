@@ -14,12 +14,9 @@
                         <input type="hidden" name="status" value="1" />
                             <legend><i class="fa fa-calendar"></i> Datum & tid</legend>
                             <div class="form-group form-inline">
-                                <div class="input-group" id='datetimepicker-book'>
+                                <div class="input-group" >
                                   <div class="input-group-addon">Bokad</div>
-                                  <input type="text" class="form-control" name="booked_at" data-parsley-required placeholder="datum & tid">
-                                  <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
+                                  <input type="text" class="form-control" id='datetimepicker-book' name="booked_at" data-parsley-required placeholder="datum & tid">
                                 </div>
                             </div>
                             <div class="form-group form-inline">
@@ -31,29 +28,21 @@
                                 </div>
                             </div>
                             <div class="form-group form-inline">
-                                <div class="input-group" id='datetimepicker-pickup'>
+                                <div class="input-group" >
                                   <div class="input-group-addon">Hämtas av kund</div>
-                                  <input type="text" class="form-control" name="pickup_at" data-parsley-required placeholder="datum & tid">
-                                  <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
+                                  <input type="text" id='datetimepicker-pickup' class="form-control" name="pickup_at" data-parsley-required placeholder="datum & tid">
                                 </div>
                             </div>
                             <br>
                             <br>
-                            <legend>Orderinformation</legend>
+                            <legend><i class="fa fa-file-text-o"></i> Orderinformation</legend>
                             <div class="form-group">
-                                <label><i class="fa fa-user"></i> Kundnummer</label>
-                                <div class="form-inline">
-                                    <input type="text" class="form-control" data-parsley-whitespace="trim" value="{{ (isset($_GET['customer_id']) ? $_GET['customer_id'] : '') }}" id="customer_id" name="customer_id" data-parsley-required data-parsley-type="number">
-                                    <button type="button" class="btn btn-default" ng-click="modalGetCustomer()">
-                                      Kundlista
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label><i class="fa fa-user"></i> Kundnamn</label>
-                                <input type="text" disabled class="form-control" id="customer_name" value="@if(isset($_GET['customer_name'])) {{ $_GET['customer_name'] }} @endif" data-parsley-required />
+                                <label><i class="fa fa-user"></i> Kund</label>
+                                <select id="selectCustomer" class="form-control" name="customer_id">
+                                    @foreach($customers as $customer)
+                                        <option value="{{ $customer->customer_id }}">{{ $customer->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group form-inline">
                                 <div class="input-group">
@@ -79,7 +68,7 @@
                             </div>
                             <div class="form-group col-sm-4">
                                 <label><i class="fa fa-square-o"></i> Plats</label>
-                                <input type="text" name="plats" class="form-control" data-parsley-maxlength="255"/>
+                                <input type="text" name="place" class="form-control" data-parsley-maxlength="255"/>
                             </div>
                             <div class="form-group col-sm-4">
                                 <label>Prioritering</label>
@@ -123,30 +112,4 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('script')
-<script type="text/javascript">
-    $("#create_order_form").parsley({
-        trigger:      'change',
-        successClass: "has-success",
-        errorClass: "has-error",
-        classHandler: function (el) {
-            return el.$element.closest('.form-group');
-        },
-        errorsWrapper: '<div class="invalid-message"></div>',
-        errorTemplate: '<span></span>',
-    });
-
-    $('#datetimepicker-book').datetimepicker({
-        format: 'YYYY-MM-DD HH:mm',
-        sideBySide: true,
-        calendarWeeks: true
-    });
-    $('#datetimepicker-pickup').datetimepicker({
-        format: 'YYYY-MM-DD HH:mm',
-        sideBySide: true,
-        calendarWeeks: true
-    });
-</script>
 @endsection
