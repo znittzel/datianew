@@ -64,6 +64,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/admin/user/create', 'UserController@save');
 
     Route::get('/tire', 'TireController@tires');
+    Route::post('/tire/file', 'TireController@file');
 
     //---------------------------------API----------------------------------------------------------------------
     Route::post('/orderevent/delete', 'OrderEventController@delete');

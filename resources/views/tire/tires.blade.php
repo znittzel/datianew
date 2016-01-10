@@ -19,36 +19,58 @@
                           <div class="tab-content">
                             <div role="tabpanel" class="tab-pane active" id="file">
                                 <div class="well well-lg">
-                                    <form action="/tire/file" method="post" novalidate>
+                                    @if(session("status"))
+                                        {!! session("status") !!}
+                                    @endif
+                                    <form action="/tire/file" method="post" novalidate id="file_tire" ng-controller="FileTiresController">
                                         {!! csrf_field() !!}
-                                        <div class="form-group">
-                                            <label><i class="fa fa-user"></i> Kund</label>
-                                            <input type="number" class="form-control" placeholder="Kundnummer" name="customer_id">
-                                            <input type="text" class="form-control" placeholder="Namn" name="name">
+                                        <div class="input-group">
+                                            <label>Inlämningsdatum & tid</label>
+                                            <div class='input-group date' id='datetimepicker-file'>
+                                                <input type='text' class="form-control" name="filed_at" value="{!! date('Y-m-d H:i') !!}"/>
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
                                         </div>
                                         <hr/>
-                                        <div class="form-group">
+                                        <div class="input-group">
+                                            <label><i class="fa fa-user"></i> Kund <button class="btn btn-default btn-sm">Hämta</button></label>
+                                            <input type="number" class="form-control" id="customer_id" data-parsley-customerexists="false" placeholder="Kundnummer" name="customer_id" data-parsley-required>
+                                            <input type="text" class="form-control" id="customer_name" placeholder="Namn" name="customer_name" disabled data-parsley-required>
+                                        </div>
+                                        <hr/>
+                                        <div class="input-group">
+                                            <label><i class="fa fa-automobile"></i> Regnummer</label>
+                                            <input type="text" name="reg_number" placeholder="ABC123" data-parsley-required class="form-control">
+                                        </div>
+                                        <hr/>
+                                        <div class="input-group">
                                             <label>Däcktyp</label>
-                                            <select class="form-control" name="type">
+                                            <select class="form-control" name="type" data-parsley-required>
                                                 <option value="vinter">Vinter</option> 
                                                 <option value="sommar">Sommar</option> 
                                                 <option value="allround">Allround</option> 
                                             </select>
                                         </div>
                                         <div class="input-group">
-                                          <span class="input-group-addon">Antal</span>
-                                            <input type="number" name="number_of_tires" class="form-control" aria-label="Antal i styck">
-                                            <span class="input-group-addon">styck</span> 
+                                            <label>Antal</label>
+                                            <select class="form-control" name="number_of_tires" data-parsley-required>
+                                                <option value="4" selected>4</option>
+                                                <option value="3">3</option>
+                                                <option value="2">2</option>
+                                                <option value="1">1</option>
+                                            </select>
                                         </div>
+                                        <br>
                                         <div class="input-group">
-                                          <span class="input-group-addon">Mönsterdjup</span>
-                                          <input type="text" name="quality" class="form-control" aria-label="Mönsterdjup i mm">
-                                          <span class="input-group-addon">mm</span>
+                                          <label>Däckkvalité (fritext)</label>
+                                          <textarea class="form-control" name="quality" style="resize:vertical;" rows="4"></textarea>
                                         </div>
                                         <hr/>
                                         <div class="form-group">
                                             <label>Plats</label>
-                                            <input class="form-control" name="position" type="text"></input>
+                                            <input class="form-control" data-parsley-required name="position" type="text"></input>
                                         </div>
                                         <input type="submit" class="btn btn-success" value="Lämna in">
                                     </form>
@@ -67,4 +89,23 @@
 @endsection
 
 @section("script")
+<script type="text/javascript">
+    $("#file_tire").parsley({
+        trigger:      'change',
+        successClass: "has-success",
+        errorClass: "has-error",
+        classHandler: function (el) {
+            return el.$element.closest('.form-group');
+        },
+        errorsWrapper: '<div class="invalid-message"></div>',
+        errorTemplate: '<span></span>',
+    });
+
+    $('#datetimepicker-file').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
+        sideBySide: true,
+        calendarWeeks: true,
+        useCurrent: true
+    });
+</script>
 @endsection

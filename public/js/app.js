@@ -529,3 +529,16 @@ app.controller('CalendarController', ['$scope', '$http', '$resource', function($
 
     })
 }]);
+
+app.controller('FileTiresController', ['$scope', '$http', function($scope, $http) {
+	$("#customer_id").focusout(function() {
+		if ($("#customer_id").val() != "") {
+			$http({
+				url: '/customer/get/'+$("#customer_id").val(),
+				method: 'GET'
+			}).success(function(customer) {
+				$("#customer_name").val(customer.name);
+			});
+		}
+	});
+}]);
